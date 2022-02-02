@@ -10,7 +10,7 @@ public class Move
 
     public Move(int rc, int xi, int yi, int xf, int yf)
     {
-        this.robotcolor = rc;
+        this.robotcolor = rc;//0=bleu, 1=rouge,2=vert,3=jaune
         this.posx_i = xi;
         this.posy_i = yi;
         this.posx_f = xf;
