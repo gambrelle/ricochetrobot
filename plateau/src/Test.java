@@ -1,4 +1,4 @@
-public class Test 
+public class Test
 {
     public static void main(String[] args)
     {
@@ -6,7 +6,7 @@ public class Test
         int[][] board = new int[16][16];
         for (int i = 0; i <= 15; i++)
         {
-            for (int j = 0; j <= 15; i++)
+            for (int j = 0; j <= 15; j++)
             {
                 board[i][j] = 0;
             }
@@ -23,6 +23,6 @@ public class Test
         board[9][7] = 11;
         board[8][6] = 12;
         board[7][6] = 12;
-        System.out.println(board.toString());
+        System.out.println(board);
     }
 }
