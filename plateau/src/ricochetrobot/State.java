@@ -13,7 +13,7 @@ public class State {
         this.board = new int[16][16];
         for (int i = 0; i < 16; i++)
         {
-            for (int j = 0; j < 16; i++)
+            for (int j = 0; j < 16; j++)
             {
                 this.board[i][j] = 0;
             }
@@ -39,7 +39,7 @@ public class State {
         int[][] board = new int[16][16];
         for (int i = 0; i <= 15; i++)
         {
-            for (int j = 0; j <= 15; i++)
+            for (int j = 0; j <= 15; j++)
             {
                 board[i][j] = 0;
             }
