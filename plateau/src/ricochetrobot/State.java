@@ -1,3 +1,4 @@
+package ricochetrobot;
 public class State {
     protected int[][] board;
     protected int[][] posRobot;
