@@ -6,9 +6,7 @@ public class State {
 
     public State()
     {
-        this.goalsToDo = {5,1,1,2,2,3,3,4,4};
-        periph = {11, 11, 12, 12, 13, 13, 14, 14};
-        
+        //this.goalsToDo = {5,1,1,2,2,3,3,4,4};
 
         //création du plateau vide.
         this.board = new int[16][16];
@@ -29,8 +27,8 @@ public class State {
         this.board[8][9] = 14;
         this.board[9][8] = 11;
         this.board[9][7] = 11;
-        this.board[9][7] = 11;
-        
-        
+        this.board[8][6] = 12;
+        this.board[7][6] = 12;
+        System.out.println(this.board.toString());
     }
 }
