@@ -44,7 +44,7 @@ public class State {
             for (int l=0;l<2;l++)
             {
                 int int_i = 0;
-                int int_j = rand.nextInt(15)+1;
+                int int_j = rand.nextInt(14)+1;
                 if (this.board[int_i][int_j] == 0)
                 {
                     this.board[int_i][int_j] = obstaclesSimples.get(rand.nextInt(obstaclesSimples.size()));
@@ -64,7 +64,7 @@ public class State {
             for (int l=0;l<2;l++)
             {
                 int int_i = 15;
-                int int_j = rand.nextInt(15)+1;
+                int int_j = rand.nextInt(14)+1;
                 if (this.board[int_i][int_j] == 0)
                 {
                     this.board[int_i][int_j] = obstaclesSimples.get(rand.nextInt(obstaclesSimples.size()));
@@ -83,7 +83,7 @@ public class State {
             //bordure exterieur gauche
             for (int l=0;l<2;l++)
             {
-                int int_i = rand.nextInt(15)+1;
+                int int_i = rand.nextInt(14)+1;
                 int int_j = 0;
                 if (this.board[int_i][int_j] == 0)
                 {
@@ -120,8 +120,8 @@ public class State {
             }
         }
         while (compteurObstaclesDoubles < 16){
-            int int_i = rand.nextInt(15)+1;
-            int int_j = rand.nextInt(15)+1;
+            int int_i = rand.nextInt(14)+1;
+            int int_j = rand.nextInt(14)+1;
             if (this.board[int_i][int_j] == 0)
             {
                 this.board[int_i][int_j] = obstaclesDoubles.get(rand.nextInt(obstaclesDoubles.size()));
