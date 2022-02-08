@@ -160,10 +160,18 @@ public class State {
 
 
     }
+    public State(State etatPrecedent)
+    {
+        this.board = etatPrecedent.getBoard();
+    }
 
     public int[][] getBoard()
     {
         return this.board;
+    }
+
+    public State Play(Move coup){
+        State a = new State(this);
     }
 }
     
