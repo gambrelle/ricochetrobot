@@ -41,12 +41,83 @@ public class State {
         int compteurObstaclesSimples = 0;
         int compteurObstaclesDoubles = 0;
         while (compteurObstaclesSimples < 8){
-            int int_i = rand.nextInt(16);
-            int int_j = rand.nextInt(16);
-            if (this.board[int_i][int_j] == 0)
+            //bordure exterieur haute
+            for (int l=0;l<2;l++)
             {
-                this.board[int_i][int_j] = obstaclesSimples.get(rand.nextInt(obstaclesSimples.size()));
-                compteurObstaclesSimples++;
+                int int_i = 0;
+                int int_j = rand.nextInt(15)+1;
+                if (this.board[int_i][int_j] == 0)
+                {
+                    this.board[int_i][int_j] = obstaclesSimples.get(rand.nextInt(obstaclesSimples.size()));
+                    compteurObstaclesSimples++;
+
+                    if (this.board[int_i][int_j] == 10)
+                    {
+                        this.board[int_i-1][int_j]=12;
+                    }
+                    if (this.board[int_i][int_j] == 12)
+                    {
+                        this.board[int_i+1][int_j]=10;
+                    }
+                }
+            }
+            //bordure exterieur basse
+            for (int l=0;l<2;l++)
+            {
+                int int_i = 15;
+                int int_j = rand.nextInt(15)+1;
+                if (this.board[int_i][int_j] == 0)
+                {
+                    this.board[int_i][int_j] = obstaclesSimples.get(rand.nextInt(obstaclesSimples.size()));
+                    compteurObstaclesSimples++;
+
+                    if (this.board[int_i][int_j] == 10)
+                    {
+                        this.board[int_i-1][int_j]=12;
+                    }
+                    if (this.board[int_i][int_j] == 12)
+                    {
+                        this.board[int_i+1][int_j]=10;
+                    }
+                }
+            }
+            //bordure exterieur gauche
+            for (int l=0;l<2;l++)
+            {
+                int int_i = rand.nextInt(15)+1;
+                int int_j = 0;
+                if (this.board[int_i][int_j] == 0)
+                {
+                    this.board[int_i][int_j] = obstaclesSimples.get(rand.nextInt(obstaclesSimples.size()));
+                    compteurObstaclesSimples++;
+                    if (this.board[int_i][int_j] == 11)
+                    {
+                        this.board[int_i][int_j-1]=13;
+                    }
+                    if (this.board[int_i][int_j] == 13)
+                    {
+                        this.board[int_i+1][int_j+1]=11;
+                    }
+                }
+            }
+            //bordure exterieur droite
+            for (int l=0;l<2;l++)
+            {
+                int int_i = rand.nextInt(16);
+                int int_j = 15;
+                if (this.board[int_i][int_j] == 0)
+                {
+                    this.board[int_i][int_j] = obstaclesSimples.get(rand.nextInt(obstaclesSimples.size()));
+                    compteurObstaclesSimples++;
+                    if (this.board[int_i][int_j] == 11)
+                    {
+                        this.board[int_i][int_j-1]=13;
+                    }
+                    if (this.board[int_i][int_j] == 13)
+                    {
+                        this.board[int_i+1][int_j+1]=11;
+                    }
+                }
             }
         }
         while (compteurObstaclesDoubles < 16){
