@@ -1,4 +1,4 @@
-package ricochetrobot;
+package game;
 
 public class Move
 {   
