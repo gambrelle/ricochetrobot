@@ -1,7 +1,6 @@
 package ricochetrobot;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.Random;
 public class State {
     protected int[][] board;
@@ -160,6 +159,11 @@ public class State {
 
 
 
+    }
+
+    public int[][] getBoard()
+    {
+        return this.board;
     }
 }
     
