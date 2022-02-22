@@ -2,9 +2,10 @@ package ricochetrobot;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
 public class State {
     protected int[][] board;
-    protected int[][] posRobot;
+    protected int[] posRobot;
     protected int[] goal;
     protected int[] goalsToDo;
 
@@ -21,6 +22,8 @@ public class State {
                 this.board[i][j] = 0;
             }
         }
+
+        //positions interdites du centre
         this.board[7][7] = 24;
         this.board[7][8] = 21;
         this.board[8][8] = 22;
@@ -33,6 +36,8 @@ public class State {
         this.board[9][7] = 11;
         this.board[8][6] = 12;
         this.board[7][6] = 12;
+
+        List<Integer> centre = Arrays.asList(7,7,7,8,8,8,8,7,6,7,6,8,7,9,8,9,9,8,9,7,8,6,7,6);
 
         List<Integer> obstaclesDoubles = Arrays.asList(10, 11, 12, 13);// cf représentation des obstacles
         List<Integer> obstaclesSimples = Arrays.asList(20, 21, 22, 23);
@@ -154,7 +159,26 @@ public class State {
             }
         }
         
-        //tirage des cases à modifier
+        //positions robots initiales
+        int compteurRobotspos = 0;
+        while (compteurRobotspos < 4)
+        {
+            int int_i = rand.nextInt(16);
+            int int_j = rand.nextInt(16);
+            for (int i=0; i<12;i++)
+            {
+                int statut = 0;
+                if(int_i != centre.get(i) | int_j != centre.get(i+1))
+                {
+                                     
+                }
+                
+            }
+            
+            
+        }
+
+        //positions jetons initiales
 
 
 
@@ -163,6 +187,9 @@ public class State {
     public State(State etatPrecedent)
     {
         this.board = etatPrecedent.getBoard();
+        this.posRobot = etatPrecedent.getPosRobot();
+        this.goal = etatPrecedent.getGoal();
+        this.goalsToDo = etatPrecedent.getGoalsToDo();
     }
 
     public int[][] getBoard()
@@ -170,8 +197,27 @@ public class State {
         return this.board;
     }
 
-    public State Play(Move coup){
-        State a = new State(this);
+    public int[] getPosRobot()
+    {
+        return this.posRobot;
     }
+
+    public int[] getGoal()
+    {
+        return this.goal;
+    }
+
+    public int[] getGoalsToDo()
+    {
+        return this.goalsToDo;
+    }
+
+    /*public State Play(Move coup){
+        State a = new State(this);
+
+
+        return a;
+    }
+    */
 }
     
