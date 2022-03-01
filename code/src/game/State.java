@@ -5,71 +5,56 @@ import java.util.ArrayList;
 public class State
 {
     int[][] board;
+    int[][] posRobot;
     public State()
     {
 
     }
+    
+    public Move getRightMove(int robot)
+    {
+        for (int i = this.posRobot[robot][1]; i<16; i++)
+        {
+            if(this.board[this.posRobot[robot][0]][i] == 12 || this.board[this.posRobot[robot][0]][i] == 21 || this.board[this.posRobot[robot][0]][i] == 22)
+                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+        }
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 16);
+    }
+    public Move getLeftMove(int robot)
+    {
+        for (int i = this.posRobot[robot][1]; i>0; i--)
+        {
+            if(this.board[this.posRobot[robot][0]][i] == 10 || this.board[this.posRobot[robot][0]][i] == 23 || this.board[this.posRobot[robot][0]][i] == 20)
+                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+        }
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 0);
+    }
+    public Move getDownMove(int robot)
+    {
+        for (int i = this.posRobot[robot][0]; i<16; i++)
+        {
+            if(this.board[i][this.posRobot[robot][1]] == 13 || this.board[i][this.posRobot[robot][1]] == 22 || this.board[i][this.posRobot[robot][1]] == 23)
+                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][0]);
+        }
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 16, this.posRobot[robot][0]);
+    }
+    public Move getUpMove(int robot)
+    {
+        for (int i = this.posRobot[robot][0]; i>0; i--)
+        {
+            if(this.board[i][this.posRobot[robot][1]] == 11 || this.board[i][this.posRobot[robot][1]] == 21 || this.board[i][this.posRobot[robot][1]] == 21)
+                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][0]);
+        }
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 0, this.posRobot[robot][0]);
+    }
 
-    /* public ArrayList<Move> getMove(int robot, int[] posRobot)
+    public ArrayList<Move> getMove(int robot)
     {
         ArrayList<Move> allMoves = new ArrayList<>();
-        int x = posRobot[0];
-        int y = posRobot[1];
-        while(y > 0)
-        {
-            y--;
-            if (this.board[x][y] == 22 || this.board[x][y] == 11 || this.board[x][y] == 12)
-            {
-                y = -1;
-                break;
-            }
-            allMoves.add(new Move(robot, posRobot[0], posRobot[1], x, y));
-        }//fait !
-        y = posRobot[0];
-        while(y < this.board[x].length)
-        {
-            y++;
-            if (this.board[x][y] == 20 || this.board[x][y] == 10 || this.board[x][y] == 13)
-            {
-                y = this.board[x].length + 3;
-                break;
-            }
-            allMoves.add(new Move(robot, posRobot[0], posRobot[1], x, y));
-        }//fait !!
-        y = posRobot[1];
-        while(x > 0)
-        {
-            x--;
-            if (this.board[x][y] == 21 || this.board[x][y] == 11 || this.board[x][y] == 10)
-            {
-                x = -1;
-                break;
-            }
-            allMoves.add(new Move(robot, posRobot[0], posRobot[1], x, y));
-        }
-        x = posRobot[0];
-        while(y < this.board.length)
-        {
-            x++;
-            if (this.board[x][y] == 23 || this.board[x][y] == 12 || this.board[x][y] == 13)
-            {
-                x = this.board.length + 3;
-                break;
-            }
-            allMoves.add(new Move(robot, posRobot[0], posRobot[1], x, y));
-        }
+        allMoves.add(getUpMove(robot));
+        allMoves.add(getRightMove(robot));
+        allMoves.add(getDownMove(robot));
+        allMoves.add(getLeftMove(robot));
         return allMoves;
     }
-    public ArrayList<Move> getMoves()
-    {
-        ArrayList<Move> allMoves = new ArrayList<>();
-        for(int i = 0; i<4; i++)
-        {
-            for (Move m : this.getMove(i, this.posRobot[i]))
-                allMoves.add(m);
-        }
-        return allMoves;
-    }
- */
-
 }
