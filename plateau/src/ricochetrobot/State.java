@@ -331,9 +331,7 @@ public class State {
             }
             if (statut == 1)
             {
-                System.err.println("test3");
                 this.posRobot[compteurRobotspos]=int_i;
-                System.err.println("test4");
                 compteurRobotspos++;
                 
                 this.posRobot[compteurRobotspos]=int_j;
@@ -346,6 +344,40 @@ public class State {
 
         //positions jetons initiales
 
+        int compteurjetonspos = 0;
+        this.goalsToDo = new int[8];
+        while (compteurjetonspos < 8)
+        {
+            int int_i = rand.nextInt(16);
+            int int_j = rand.nextInt(16);
+            int statut = 0;
+            for (int i=0; i<12;i=i+2)
+            {
+                statut = 0;
+                if(int_i != centre.get(i) || int_j != centre.get(i+1))
+                {
+                    statut = 1;         
+                }
+                
+                
+                
+            }
+            if (statut == 1)
+            {
+                this.posRobot[compteurjetonspos]=int_i;                
+                compteurjetonspos++;
+                
+                this.posRobot[compteurjetonspos]=int_j;
+                compteurjetonspos++;
+            }
+            
+            
+            
+        }
+
+        //positions jeton objectif
+        this.active_goal = 0; //
+        // valeur à changer par l'utilisateur avec un setter.
 
 
 
@@ -354,7 +386,7 @@ public class State {
     {
         this.board = etatPrecedent.getBoard();
         this.posRobot = etatPrecedent.getPosRobot();
-        this.active_goal = etatPrecedent.getGoal();
+        this.active_goal = etatPrecedent.getActiveGoal();
         this.goalsToDo = etatPrecedent.getGoalsToDo();
     }
 
@@ -369,7 +401,7 @@ public class State {
         return this.posRobot;
     }
 
-    public int getGoal()
+    public int getActiveGoal()
     {
         return this.active_goal;
     }
