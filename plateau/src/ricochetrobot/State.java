@@ -38,7 +38,7 @@ public class State {
 
         List<Integer> centre = Arrays.asList(7,7,7,8,8,8,8,7,6,7,6,8,7,9,8,9,9,8,9,7,8,6,7,6);
 
-        List<Integer> obstaclesSimples = Arrays.asList(10, 11, 12, 13);//liste non utilisé dans le programme mais utile
+        List<Integer> obstaclesSimples = Arrays.asList(10, 11, 12, 13);//liste non utilisé dans le programme
         //10 = obstacle simple gauche
         //11 = obstacle simple haut
         //12 = obstacle simple droit
@@ -366,7 +366,7 @@ public class State {
             int int_i = rand.nextInt(16);
             int int_j = rand.nextInt(16);
             int statut = 0;
-            for (int i=0; i<12;i=i+2)
+            for (int i=0; i<12;i=i+2)//vérification de la légalité des coordonnées aléatoirement choisies (=pas au centre)
             {
                 statut = 0;
                 if(int_i != centre.get(i) || int_j != centre.get(i+1))
@@ -390,13 +390,14 @@ public class State {
             
         }
 
-        //positions jeton objectif
-        this.active_goal = 0; //
+        //position jeton objectif
+        this.active_goal = 0; 
         // valeur à changer par l'utilisateur avec un setter.
 
 
 
     }
+    
     public State(State etatPrecedent)
     {
         this.board = etatPrecedent.getBoard();
@@ -426,12 +427,5 @@ public class State {
         return this.goalsToDo;
     }
 
-    /*public State Play(Move coup){
-        State a = new State(this);
-
-
-        return a;
-    }
-    */
 }
     
