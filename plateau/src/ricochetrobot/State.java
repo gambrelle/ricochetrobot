@@ -6,7 +6,7 @@ import java.util.Random;
 public class State {
     protected int[][] board;
     protected int[] posRobot;
-    protected int[] goal;
+    protected int active_goal;
     protected int[] goalsToDo;
 
     public State()
@@ -162,15 +162,53 @@ public class State {
                 //coin haut droit
                 if (this.board[int_i][int_j]==11)
                 {
-                    //case de droite
-                    this.board[int_i][int_j+1]=22;//obstacle gauche sur case de droite
+                    //case sur la droite                    
+                    if (this.board[int_i+1][int_j]==0){//cas où la case à droite est vide
+                        this.board[int_i+1][int_j]=10;//création obstacle gauche sur case de droite                       
+                    }
+                    else // cas où cette case n'est pas vide (ne peut être occupé que par un obstacle simple)
+                    {
+                        if (this.board[int_i+1][int_j]==10){}
+                        else{
+                            if (this.board[int_i+1][int_j]==11){ //présence d'un obstacle simple haut
+                                this.board[int_i+1][int_j]=20;   //création coin haut gauche
+                            }
+                            else{
+                                if (this.board[int_i+1][int_j]==13){//présence d'un obstacle simple bas
+                                    this.board[int_i+1][int_j]=23;  //création coin bas gauche
+                                }
+                                else{
+                                    this.board[int_i+1][int_j]=30; //création tunnel vertical/gauche droite
+                                }
+                            }
+                        }
+                    }
 
-                    //case du dessus
-                    this.board[int_i-1][int_j]=23;//obstacle bas sur case au-dessus
+                    //case au-dessus
+                    if (this.board[int_i-1][int_j]==0)//obstacle bas sur case au-dessus
+                    {
+                        this.board[int_i-1][int_j]=13;//création obstacle bas sur case au-dessus
+                    }
+                    else // cas où cette case n'est pas vide (ne peut être occupé que par un obstacle simple)
+                    {
+                        if (this.board[int_i-1][int_j]==13){}
+                        else{
+                            if (this.board[int_i-1][int_j]==10){ //présence d'un obstacle simple gauche
+                                this.board[int_i-1][int_j]=23;   //création coin bas gauche
+                            }
+                            else{
+                                if (this.board[int_i-1][int_j]==12){//présence d'un obstacle simple droit
+                                    this.board[int_i-1][int_j]=22;  //création coin bas droit
+                                }
+                                else{
+                                    this.board[int_i-1][int_j]=31; //création tunnel horizontal, bas haut
+                                }
+                            }
+                        }
+                    }
                 }
 
-                //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-                //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
                 //coin bas droite
                 if (this.board[int_i][int_j]==22)
                 {
@@ -223,8 +261,50 @@ public class State {
                 //coin bas gauche
                 if (this.board[int_i][int_j]==11)
                 {
-                    this.board[int_i][int_j-1]=22;//obstacle droit sur case de gauche
-                    this.board[int_i+1][int_j]=21;//obstacle haut sur case au-dessous
+                    //case sur la gauche 
+                    if (this.board[int_i][int_j-1]==0){//cas où la case à gauche est vide
+                        this.board[int_i][int_j-1]=12;//création obstacle droit sur case de gauche                        
+                    }
+                    else // cas où cette case n'est pas vide (ne peut être occupé que par un obstacle simple)
+                    {
+                        if (this.board[int_i][int_j-1]==12){}
+                        else{
+                            if (this.board[int_i][int_j-1]==11){ //présence d'un obstacle simple haut
+                                this.board[int_i][int_j-1]=21;   //création coin haut droit
+                            }
+                            else{
+                                if (this.board[int_i][int_j-1]==13){//présence d'un obstacle simple bas
+                                    this.board[int_i][int_j-1]=22;  //création coin bas droit
+                                }
+                                else{
+                                    this.board[int_i][int_j-1]=30; //création tunnel vertical/gauche droite
+                                }
+                            }
+                        }
+                    }
+
+                    //case en dessous
+                    if (this.board[int_i+1][int_j]==0)//cas où la case en dessous est vide
+                    {
+                        this.board[int_i+1][int_j]=21;//obstacle haut sur case au-dessous
+                    }
+                    else // cas où cette case n'est pas vide (ne peut être occupé que par un obstacle simple)
+                    {
+                        if (this.board[int_i-1][int_j]==13){}
+                        else{
+                            if (this.board[int_i-1][int_j]==10){ //présence d'un obstacle simple gauche
+                                this.board[int_i-1][int_j]=23;   //création coin bas gauche
+                            }
+                            else{
+                                if (this.board[int_i-1][int_j]==12){//présence d'un obstacle simple droit
+                                    this.board[int_i-1][int_j]=22;  //création coin bas droit
+                                }
+                                else{
+                                    this.board[int_i-1][int_j]=31; //création tunnel horizontal, bas haut
+                                }
+                            }
+                        }
+                    }
                 }
                 
             }
@@ -232,6 +312,7 @@ public class State {
         
         //positions robots initiales
         int compteurRobotspos = 0;
+        this.posRobot= new int[8];
         while (compteurRobotspos < 8)
         {
             int int_i = rand.nextInt(16);
@@ -240,16 +321,21 @@ public class State {
             for (int i=0; i<12;i=i+2)
             {
                 statut = 0;
-                if(int_i != centre.get(i) | int_j != centre.get(i+1))
+                if(int_i != centre.get(i) || int_j != centre.get(i+1))
                 {
                     statut = 1;         
                 }
                 
+                
+                
             }
             if (statut == 1)
             {
+                System.err.println("test3");
                 this.posRobot[compteurRobotspos]=int_i;
+                System.err.println("test4");
                 compteurRobotspos++;
+                
                 this.posRobot[compteurRobotspos]=int_j;
                 compteurRobotspos++;
             }
@@ -272,33 +358,7 @@ public class State {
         this.goalsToDo = etatPrecedent.getGoalsToDo();
     }
 
-    public void ObstaceDouble(int x, int y, int obstacle)
-    {
-        //coin haut gauche
-        if (this.board[int_i][int_j]==10)
-        {
-            if (this.board[int_i][int_j-1]==0){//cas où la case à gauche est vide
-                this.board[int_i][int_j-1]=22;//création obstacle droit sur case de gauche                        
-            }
-            else // cas où cette case n'est pas vide (ne peut être occupé que par un obstacle simple)
-            {
-                if (this.board[int_i][int_j-1]==22){}
-                else{
-
-                }
-            }
-            if (this.board[int_i-1][int_j]==0)//obstacle bas sur case au-dessus
-            {
-                this.board[int_i-1][int_j]=23;//création obstacle bas sur case au-dessus
-            }
-            else // cas où cette case n'est pas vide (ne peut être occupé que par un obstacle simple)
-            {
-
-            }
-            
-        }
-    }
-
+    
     public int[][] getBoard()
     {
         return this.board;
