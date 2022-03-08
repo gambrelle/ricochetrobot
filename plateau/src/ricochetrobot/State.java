@@ -354,7 +354,7 @@ public class State {
     {
         this.board = etatPrecedent.getBoard();
         this.posRobot = etatPrecedent.getPosRobot();
-        this.goal = etatPrecedent.getGoal();
+        this.active_goal = etatPrecedent.getGoal();
         this.goalsToDo = etatPrecedent.getGoalsToDo();
     }
 
@@ -369,9 +369,9 @@ public class State {
         return this.posRobot;
     }
 
-    public int[] getGoal()
+    public int getGoal()
     {
-        return this.goal;
+        return this.active_goal;
     }
 
     public int[] getGoalsToDo()
