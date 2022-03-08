@@ -36,5 +36,8 @@ public class Move
     {
         return this.posy_f;
     }
-
+    @Override
+    public String toString() {
+        return "Mouvement de " + this.posx_i + ", " + this.posy_i + " | " + this.posx_f + ", " + this.posy_f;
+    }
 }
