@@ -6,22 +6,16 @@ public class State
 {
     int[][] board;
     int[][] posRobot;
+    protected int active_goal;
+    protected int[] goalsToDo;
 
     public State()
     {
-        this.board = {{0,0,0,0,10,12,0,0,0,0,0,10,12,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,10,12,0,0,0,0,0,0,0,0,0,0,0,0}};
-        this.board[7][7] = 24;
-        this.board[7][8] = 21;
-        this.board[8][8] = 22;
-        this.board[8][7] = 23;
-        this.board[6][7] = 13;
-        this.board[6][8] = 13;
-        this.board[7][9] = 14;
-        this.board[8][9] = 14;
-        this.board[9][8] = 11;
-        this.board[9][7] = 11;
-        this.board[8][6] = 12;
-        this.board[7][6] = 12;
+        RandomBoardGeneration generationAleatoire = new RandomBoardGeneration();
+        this.board = generationAleatoire.getBoard();
+        this.posRobot = generationAleatoire.getPosRobot();
+        this.active_goal = generationAleatoire.getActiveGoal();
+        this.goalsToDo = generationAleatoire.getGoalsToDo();
     }
 
     public State getClone()
@@ -36,7 +30,7 @@ public class State
         }
         for (int i = 0; i < s.posRobot.length; i++)
         {
-            for (int j = 0; s.posRobot[i].length; j++)
+            for (int j = 0; j < s.posRobot[i].length; j++)
             {
                 s.posRobot[i][j] = this.posRobot[i][j];
             }
