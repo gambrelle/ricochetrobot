@@ -5,13 +5,12 @@ import java.util.Random;
 
 public class State {
     protected int[][] board;
-    protected int[] posRobot;
-    protected int active_goal;
-    protected int[] goalsToDo;
+    protected int[] posRobot;//[xrobot1, yrobot1, xrobot2, yrobot2,..] positions des robots (4 robots donc 8 entiers (coordonnées x, y))
+    protected int active_goal; //numéro du jeton "objectif" entre 0 et 3 (4 valeurs possibles car 4 jetons)
+    protected int[] goalsToDo;//[xjeton1,yjeton1,xjeton2,yjeton2] position des jetons (4 jetons donc 8 entiers (coordonnées x, y))
 
     public State()
     {
-        //this.goalsToDo = {1,1,2,2,3,3,4,4};
 
         //création du plateau vide.
         this.board = new int[16][16];
@@ -40,7 +39,23 @@ public class State {
         List<Integer> centre = Arrays.asList(7,7,7,8,8,8,8,7,6,7,6,8,7,9,8,9,9,8,9,7,8,6,7,6);
 
         List<Integer> obstaclesSimples = Arrays.asList(10, 11, 12, 13);//liste non utilisé dans le programme mais utile
+        //10 = obstacle simple gauche
+        //11 = obstacle simple haut
+        //12 = obstacle simple droit
+        //13 = obstacle simple bas
+
         List<Integer> obstaclesDoubles = Arrays.asList(20, 21, 22, 23);
+        //20 = obstacle double haut gauche
+        //21 = obstacle double haut droit
+        //22 = obstacle double bas droit
+        //23 = obstacle double bas gauche
+
+        //Obstacles "tunnel"
+        //30 = tunnel vertical/gauche droite
+        //31 = tunnel horizontal/haut bas
+
+
+
         Random rand = new Random();
         int compteurObstaclesSimples = 0;
         int compteurObstaclesDoubles = 0;
