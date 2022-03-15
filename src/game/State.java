@@ -24,7 +24,7 @@ public class State
 		
 
     }
-    //Produit une nouvelle grille à chaque tour, il faudrai faire un ramdom que une seule fois 
+    //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois 
     
     
     public int[][] Get_Board()
