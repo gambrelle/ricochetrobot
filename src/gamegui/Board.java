@@ -26,24 +26,17 @@ public class Board extends JPanel implements EcouteurModele{
 	public int[][] tableau;
 	public int[][] pos_Robot;
 	private State state ;
-	private Border border_LT = BorderFactory.createMatteBorder(4, 4, 0, 0, Color.BLACK);
-	private Border border_TR = BorderFactory.createMatteBorder(4, 0,0 , 4, Color.BLACK);
-	private Border border_RB = BorderFactory.createMatteBorder(0, 0, 4, 4, Color.BLACK);
-	private Border border_BL = BorderFactory.createMatteBorder(0, 4, 4, 0, Color.BLACK);
-	private Border border_Top = BorderFactory.createMatteBorder(4, 0, 0, 0, Color.BLACK);
-	private Border border_Left = BorderFactory.createMatteBorder(0, 4,0 , 0, Color.BLACK);
-	private Border border_Right = BorderFactory.createMatteBorder(0, 0, 0, 4, Color.BLACK);
-	private Border border_Bottom = BorderFactory.createMatteBorder(0, 0,4 , 0, Color.BLACK);
+ 
 	//public JPanel board;
 
 	
 	public Board(State state) throws IOException, InterruptedException
 	{
+		this.state = state;
 		this.tableau = state.Get_Board();
-		this.setLayout(new GridLayout(0,tableau.length ));
 		this.pos_Robot = state.Get_Robot();
 		
-		int x_robot1 = 3;
+	/*	int x_robot1 = 3;
 		int y_robot1 = 4;
 		int x_robot2 = 10;
 		int y_robot2 = 11;
@@ -51,7 +44,7 @@ public class Board extends JPanel implements EcouteurModele{
 		int y_robot3 = 0;
 		int x_robot4 = 0;
 		int y_robot4 = 0;
-	/*	this.pos_Robot[0][0] = x_robot1;
+		this.pos_Robot[0][0] = x_robot1;
 		this.pos_Robot[0][1] = y_robot1;
 		this.pos_Robot[1][0] = x_robot2;
 		this.pos_Robot[1][1] = y_robot2;
@@ -60,84 +53,79 @@ public class Board extends JPanel implements EcouteurModele{
 		this.pos_Robot[3][0] = x_robot4;
 		this.pos_Robot[3][1] = y_robot4;*/
 		
-
-
+		}
 	
-		for( int i=0; i<tableau.length; i++) 
+
+		 
+		@Override
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			int x_robot1 = 6;
+			int y_robot1 = 5;
+			this.pos_Robot[0][0] = x_robot1;
+			this.pos_Robot[0][1] = y_robot1;
+			
+			int dim = 35;
+	
+			for( int i=0; i<tableau.length; i++) 
 		    {
 		        for( int j=0; j<tableau.length; j++) 
 		        {        
 		        //JPanel cellule = new JPanel();// on utilise un simple JPanel pour chaque cellule, donc on adaptera la couleur de fond (background)
-		        JPanel cellule = new JPanel();
-		        Cellule test = new Cellule(state);
-			    cellule.setPreferredSize(new Dimension(35,35));
+		        //JPanel cellule = new JPanel();
+		        //Cellule test = new Cellule(state);
+			    //cellule.setPreferredSize(new Dimension(35,35));
 		        int valeur = tableau[i][j];
 					switch(valeur) 
 					{	
 			        case 10:
-				        test.setBackground(Color.WHITE);
-				        this.add(test);
-					    test.setBorder(border_Top);
+			    		//g.setColor(Color.GREEN);
+			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim);//border top 1 
 					    break;					   					    
 			        case 11:
-				        cellule.setBackground(Color.WHITE);
-				        this.add(cellule);	
-					    cellule.setBorder(border_Left);
+			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim);//border left 2
 					    break;
 			        case 12:
-				        cellule.setBackground(Color.WHITE);
-				        this.add(cellule);	
-					    cellule.setBorder(border_Right);
+			        	g.drawLine(i*dim+dim, j*dim, i*dim+dim, j*dim+dim);//border rigth 3
 					    break;
 			        case 13:
-				        cellule.setBackground(Color.WHITE);
-				        this.add(cellule);	
-					    cellule.setBorder(border_Bottom);
-					    break;
+			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim);//border bottom 4 
+					    break; 
 			        case 20:
-				        cellule.setBackground(Color.WHITE);
-					    //cellule.setBorder(black);
-				        this.add(cellule);	
-					    cellule.setBorder(border_LT);
-					    break;
-			        case 21:
-				        cellule.setBackground(Color.WHITE);
-					    //cellule.setBorder(black);
-				        this.add(cellule);	
-					    cellule.setBorder(border_TR);
+			        	//border left top
+			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
+			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); //1
+					    break; 
+			        case 23:
+			  			
+			  			g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); //3
+			  			g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); // 1
+			        	//border top rigth
 					    break;
 			        case 22:
-				        cellule.setBackground(Color.WHITE);
-					    //cellule.setBorder(black);
-				        this.add(cellule);	
-					    cellule.setBorder(border_RB);
+			        	g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); //3
+			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); //4
+			        	//border rigth bottom
 					    break;
-			        case 23:
-				        cellule.setBackground(Color.WHITE);
-					    //cellule.setBorder(black);
-				        this.add(cellule);	
-					    cellule.setBorder(border_BL);
-					    break;
-			        case 24: 
-				        cellule.setBackground(Color.WHITE);
-					    //cellule.setBorder(black);
-				        this.add(cellule);	
-					default:
-				        cellule.setBackground(Color.WHITE);
-					    //cellule.setBorder(black);
-				        this.add(cellule);	
+			        case 21:
+			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); // 4
+			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
+			        	//border bottom left
+					    break;/*
+					default: */
+
+
+
 
 					}
-
 
 		        	
 		        }
 	
 		        }  
-		 
-
-}
-	
+			
+			
+		}
 
 
 	

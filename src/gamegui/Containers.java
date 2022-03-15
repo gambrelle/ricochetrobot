@@ -53,6 +53,7 @@ public class Containers extends JFrame implements ActionListener {
 		container.setLayout(new BorderLayout());	
 		this.state = state;
 		this.board = new Board(state);
+	    board.setPreferredSize(new Dimension(560,560));
 
 		/*
 		 * board de la classe Board
