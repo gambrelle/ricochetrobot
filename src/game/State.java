@@ -7,7 +7,7 @@ public class State
     int[][] board;
     int[][] posRobot;
     protected int active_goal;
-    protected int[] goalsToDo;
+    protected int[][] goalsToDo;
 
     public State()
     {
@@ -18,6 +18,20 @@ public class State
         this.goalsToDo = generationAleatoire.getGoalsToDo();
     }
 
+    public void printBoard()
+    {
+        for (int i = 0; i < this.board.length; i++)
+        {
+            for (int j = 0; j < this.board[i].length; j++)
+                {
+                    if (this.board[i][j] < 9)
+                        System.out.print(this.board[i][j] +"  ");
+                    else
+                        System.out.print(this.board[i][j] +" ");
+                }
+                System.out.print("\n");
+        }
+    }
     public State getClone()
     {
         State s = new State();

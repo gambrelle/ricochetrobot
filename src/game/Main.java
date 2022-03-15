@@ -3,6 +3,7 @@ public class Main
 {
     public static void main(String[] args) {
         State s = new State();
+        s.printBoard();
         for (Move move : s.getMove(1))
             System.out.println(move.toString());
         State s2 = s.play(s.getLeftMove(1), 1);
