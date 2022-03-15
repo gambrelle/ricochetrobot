@@ -1,4 +1,5 @@
 package game;
+import gamegui.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +25,7 @@ public class RandomBoardGeneration
         }
 
         //positions interdites du centre
-        this.board[7][7] = 24;
+        this.board[7][7] = 20;
         this.board[7][8] = 21;
         this.board[8][8] = 22;
         this.board[8][7] = 23;
@@ -40,8 +41,8 @@ public class RandomBoardGeneration
         List<Integer> centre = Arrays.asList(7,7,7,8,8,8,8,7,6,7,6,8,7,9,8,9,9,8,9,7,8,6,7,6);
 
         List<Integer> obstaclesSimples = Arrays.asList(10, 11, 12, 13);//liste non utilisé dans le programme
-        //10 = obstacle simple gauche
-        //11 = obstacle simple haut
+        //10 = obstacle simple haut
+        //11 = obstacle simple gauche
         //12 = obstacle simple droit
         //13 = obstacle simple bas
 
@@ -69,7 +70,7 @@ public class RandomBoardGeneration
                 if (this.board[int_i][int_j] == 0)
                 {
                     this.board[int_i][int_j] = 10;
-                    this.board[int_i][int_j-1]=12;
+                    this.board[int_i][int_j-1]=11;
                     compteurObstaclesSimples++;   
                 }
             }
@@ -81,8 +82,8 @@ public class RandomBoardGeneration
                 //on place aléatoirement un obstacle vertical sur la paroi/bordure basse
                 if (this.board[int_i][int_j] == 0)
                 {
-                    this.board[int_i][int_j] = 10;
-                    this.board[int_i][int_j-1]=12;
+                    this.board[int_i][int_j] = 12;
+                    this.board[int_i][int_j-1]=13;
                     compteurObstaclesSimples++;
                 }
             }
@@ -106,7 +107,7 @@ public class RandomBoardGeneration
                 if (this.board[int_i][int_j] == 0)
                 {
                     this.board[int_i][int_j] = 13;
-                    this.board[int_i-1][int_j]=11;
+                    this.board[int_i-1][int_j]=12;
                     compteurObstaclesSimples++;                    
                 }
             }

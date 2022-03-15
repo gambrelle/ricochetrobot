@@ -1,5 +1,8 @@
 package game;
 
+import gamegui.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class State
@@ -9,16 +12,33 @@ public class State
     protected int active_goal;
     protected int[] goalsToDo;
 
-    public State()
+    
+
+    public State() throws IOException, InterruptedException
     {
-        RandomBoardGeneration generationAleatoire = new RandomBoardGeneration();
-        this.board = generationAleatoire.getBoard();
+    	RandomBoardGeneration generationAleatoire = new RandomBoardGeneration();
+		this.board =  generationAleatoire.getBoard();
         this.posRobot = generationAleatoire.getPosRobot();
         this.active_goal = generationAleatoire.getActiveGoal();
         this.goalsToDo = generationAleatoire.getGoalsToDo();
+		
+
+    }
+    //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois 
+    
+    
+    public int[][] Get_Board()
+    {
+		return this.board;
+    	
+    }
+    
+    public int[][] Get_Robot()
+    {
+    	return this.posRobot;
     }
 
-    public State getClone()
+    public State getClone() throws IOException, InterruptedException
     {
         State s = new State();
         for (int i = 0; i < s.board.length; i++)
@@ -33,11 +53,13 @@ public class State
             for (int j = 0; j < s.posRobot[i].length; j++)
             {
                 s.posRobot[i][j] = this.posRobot[i][j];
+
+                
             }
         }
         return s;
     }
-    public State play(Move move, int robot)
+    public State play(Move move, int robot) throws IOException, InterruptedException
     {
         State s = this.getClone();
         s.posRobot[robot][0] = move.getPosXF();
