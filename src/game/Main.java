@@ -1,8 +1,17 @@
 package game;
+
+import gamegui.*;
+
+import java.io.IOException;
+
+
 public class Main
 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
+    	//RandomBoardGeneration generationAleatoire = new RandomBoardGeneration(); 	
+    	//int[][] bo = generationAleatoire.getBoard();  	
         State s = new State();
+        new Containers(s);
         for (Move move : s.getMove(1))
             System.out.println(move.toString());
         State s2 = s.play(s.getLeftMove(1), 1);
