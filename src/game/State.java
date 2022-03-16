@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class State
 {
@@ -25,7 +26,7 @@ public class State
             for (int j = 0; j < this.board[i].length; j++)
                 {
                     if (this.board[i][j] < 9)
-                        System.out.print(this.board[i][j] +"  ");
+                        System.out.print(" " + this.board[i][j] + " ");
                     else
                         System.out.print(this.board[i][j] +" ");
                 }
@@ -64,8 +65,13 @@ public class State
         {
             if(this.board[this.posRobot[robot][0]][i] == 12 || this.board[this.posRobot[robot][0]][i] == 21 || this.board[this.posRobot[robot][0]][i] == 22)
                 return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+            for (int k = 0; k < 3; k++)
+            {
+                if (k != robot && this.posRobot[k][0] == this.posRobot[robot][0] && this.posRobot[k][1] == i)
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+            }
         }
-        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 16);
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 15);
     }
     public Move getLeftMove(int robot)
     {
@@ -73,6 +79,11 @@ public class State
         {
             if(this.board[this.posRobot[robot][0]][i] == 10 || this.board[this.posRobot[robot][0]][i] == 23 || this.board[this.posRobot[robot][0]][i] == 20)
                 return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+            for (int k = 0; k < 3; k++)
+            {
+                if (k != robot && this.posRobot[k][0] == this.posRobot[robot][0] && this.posRobot[k][1] == i)
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+            }
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 0);
     }
@@ -81,18 +92,28 @@ public class State
         for (int i = this.posRobot[robot][0]; i<16; i++)
         {
             if(this.board[i][this.posRobot[robot][1]] == 13 || this.board[i][this.posRobot[robot][1]] == 22 || this.board[i][this.posRobot[robot][1]] == 23)
-                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][0]);
+                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+            for (int k = 0; k < 3; k++)
+            {
+                if (k != robot && this.posRobot[k][0] == i && this.posRobot[k][1] == this.posRobot[robot][1])
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+            }
         }
-        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 16, this.posRobot[robot][0]);
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 15, this.posRobot[robot][1]);
     }
     public Move getUpMove(int robot)
     {
         for (int i = this.posRobot[robot][0]; i>0; i--)
         {
             if(this.board[i][this.posRobot[robot][1]] == 11 || this.board[i][this.posRobot[robot][1]] == 21 || this.board[i][this.posRobot[robot][1]] == 21)
-                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][0]);
+                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+            for (int k = 0; k < 3; k++)
+            {
+                if (k != robot && this.posRobot[k][0] == i && this.posRobot[k][1] == this.posRobot[robot][1])
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+            }
         }
-        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 0, this.posRobot[robot][0]);
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 0, this.posRobot[robot][1]);
     }
 
     public ArrayList<Move> getMove(int robot)
@@ -102,6 +123,16 @@ public class State
         allMoves.add(getRightMove(robot));
         allMoves.add(getDownMove(robot));
         allMoves.add(getLeftMove(robot));
+        /*for (Move move : allMoves)
+        {
+            if (move.getPosXI() == move.getPosXF() && move.getPosYI() == move.getPosYF())
+                allMoves.remove(move);
+        }*/
+        for (Iterator<Move> it = allMoves.iterator(); it.hasNext(); ) {
+            Move move = it.next();
+            if (move.getPosXI() == move.getPosXF() && move.getPosYI() == move.getPosYF())
+                it.remove();
+        }
         return allMoves;
     }
 }
