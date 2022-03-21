@@ -78,11 +78,11 @@ public class Board extends JPanel implements EcouteurModele{
 		        int valeur = tableau[i][j];
 					switch(valeur) 
 					{	
-			        case 10:
+			        case 11:
 			    		//g.setColor(Color.GREEN);
 			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim);//border top 1 
 					    break;					   					    
-			        case 11:
+			        case 10:
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim);//border left 2
 					    break;
 			        case 12:
@@ -96,7 +96,7 @@ public class Board extends JPanel implements EcouteurModele{
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
 			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); //1
 					    break; 
-			        case 23:
+			        case 21:
 			  			
 			  			g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); //3
 			  			g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); // 1
@@ -107,7 +107,7 @@ public class Board extends JPanel implements EcouteurModele{
 			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); //4
 			        	//border rigth bottom
 					    break;
-			        case 21:
+			        case 23:
 			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); // 4
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
 			        	//border bottom left

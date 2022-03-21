@@ -26,23 +26,23 @@ public class RandomBoardGeneration
 
         //positions interdites du centre
         this.board[7][7] = 20;
-        this.board[7][8] = 21;
+        this.board[7][8] = 23;
         this.board[8][8] = 22;
-        this.board[8][7] = 23;
-        this.board[6][7] = 13;
-        this.board[6][8] = 13;
-        this.board[7][9] = 14;
-        this.board[8][9] = 14;
-        this.board[9][8] = 11;
-        this.board[9][7] = 11;
-        this.board[8][6] = 12;
-        this.board[7][6] = 12;
+        this.board[8][7] = 21;
+        this.board[6][7] = 12;
+        this.board[6][8] = 12;
+        this.board[7][9] = 11;
+        this.board[8][9] = 11;
+        this.board[9][8] = 10;
+        this.board[9][7] = 10;
+        this.board[8][6] = 13;
+        this.board[7][6] = 13;
 
         List<Integer> centre = Arrays.asList(7,7,7,8,8,8,8,7,6,7,6,8,7,9,8,9,9,8,9,7,8,6,7,6);
 
         List<Integer> obstaclesSimples = Arrays.asList(10, 11, 12, 13);//liste non utilisé dans le programme
-        //10 = obstacle simple haut
-        //11 = obstacle simple gauche
+        //10 = obstacle simple gauche
+        //11 = obstacle simple haut
         //12 = obstacle simple droit
         //13 = obstacle simple bas
 
@@ -57,57 +57,58 @@ public class RandomBoardGeneration
         //31 = tunnel horizontal/haut bas
 
 
-
+        
         Random rand = new Random();
+        
         int compteurObstaclesSimples = 0;
         int compteurObstaclesDoubles = 0;
         while (compteurObstaclesSimples < 8){
             //bordure exterieur haute
             for (int l=0;l<2;l++)
             {
-                int int_i = 0;
-                int int_j = rand.nextInt(14)+1;
+                int int_i = rand.nextInt(14)+1;
+                int int_j = 0;
                 if (this.board[int_i][int_j] == 0)
                 {
                     this.board[int_i][int_j] = 10;
-                    this.board[int_i][int_j-1]=11;
+                    this.board[int_i-1][int_j]=12;
                     compteurObstaclesSimples++;   
                 }
             }
             //bordure exterieur basse
             for (int l=0;l<2;l++)
             {
-                int int_i = 15;
-                int int_j = rand.nextInt(14)+1; 
+                int int_i = rand.nextInt(14)+1;
+                int int_j = 15; 
                 //on place aléatoirement un obstacle vertical sur la paroi/bordure basse
                 if (this.board[int_i][int_j] == 0)
                 {
-                    this.board[int_i][int_j] = 12;
-                    this.board[int_i][int_j-1]=13;
+                    this.board[int_i][int_j] = 10;
+                    this.board[int_i-1][int_j]=12;
                     compteurObstaclesSimples++;
                 }
             }
             //bordure exterieur gauche
             for (int l=0;l<2;l++)
             {
-                int int_i = rand.nextInt(14)+1;//entre 1 et 15 inclus
-                int int_j = 0;
+                int int_i = 0;
+                int int_j = rand.nextInt(14)+1;//entre 1 et 15 inclus
                 if (this.board[int_i][int_j] == 0)
                 {
-                    this.board[int_i][int_j] = 13;
-                    this.board[int_i-1][int_j]=11;
+                    this.board[int_i][int_j] = 11;
+                    this.board[int_i][int_j-1]=13;
                     compteurObstaclesSimples++;                    
                 }
             }
             //bordure exterieur droite
             for (int l=0;l<2;l++)
             {
-                int int_i = rand.nextInt(14)+1;//entre 1 et 15 inclus
-                int int_j = 15;
+                int int_i = 15;
+                int int_j = rand.nextInt(14)+1;//entre 1 et 15 inclus
                 if (this.board[int_i][int_j] == 0)
                 {
-                    this.board[int_i][int_j] = 13;
-                    this.board[int_i-1][int_j]=12;
+                    this.board[int_i][int_j] = 11;
+                    this.board[int_i][int_j-1]=13;
                     compteurObstaclesSimples++;                    
                 }
             }
@@ -116,23 +117,24 @@ public class RandomBoardGeneration
 
 
         while (compteurObstaclesDoubles < 16){
-            int int_i = rand.nextInt(13)+1;//entre 1 et 14
-            int int_j = rand.nextInt(13)+1;//entre 1 et 14
+            int int_i = rand.nextInt(14)+1;//entre 1 et 14
+            int int_j = rand.nextInt(14)+1;//entre 1 et 14
             if (this.board[int_i][int_j] == 0)
             {   
                 boolean feu_vert = true;
                 int obstacle_potentiel = obstaclesDoubles.get(rand.nextInt(obstaclesDoubles.size()));
-                for (int k = -1; k < 1; k++)
+                for (int k = -1; k < 2; k++)
                 {
-                    for (int l = -1; l < 1; l++)
+                    for (int l = -1; l < 2; l++)
                     {   
                         int position_test = this.board[int_i + k][int_j + l];
-                        if (position_test==0 || obstaclesSimples.contains(position_test) ||((int_i==(int_i+k))&&(int_j==(int_j+l))))
+                        if ((!obstaclesSimples.contains(position_test) && !obstaclesDoubles.contains(position_test)  ))
                         {
-
+                           
                         }
                         else
-                        {
+                        {   
+                            
                             feu_vert = false;
                         }
                     }
@@ -143,6 +145,7 @@ public class RandomBoardGeneration
                 }                
             }             
         }
+        
 
                 
         //positions robots initiales
