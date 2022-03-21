@@ -10,7 +10,7 @@ public class RandomBoardGeneration
     protected int[][] board;
     protected int[][] posRobot;//[xrobot1, yrobot1, xrobot2, yrobot2,..] positions des robots (4 robots donc 8 entiers (coordonnées x, y))
     protected int active_goal; //numéro du jeton "objectif" entre 0 et 3 (4 valeurs possibles car 4 jetons)
-    protected int[] goalsToDo;//[xjeton1,yjeton1,xjeton2,yjeton2] position des jetons (4 jetons donc 8 entiers (coordonnées x, y))
+    protected int[][] goalsToDo;//[xjeton1,yjeton1,xjeton2,yjeton2] position des jetons (4 jetons donc 8 entiers (coordonnées x, y))
     public RandomBoardGeneration()
     {
 
@@ -355,7 +355,7 @@ public class RandomBoardGeneration
         //positions jetons initiales
 
         int compteurjetonspos = 0;
-        this.goalsToDo = new int[8];
+        this.goalsToDo = new int[8][2];
         while (compteurjetonspos < 8)
         {
             int int_i = rand.nextInt(16);
@@ -371,15 +371,14 @@ public class RandomBoardGeneration
             }
             if (statut == 1)
             {
-                this.goalsToDo[compteurjetonspos]=int_i;
-                compteurjetonspos++;
-                this.goalsToDo[compteurjetonspos]=int_j;
+                this.goalsToDo[compteurjetonspos][0]=int_i;
+                this.goalsToDo[compteurjetonspos][1]=int_j;
                 compteurjetonspos++;
             }
         }
 
         //position jeton objectif
-        this.active_goal = 0; 
+        this.active_goal = 0;
         // valeur à changer par l'utilisateur avec un setter.
     }
 
@@ -398,7 +397,7 @@ public class RandomBoardGeneration
         return this.active_goal;
     }
 
-    public int[] getGoalsToDo()
+    public int[][] getGoalsToDo()
     {
         return this.goalsToDo;
     }
