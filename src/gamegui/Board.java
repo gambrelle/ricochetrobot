@@ -1,24 +1,17 @@
 package gamegui;
 
 import game.*;
-import java.util.ArrayList;
 import java.awt.BasicStroke;
-import java.awt.Color;
 //import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 
 
@@ -32,12 +25,16 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 	private static final long serialVersionUID = 1L;
 	public int[][] tableau;
 	public int[][] pos_Robot;
-	public int[] pos_jeton;
+	public int[][] pos_jeton;
 	private State state ;
 	private BufferedImage green_robot;
 	private BufferedImage red_robot;
 	private BufferedImage blue_robot;
 	private BufferedImage yellow_robot;
+	private BufferedImage green_jeton;
+	private BufferedImage red_jeton;
+	private BufferedImage blue_jeton;
+	private BufferedImage yellow_jeton;
 	private BufferedImage carre;
 	private int pos_x , pos_y;
 	private int dim = 40;
@@ -55,6 +52,10 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 		red_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\red_robot.png"));
 		blue_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\blue_robot.png"));
 		yellow_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\yellow_robot.png"));
+		green_jeton = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\vertrond.png"));
+		red_jeton = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\rougerond.png"));
+		blue_jeton = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\bleurond.png"));
+		yellow_jeton = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\jaunerond.png"));
 		carre = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\carre.jpg"));
 		this.addMouseListener(this);
 
@@ -76,14 +77,14 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 			int x_blue_robot = this.pos_Robot[3][0];
 			int y_blue_robot = this.pos_Robot[3][1];
 			
-			int x_green_jeton = this.pos_jeton[0];
-			int y_green_jeton = this.pos_jeton[1];
-			int x_red_jeton = this.pos_jeton[2];
-			int y_red_jeton = this.pos_jeton[3];
-			int x_yellow_jeton = this.pos_jeton[4];
-			int y_yellow_jeton = this.pos_jeton[5];
-			int x_blue_jeton = this.pos_jeton[6];
-			int y_blue_jeton = this.pos_jeton[7];
+			int x_green_jeton = this.pos_jeton[1][0];
+			int y_green_jeton = this.pos_jeton[1][1];
+			int x_red_jeton = this.pos_jeton[2][1];
+			int y_red_jeton = this.pos_jeton[2][1];
+			int x_yellow_jeton = this.pos_jeton[3][0];
+			int y_yellow_jeton = this.pos_jeton[3][1];
+			int x_blue_jeton = this.pos_jeton[4][0];
+			int y_blue_jeton = this.pos_jeton[4][1];
 			
 			
 			
@@ -117,7 +118,7 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
 			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); //1
 					    break; 
-			        case 23:		  			
+			        case 21:		  			
 			  			g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); //3
 			  			g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); // 1
 
@@ -128,7 +129,7 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); //4
 			        	//border rigth bottom
 					    break;
-			        case 21:
+			        case 23:
 			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); // 4
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
 			        	//border bottom left
@@ -139,10 +140,10 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 						g.drawImage(blue_robot,dim*x_blue_robot , dim*y_blue_robot, null);
 						g.drawImage(yellow_robot,dim*x_yellow_robot , dim*y_yellow_robot, null);
 						
-						//g.drawImage(green_robot,dim*x_green_jeton , dim*y_green_jeton, null);
-						//g.drawImage(red_robot,dim*x_red_jeton , dim*y_red_jeton, null);
-						//g.drawImage(blue_robot,dim*x_blue_jeton , dim*y_blue_jeton, null);
-						//g.drawImage(yellow_robot,dim*x_yellow_jeton , dim*y_yellow_jeton, null);
+						g.drawImage(green_jeton,dim*x_green_jeton , dim*y_green_jeton, null);
+						g.drawImage(red_jeton,dim*x_red_jeton , dim*y_red_jeton, null);
+						g.drawImage(blue_jeton,dim*x_blue_jeton , dim*y_blue_jeton, null);
+						g.drawImage(yellow_jeton,dim*x_yellow_jeton , dim*y_yellow_jeton, null);
 						
 					}
 		        	

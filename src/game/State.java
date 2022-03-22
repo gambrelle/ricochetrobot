@@ -10,7 +10,7 @@ public class State
     int[][] board;
     int[][] posRobot;
     protected int active_goal;
-    protected int[] goalsToDo;
+    protected int[][] goalsToDo;
 
     
 
@@ -25,8 +25,7 @@ public class State
 
     }
 
-    
-    
+      
     public int[][] get_Board()
     {
 		return this.board;
@@ -38,7 +37,7 @@ public class State
     	return this.posRobot;
     }
     
-    public int[] get_goalsToDo()
+    public int[][] get_goalsToDo()
     {
     	return this.goalsToDo;
     }
