@@ -62,9 +62,13 @@ public class RandomBoardGeneration
         
         int compteurObstaclesSimples = 0;
         int compteurObstaclesDoubles = 0;
+        int compteurSimpleHaut = 0;
+        int compteurSimpleBas = 0;
+        int compteurSimpleDroit = 0;
+        int compteurSimpleGauche = 0;
         while (compteurObstaclesSimples < 8){
             //bordure exterieur haute
-            for (int l=0;l<2;l++)
+            while (compteurSimpleHaut <2)
             {
                 int int_i = rand.nextInt(14)+1;
                 int int_j = 0;
@@ -72,11 +76,12 @@ public class RandomBoardGeneration
                 {
                     this.board[int_i][int_j] = 10;
                     this.board[int_i-1][int_j]=12;
+                    compteurSimpleHaut++;
                     compteurObstaclesSimples++;   
                 }
             }
             //bordure exterieur basse
-            for (int l=0;l<2;l++)
+            while (compteurSimpleBas<2)
             {
                 int int_i = rand.nextInt(14)+1;
                 int int_j = 15; 
@@ -86,10 +91,11 @@ public class RandomBoardGeneration
                     this.board[int_i][int_j] = 10;
                     this.board[int_i-1][int_j]=12;
                     compteurObstaclesSimples++;
+                    compteurSimpleBas++;
                 }
             }
             //bordure exterieur gauche
-            for (int l=0;l<2;l++)
+            while (compteurSimpleGauche<2)
             {
                 int int_i = 0;
                 int int_j = rand.nextInt(14)+1;//entre 1 et 15 inclus
@@ -97,11 +103,12 @@ public class RandomBoardGeneration
                 {
                     this.board[int_i][int_j] = 11;
                     this.board[int_i][int_j-1]=13;
-                    compteurObstaclesSimples++;                    
+                    compteurObstaclesSimples++;  
+                    compteurSimpleGauche++;                  
                 }
             }
             //bordure exterieur droite
-            for (int l=0;l<2;l++)
+            while (compteurSimpleDroit<2)
             {
                 int int_i = 15;
                 int int_j = rand.nextInt(14)+1;//entre 1 et 15 inclus
@@ -109,9 +116,11 @@ public class RandomBoardGeneration
                 {
                     this.board[int_i][int_j] = 11;
                     this.board[int_i][int_j-1]=13;
-                    compteurObstaclesSimples++;                    
+                    compteurObstaclesSimples++;  
+                    compteurSimpleDroit++;                  
                 }
             }
+            
         } 
         //on trouve forcément 8 emplacements pour les obstacles simples.
 
@@ -123,24 +132,176 @@ public class RandomBoardGeneration
             {   
                 boolean feu_vert = true;
                 int obstacle_potentiel = obstaclesDoubles.get(rand.nextInt(obstaclesDoubles.size()));
-                for (int k = -1; k < 2; k++)
-                {
-                    for (int l = -1; l < 2; l++)
-                    {   
-                        int position_test = this.board[int_i + k][int_j + l];
-                        if ((!obstaclesSimples.contains(position_test) && !obstaclesDoubles.contains(position_test)  ))
-                        {
-                           
-                        }
-                        else
+                if (obstaclesSimples.contains(this.board[int_i][int_j])){feu_vert = false;}
+                if (feu_vert){
+                    for (int k = -1; k < 2; k++)
+                    {
+                        for (int l = -1; l < 2; l++)
                         {   
-                            
-                            feu_vert = false;
+                            int position_test = this.board[int_i + k][int_j + l];
+                            if (!obstaclesDoubles.contains(position_test) )
+                            {
+
+                            }
+                            else
+                            {   
+                                
+                                feu_vert = false;
+                            }
                         }
                     }
-                }
+                    switch(this.board[int_i][int_j]){
+                        case 20: // cas du coin haut gauche
+                            if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ //gauche
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i][int_j-1])){ //haut
+                                feu_vert=false;
+                                break;
+                            }
+
+                            //axe bord haut cases de droite
+                            if(obstaclesSimples.contains(this.board[int_i+1][int_j-1])){ //haut diagonale haut droite
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i+1][int_j])){ //haut diagonale bas droite
+                                feu_vert=false;
+                                break;
+                            }
+
+                            //axe bord gauche cases du bas
+                            if(obstaclesSimples.contains(this.board[int_i][int_j+1])){ //gauche diagonale bas droite
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i-1][int_j+1])){ //gauche diagonale bas gauche
+                                feu_vert=false;
+                                break;
+                            }
+                            break;
+
+
+                        case 21: // cas du coin haut droite
+                            if(obstaclesSimples.contains(this.board[int_i+1][int_j])){ //droite
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i][int_j-1])){ //haut
+                                feu_vert=false;
+                                break;
+                            }
+
+                            //axe bords haut cases de gauche
+                            if(obstaclesSimples.contains(this.board[int_i-1][int_j-1])){ //haut gauche diagonale haut droite
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ //haut gauche diagonale haut gauche
+                                feu_vert=false;
+                                break;
+                            }
+
+                            //axe bords droit cases du bas
+                            if(obstaclesSimples.contains(this.board[int_i+1][int_j+1])){ //droit bas diagonale droite bas
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i][int_j+1])){ //droit bas diagonale gauche bas
+                                feu_vert=false;
+                                break;
+                            }
+                            break;
+
+
+                        case 22: // cas du coin bas droite
+                            if(obstaclesSimples.contains(this.board[int_i+1][int_j])){ //droite
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i][int_j+1])){ //bas
+                                feu_vert=false;
+                                break;
+                            }
+
+
+                            //axe bords bas cases de gauche
+                            if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ // bas gauche diagonale haute
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i-1][int_j+1])){ // bas gauche diagonale basse
+                                feu_vert=false;
+                                break;
+                            }
+
+
+                            //axe bords droite case du haut
+                            if(obstaclesSimples.contains(this.board[int_i+1][int_j-1])){ // droite haut diagonale droite
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i][int_j-1])){ // droite haut diagonale gauche
+                                feu_vert=false;
+                                break;
+                            }
+                            break;
+
+
+                        case 23: // cas du coin bas gauche
+                            if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ //gauche
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i][int_j+1])){ //bas
+                                feu_vert=false;
+                                break;
+                            }
+
+                            //axe du bord bas cases de droites
+                            if(obstaclesSimples.contains(this.board[int_i+1][int_j])){ //bas droite diagonale haute
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i+1][int_j+1])){ //bas droite diagonale basse
+                                feu_vert=false;
+                                break;
+                            }
+
+                            //axe de gauche cases du haut
+                            if(obstaclesSimples.contains(this.board[int_i][int_j-1])){ //gauche haut diagonale droite
+                                feu_vert=false;
+                                break;
+                            }
+                            if(obstaclesSimples.contains(this.board[int_i-1][int_j-1])){ //gauche haut diagonale gauche
+                                feu_vert=false;
+                                break;
+                            }
+                            break;
+                        }
+                    
+            }
                 if (feu_vert){
                     this.board[int_i][int_j] = obstacle_potentiel;
+                    switch(obstacle_potentiel){
+                        case 20: // cas du coin haut gauche
+                            this.board[int_i-1][int_j]=12; //gauche                            
+                            this.board[int_i][int_j-1]=13; //haut
+                            break;
+                        case 21: // cas du coin haut droit
+                            this.board[int_i+1][int_j]=10; //droit                            
+                            this.board[int_i][int_j-1]=13; //haut
+                            break;
+                        case 22: // cas du coin bas droit
+                            this.board[int_i+1][int_j] = 10; //droit                           
+                            this.board[int_i][int_j+1]= 11; //bas
+                            break;
+                        case 23: // cas du coin bas gauche
+                            this.board[int_i-1][int_j]= 12; //gauche                            
+                            this.board[int_i][int_j+1]= 11; //bas
+                            break;
+                    }
                     compteurObstaclesDoubles++;
                 }                
             }             
