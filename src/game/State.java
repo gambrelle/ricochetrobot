@@ -24,18 +24,22 @@ public class State
 		
 
     }
-    //Produit une nouvelle grille à chaque tour, il faudrai faire un ramdom que une seule fois 
     
     
-    public int[][] Get_Board()
+    public int[][] get_Board()
     {
 		return this.board;
     	
     }
     
-    public int[][] Get_Robot()
+    public int[][] get_Robot()
     {
     	return this.posRobot;
+    }
+    
+    public int[] get_goalsToDo()
+    {
+    	return this.goalsToDo;
     }
 
     public State getClone() throws IOException, InterruptedException

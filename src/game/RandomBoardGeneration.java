@@ -25,6 +25,8 @@ public class RandomBoardGeneration
         }
 
         //positions interdites du centre
+        this.board[15][0] = 11;
+        this.board[0][15] = 11;
         this.board[7][7] = 20;
         this.board[7][8] = 21;
         this.board[8][8] = 22;
