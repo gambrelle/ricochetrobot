@@ -27,7 +27,11 @@ public class Main
         System.out.println(Arrays.deepToString(s.posRobot));
         System.out.println(Arrays.deepToString(s.goalsToDo));
 
+        for (int i = 0; i <= 3; i++)
+            for (Move move : s.getMove(i))
+                System.out.println(move.toString());
         s = s.play(s.getUpMove(1), 1);
+        
 
         System.out.println(Arrays.deepToString(s.posRobot));
     }

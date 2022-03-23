@@ -37,6 +37,11 @@ public class State
     	return this.posRobot;
     }
 
+    public int getActiveGoal()
+    {
+        return this.active_goal;
+    }
+
     public void printBoard()
     {
         for (int i = 0; i < this.board.length; i++)
