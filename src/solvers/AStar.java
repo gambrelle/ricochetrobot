@@ -1,4 +1,4 @@
-package solvers;
+/* package solvers;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -35,3 +35,4 @@ public class AStar extends Solver
         return openList;
     }
 }
+ */

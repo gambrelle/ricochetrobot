@@ -24,22 +24,27 @@ public class State
         this.goalsToDo = generationAleatoire.getGoalsToDo();
     }
     //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois 
-    
-    
+       
     public int[][] Get_Board()
     {
 		return this.board;
     	
     }
-    
     public int[][] Get_Robot()
     {
     	return this.posRobot;
     }
-
+    public int[][] getAllGoals()
+    {
+        return this.goalsToDo;
+    } 
     public int getActiveGoal()
     {
         return this.active_goal;
+    }
+    public void chooseActivegoal(int i)
+    {
+        this.active_goal = i;
     }
 
     public void printBoard()
@@ -56,6 +61,7 @@ public class State
                 System.out.print("\n");
         }
     }
+    
     public State getClone()
     {
         State s = new State();
@@ -75,13 +81,13 @@ public class State
         }
         return s;
     }
-    public State play(Move move, int robot)
+    
+    public void play(Move move, int robot)
     {
-        State s = this.getClone();
-        s.posRobot[robot][0] = move.getPosXF();
-        s.posRobot[robot][1] = move.getPosYF();
-        return s;
+        this.posRobot[robot][0] = move.getPosXF();
+        this.posRobot[robot][1] = move.getPosYF();
     }
+    
     public Move getRightMove(int robot)
     {
         for (int i = this.posRobot[robot][0]; i<16; i++)
@@ -153,8 +159,10 @@ public class State
         }
         return allMoves;
     }
-    public void setPos(int[][] l)
+
+    public boolean isFinalState()
     {
-        this.posRobot = l; 
+        return this.posRobot[this.active_goal][0] == this.goalsToDo[this.active_goal][0] && this.posRobot[this.active_goal][1] == this.goalsToDo[this.active_goal][1];
     }
+    
 }

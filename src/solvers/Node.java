@@ -7,11 +7,12 @@ public class Node implements Comparable<Node>
     protected int x, y, heuristic;
     protected Move move;
     
-    public Node(int x, int y, int heuristic)
+    public Node(int x, int y, int heuristic, Move move)
     {
         this.x = x;
         this.y = y;
         this.heuristic = heuristic;
+        this.move = move;
     }
 
     public int getX()
