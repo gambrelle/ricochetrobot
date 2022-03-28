@@ -121,7 +121,7 @@ public class State
             for (int k = 0; k < 3; k++)
             {
                 if (k != robot && this.posRobot[k][0] == i && this.posRobot[k][1] == this.posRobot[robot][1])
-                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i-1, this.posRobot[robot][1]);
             }
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 15, this.posRobot[robot][1]);
@@ -135,7 +135,7 @@ public class State
             for (int k = 0; k < 3; k++)
             {
                 if (k != robot && this.posRobot[k][0] == i && this.posRobot[k][1] == this.posRobot[robot][1])
-                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i+1, this.posRobot[robot][1]);
             }
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 0, this.posRobot[robot][1]);
@@ -149,7 +149,7 @@ public class State
             for (int k = 0; k < 3; k++)
             {
                 if (k != robot && this.posRobot[k][0] == this.posRobot[robot][0] && this.posRobot[k][1] == i)
-                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i-1);
             }
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 15);
@@ -163,7 +163,7 @@ public class State
             for (int k = 0; k < 3; k++)
             {
                 if (k != robot && this.posRobot[k][0] == this.posRobot[robot][0] && this.posRobot[k][1] == i)
-                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i+1);
             }
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 0);
