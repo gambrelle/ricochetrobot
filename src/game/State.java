@@ -16,8 +16,9 @@ public class State
 
     
 
-    public State()
-    {
+    public State() throws IOException, InterruptedException
+    {   
+        System.out.println("State.java");
     	RandomBoardGeneration generationAleatoire = new RandomBoardGeneration();
 		this.board =  generationAleatoire.getBoard();
         this.posRobot = generationAleatoire.getPosRobot();
@@ -26,28 +27,44 @@ public class State
         this.robot = robot;
     }
     //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois 
+
     public int GetNumber()
     {
     	return robot;
     }
     
+
     public int[][] Get_Board()
     {
 		return this.board;
     	
     }
-    
     public int[][] Get_Robot()
     {
     	return this.posRobot;
     }
+
     
     
     public int[][] Get_Goal()
     {
     	return this.goalsToDo ;
     }
-    
+
+    public int[][] getAllGoals()
+    {
+        return this.goalsToDo;
+    } 
+    public int getActiveGoal()
+    {
+        return this.active_goal;
+    }
+    public void chooseActivegoal(int i)
+    {
+        this.active_goal = i;
+    }
+
+
     public void printBoard()
     {
         for (int i = 0; i < this.board.length; i++)
@@ -62,7 +79,8 @@ public class State
                 System.out.print("\n");
         }
     }
-    public State getClone()
+    
+    public State getClone() throws IOException, InterruptedException
     {
         State s = new State();
         for (int i = 0; i < s.board.length; i++)
@@ -81,21 +99,19 @@ public class State
         }
         return s;
     }
-    public State play(Move move, int robot)
+    
+    public void play(Move move, int robot)
     {
-        State s = this.getClone(); 
+
+
         this.posRobot[robot][0] = move.getPosXF();
         this.posRobot[robot][1] = move.getPosYF();
 
-        return s;
+
     }
-   /*  public void play2(Move move, int robot)
-    {
-        
-        this.posRobot[robot][0] = move.getPosXF();
-        this.posRobot[robot][1] = move.getPosYF();
-    }   
-    */
+
+    
+
     public Move getRightMove(int robot)
     {
         for (int i = this.posRobot[robot][0]; i<16; i++)
@@ -167,8 +183,10 @@ public class State
         }
         return allMoves;
     }
-    public void setPos(int[][] l)
+
+    public boolean isFinalState()
     {
-        this.posRobot = l; 
+        return this.posRobot[this.active_goal][0] == this.goalsToDo[this.active_goal][0] && this.posRobot[this.active_goal][1] == this.goalsToDo[this.active_goal][1];
     }
+    
 }
