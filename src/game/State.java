@@ -12,6 +12,7 @@ public class State
     int[][] posRobot;
     protected int active_goal;
     protected int[][] goalsToDo;
+    int robot ; 
 
     
 
@@ -22,9 +23,13 @@ public class State
         this.posRobot = generationAleatoire.getPosRobot();
         this.active_goal = generationAleatoire.getActiveGoal();
         this.goalsToDo = generationAleatoire.getGoalsToDo();
+        this.robot = robot;
     }
     //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois 
-    
+    public int GetNumber()
+    {
+    	return robot;
+    }
     
     public int[][] Get_Board()
     {
@@ -36,7 +41,13 @@ public class State
     {
     	return this.posRobot;
     }
-
+    
+    
+    public int[][] Get_Goal()
+    {
+    	return this.goalsToDo ;
+    }
+    
     public void printBoard()
     {
         for (int i = 0; i < this.board.length; i++)
@@ -72,11 +83,19 @@ public class State
     }
     public State play(Move move, int robot)
     {
-        State s = this.getClone();
-        s.posRobot[robot][0] = move.getPosXF();
-        s.posRobot[robot][1] = move.getPosYF();
+        State s = this.getClone(); 
+        this.posRobot[robot][0] = move.getPosXF();
+        this.posRobot[robot][1] = move.getPosYF();
+
         return s;
     }
+   /*  public void play2(Move move, int robot)
+    {
+        
+        this.posRobot[robot][0] = move.getPosXF();
+        this.posRobot[robot][1] = move.getPosYF();
+    }   
+    */
     public Move getRightMove(int robot)
     {
         for (int i = this.posRobot[robot][0]; i<16; i++)
