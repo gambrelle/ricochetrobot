@@ -11,7 +11,7 @@ public class RandomBoardGeneration
     protected int[][] board;
     protected int[][] posRobot;//[xrobot1, yrobot1, xrobot2, yrobot2,..] positions des robots (4 robots donc 8 entiers (coordonnées x, y))
     protected int active_goal; //numéro du jeton "objectif" entre 0 et 3 (4 valeurs possibles car 4 jetons)
-    protected int[] goalsToDo;//[xjeton1,yjeton1,xjeton2,yjeton2] position des jetons (4 jetons donc 8 entiers (coordonnées x, y))
+    protected int[][] goalsToDo;//[xjeton1,yjeton1,xjeton2,yjeton2] position des jetons (4 jetons donc 8 entiers (coordonnées x, y))
     public RandomBoardGeneration() throws IOException, InterruptedException
 
     {

@@ -63,7 +63,7 @@ public class State
         }
     }
     
-    public State getClone()
+    public State getClone() throws IOException, InterruptedException
     {
         State s = new State();
         for (int i = 0; i < s.board.length; i++)

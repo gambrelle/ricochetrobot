@@ -1,5 +1,6 @@
 package solvers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import game.*;
@@ -9,7 +10,7 @@ public abstract class Solver
     protected State initialState;
     protected int[] posActiveRobot, posActiveGoal;
 
-    public Solver(State state)
+    public Solver(State state) throws IOException, InterruptedException
     {
         this.initialState = state.getClone();
         this.posActiveGoal = this.initialState.getAllGoals()[this.initialState.getActiveGoal()];
