@@ -4,13 +4,14 @@ import gamegui.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class State
 {
     int[][] board;
     int[][] posRobot;
     protected int active_goal;
-    protected int[] goalsToDo;
+    protected int[][] goalsToDo;
 
     
 
@@ -22,8 +23,6 @@ public class State
         this.posRobot = generationAleatoire.getPosRobot();
         this.active_goal = generationAleatoire.getActiveGoal();
         this.goalsToDo = generationAleatoire.getGoalsToDo();
-		
-
     }
     //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois 
     
@@ -39,7 +38,21 @@ public class State
     	return this.posRobot;
     }
 
-    public State getClone() throws IOException, InterruptedException
+    public void printBoard()
+    {
+        for (int i = 0; i < this.board.length; i++)
+        {
+            for (int j = 0; j < this.board[i].length; j++)
+                {
+                    if (this.board[i][j] < 9)
+                        System.out.print(" " + this.board[i][j] + " ");
+                    else
+                        System.out.print(this.board[i][j] +" ");
+                }
+                System.out.print("\n");
+        }
+    }
+    public State getClone()
     {
         State s = new State();
         for (int i = 0; i < s.board.length; i++)
@@ -54,13 +67,11 @@ public class State
             for (int j = 0; j < s.posRobot[i].length; j++)
             {
                 s.posRobot[i][j] = this.posRobot[i][j];
-
-                
             }
         }
         return s;
     }
-    public State play(Move move, int robot) throws IOException, InterruptedException
+    public State play(Move move, int robot)
     {
         State s = this.getClone();
         s.posRobot[robot][0] = move.getPosXF();
@@ -69,39 +80,59 @@ public class State
     }
     public Move getRightMove(int robot)
     {
+        for (int i = this.posRobot[robot][0]; i<16; i++)
+        {
+            if(this.board[i][this.posRobot[robot][1]] == 13 || this.board[i][this.posRobot[robot][1]] == 22 || this.board[i][this.posRobot[robot][1]] == 23)
+                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+            for (int k = 0; k < 3; k++)
+            {
+                if (k != robot && this.posRobot[k][0] == i && this.posRobot[k][1] == this.posRobot[robot][1])
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+            }
+        }
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 15, this.posRobot[robot][1]);
+    }
+    public Move getLeftMove(int robot)
+    {
+        for (int i = this.posRobot[robot][0]; i>0; i--)
+        {
+            if(this.board[i][this.posRobot[robot][1]] == 11 || this.board[i][this.posRobot[robot][1]] == 21 || this.board[i][this.posRobot[robot][1]] == 21)
+                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+            for (int k = 0; k < 3; k++)
+            {
+                if (k != robot && this.posRobot[k][0] == i && this.posRobot[k][1] == this.posRobot[robot][1])
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
+            }
+        }
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 0, this.posRobot[robot][1]);
+    }
+    public Move getDownMove(int robot)
+    {
         for (int i = this.posRobot[robot][1]; i<16; i++)
         {
             if(this.board[this.posRobot[robot][0]][i] == 12 || this.board[this.posRobot[robot][0]][i] == 21 || this.board[this.posRobot[robot][0]][i] == 22)
                 return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+            for (int k = 0; k < 3; k++)
+            {
+                if (k != robot && this.posRobot[k][0] == this.posRobot[robot][0] && this.posRobot[k][1] == i)
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+            }
         }
-        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 16);
+        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 15);
     }
-    public Move getLeftMove(int robot)
+    public Move getUpMove(int robot)
     {
         for (int i = this.posRobot[robot][1]; i>0; i--)
         {
             if(this.board[this.posRobot[robot][0]][i] == 10 || this.board[this.posRobot[robot][0]][i] == 23 || this.board[this.posRobot[robot][0]][i] == 20)
                 return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+            for (int k = 0; k < 3; k++)
+            {
+                if (k != robot && this.posRobot[k][0] == this.posRobot[robot][0] && this.posRobot[k][1] == i)
+                    return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
+            }
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 0);
-    }
-    public Move getDownMove(int robot)
-    {
-        for (int i = this.posRobot[robot][0]; i<16; i++)
-        {
-            if(this.board[i][this.posRobot[robot][1]] == 13 || this.board[i][this.posRobot[robot][1]] == 22 || this.board[i][this.posRobot[robot][1]] == 23)
-                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][0]);
-        }
-        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 16, this.posRobot[robot][0]);
-    }
-    public Move getUpMove(int robot)
-    {
-        for (int i = this.posRobot[robot][0]; i>0; i--)
-        {
-            if(this.board[i][this.posRobot[robot][1]] == 11 || this.board[i][this.posRobot[robot][1]] == 21 || this.board[i][this.posRobot[robot][1]] == 21)
-                return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][0]);
-        }
-        return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 0, this.posRobot[robot][0]);
     }
 
     public ArrayList<Move> getMove(int robot)
@@ -111,6 +142,15 @@ public class State
         allMoves.add(getRightMove(robot));
         allMoves.add(getDownMove(robot));
         allMoves.add(getLeftMove(robot));
+        for (Iterator<Move> it = allMoves.iterator(); it.hasNext(); ) {
+            Move move = it.next();
+            if (move.getPosXI() == move.getPosXF() && move.getPosYI() == move.getPosYF())
+                it.remove();
+        }
         return allMoves;
+    }
+    public void setPos(int[][] l)
+    {
+        this.posRobot = l; 
     }
 }
