@@ -15,7 +15,7 @@ import javax.swing.border.Border;
 
 
 
-public class Containers extends JFrame implements ActionListener  {
+public class Containers extends JFrame implements ActionListener {
 	
 	/**
 	 * 
@@ -34,10 +34,14 @@ public class Containers extends JFrame implements ActionListener  {
     public JLabel show_round = new JLabel();//affiche les manches
     public JLabel affichage_time = new JLabel();//affiche le timer
 	private Border border = BorderFactory.createMatteBorder(0, 0,4 , 0, Color.BLACK);;
-	private static int pos_x , pos_y;
 	
 	
-	
+	/*public Containers() throws IOException, InterruptedException 
+	{
+		this(new State());
+		this.board = new Board(state);
+	}*/
+
 	public Containers(State state) throws IOException, InterruptedException
 	{
 
@@ -48,9 +52,8 @@ public class Containers extends JFrame implements ActionListener  {
 		Container container = this.getContentPane();
 		container.setLayout(new BorderLayout());	
 		this.state = state;
-		this.board = new Board(state);
-	    board.setPreferredSize(new Dimension(640,640));
-	    //board.addMouseListener(this);
+		this.board = new Board(state);  
+	    board.setPreferredSize(new Dimension(700,700));
 
 		/*
 		 * board de la classe Board
@@ -156,4 +159,16 @@ public class Containers extends JFrame implements ActionListener  {
     }
     
 
+	
+
+	/*
+	 * a faire: -Rigth_side -> compter les points du gagnant
+	 * 			- afficher les manches 
+	 * 			-
+	 * 
+	 * creer un bouton pour lancer le board 
+	 * un bouton pour d�marrer la manche 
+	 * On laisse le timer d�filer 5 sec, 
+	 * 
+	 */
 }

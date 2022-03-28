@@ -21,6 +21,8 @@ public class Move
     {
         return this.robotcolor;
     }
+    
+    
     public int getPosXI()
     {
         return this.posx_i;
