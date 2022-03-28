@@ -15,8 +15,9 @@ public class State
 
     
 
-    public State()
-    {
+    public State() throws IOException, InterruptedException
+    {   
+        System.out.println("State.java");
     	RandomBoardGeneration generationAleatoire = new RandomBoardGeneration();
 		this.board =  generationAleatoire.getBoard();
         this.posRobot = generationAleatoire.getPosRobot();
