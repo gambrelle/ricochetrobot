@@ -5,6 +5,8 @@ import java.awt.BasicStroke;
 //import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -17,7 +19,7 @@ import javax.swing.*;
 
 
 
-public class Board extends JPanel implements EcouteurModele,MouseListener {
+public class Board extends JPanel implements EcouteurModele,MouseListener, KeyListener  {
 
 	/**
 	 * 
@@ -39,6 +41,11 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 	private int pos_x , pos_y;
 	private int dim = 40;
 	public boolean bool = false ;
+	private Move MoveL;
+	private Move MoveR;
+	private Move MoveU;
+	private Move MoveD;
+	private int robot;
 	//public JPanel board;
 
 	
@@ -48,6 +55,10 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 		this.tableau = state.get_Board();
 		this.pos_Robot = state.get_Robot();
 		this.pos_jeton = state.get_goalsToDo();
+		this.MoveD = state.getDownMove(this.robot);
+		this.MoveU = state.getUpMove(this.robot);
+		this.MoveL = state.getLeftMove(this.robot);
+		this.MoveR = state.getRightMove(this.robot);
 		green_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\green_robot.png"));
 		red_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\red_robot.png"));
 		blue_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\blue_robot.png"));
@@ -58,6 +69,7 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 		yellow_jeton = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\jaunerond.png"));
 		carre = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\carre.jpg"));
 		this.addMouseListener(this);
+		this.addKeyListener(this);
 
 
 		
@@ -70,7 +82,7 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 			super.paintComponent(g);
 			int x_green_robot = this.pos_Robot[0][0] ;
 			int y_green_robot = this.pos_Robot[0][1] ;
-			int x_red_robot = this.pos_Robot[1][0];
+			/*int x_red_robot = this.pos_Robot[1][0];
 			int y_red_robot = this.pos_Robot[1][1];
 			int x_yellow_robot = this.pos_Robot[2][0] ;
 			int y_yellow_robot = this.pos_Robot[2][1];
@@ -84,7 +96,7 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 			int x_yellow_jeton = this.pos_jeton[3][0];
 			int y_yellow_jeton = this.pos_jeton[3][1];
 			int x_blue_jeton = this.pos_jeton[4][0];
-			int y_blue_jeton = this.pos_jeton[4][1];
+			int y_blue_jeton = this.pos_jeton[4][1];*/
 			
 			
 			
@@ -140,11 +152,11 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 						//g.drawImage(blue_robot,dim*x_blue_robot , dim*y_blue_robot, null);
 						//g.drawImage(yellow_robot,dim*x_yellow_robot , dim*y_yellow_robot, null);
 						
-						g.drawImage(green_jeton,dim*x_green_jeton , dim*y_green_jeton, null);
+						//g.drawImage(green_jeton,dim*x_green_jeton , dim*y_green_jeton, null);
 						//g.drawImage(red_jeton,dim*x_red_jeton , dim*y_red_jeton, null);
 						//g.drawImage(blue_jeton,dim*x_blue_jeton , dim*y_blue_jeton, null);
 						//g.drawImage(yellow_jeton,dim*x_yellow_jeton , dim*y_yellow_jeton, null);
-						
+						break;
 					}
 		        	
 		        }		        
@@ -155,26 +167,6 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 
 
 	
-	
-
-	
-	
-	
-	
-	
-
-	
-	
-
-	
-
-
-
-	@Override
-	public void modeleMAJ(Object source) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 
@@ -191,15 +183,24 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 			System.out.println(this.pos_Robot[0][1]);
 		}// TODO Auto-generated method stub
 		else if ((int) (pos_x / dim) ==  this.pos_Robot[1][0] && (int)( pos_y / dim) == this.pos_Robot[1][1] )
-		{            
+		{   
+			System.out.println("green_robot");
+			System.out.println(this.pos_Robot[0][0]);
+			System.out.println(this.pos_Robot[0][1]);
 
 		}
-		if ((int) (pos_x / dim) ==  this.pos_Robot[2][0] && (int)( pos_y / dim) == this.pos_Robot[2][1] )
-		{            
+		else if ((int) (pos_x / dim) ==  this.pos_Robot[2][0] && (int)( pos_y / dim) == this.pos_Robot[2][1] )
+		{  
+			System.out.println("green_robot");
+			System.out.println(this.pos_Robot[0][0]);
+			System.out.println(this.pos_Robot[0][1]);
 
 		}
 		if ((int) (pos_x / dim) ==  this.pos_Robot[3][0] && (int)( pos_y / dim) == this.pos_Robot[3][1] )
-		{            
+		{      
+			System.out.println("green_robot");
+			System.out.println(this.pos_Robot[0][0]);
+			System.out.println(this.pos_Robot[0][1]);
 
 		}
 
@@ -208,33 +209,68 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-
-		
-	}
-
-
-
+	public void mousePressed(MouseEvent e) {}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-
-
-
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub		
+	}
 
-		
-		
+	
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
+		switch(key) {
+		case KeyEvent.VK_RIGHT: 
+			state.play(MoveD, 1);
+	        this.pos_Robot[this.robot][0] = this.MoveR.getPosXF();
+	        this.pos_Robot[this.robot][1] = this.MoveR.getPosYF();
+			System.out.println("green_robot");
+			break;
+		}
+		// TODO Auto-generated method stub	
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+			//state.play(MoveD, 1);
+	        this.pos_Robot[this.robot][0] = this.MoveR.getPosXF();
+	        this.pos_Robot[this.robot][1] = this.MoveR.getPosYF();
+			System.out.println("green_robot");
+			//play(this.MoveR, this.robot);
+            repaint();	
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+	        this.pos_Robot[robot][0] = this.MoveL.getPosXF();
+	        this.pos_Robot[robot][1] = this.MoveL.getPosYF();
+            repaint();	
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+	        this.pos_Robot[robot][0] = this.MoveD.getPosXF();
+	        this.pos_Robot[robot][1] = this.MoveD.getPosYF();
+            repaint();	
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_UP){
+	        this.pos_Robot[robot][0] = this.MoveU.getPosXF();
+	        this.pos_Robot[robot][1] = this.MoveU.getPosYF();
+            repaint();
+		}
 	}
 
 
-
+	
+	
 	@Override
-	public void mouseExited(MouseEvent e) {
+	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
