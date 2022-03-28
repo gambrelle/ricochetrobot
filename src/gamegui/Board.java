@@ -142,10 +142,11 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 					{	
 			        case 10:
 			    		//Draw a line
-			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim);//border top 1 			        	
+			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim);//border left 2			        				        	
 					    break;					   					    
 			        case 11:
-			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim);//border left 2
+
+			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim);//border top 1 
 					    break;
 			        case 12:
 			        	g.drawLine(i*dim+dim, j*dim, i*dim+dim, j*dim+dim);//border rigth 3
@@ -174,6 +175,13 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
 			        	//border bottom left
 					    break;
+			        case 1 : 
+			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
+			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim);
+			        	g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); //3
+			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim);
+
+			        	
 					default: 
 
 					}
@@ -201,14 +209,20 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		public void keyPressed(KeyEvent e) {
 		    int key = e.getKeyCode();		    
 	        for (Move move : state.getMove(robot))
-		         System.out.println(move.toString());
+		        // System.out.println(move.toString());
+	        	System.out.println(Arrays.deepToString(state.Get_Robot()));
+	        	System.out.println("=========================================");
 	        {
 	
 				    //System.out.println(Arrays.deepToString(state.Get_Robot()));
 					    switch(key) 
 					    {
 					    case KeyEvent.VK_UP:
-						    state.play(this.moveU, this.robot);    
+					    	
+						    state.play(this.state.getUpMove(this.robot) , this.robot);    
+					        System.out.println(this.moveU);
+				        	this.state.printBoard();
+
 					    	repaint();
 					    	//System.out.println(this.pos_Robot[robot][0]);
 					    	//System.out.println(robot);
@@ -218,7 +232,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 					        //state.printBoard();
 					    	break;
 					    case KeyEvent.VK_DOWN:			    				    	
-					         state.play(this.moveD, this.robot);
+					         state.play(this.state.getDownMove(this.robot), this.robot);
 					    	// System.out.println(robot);
 					    	// System.out.println(this.pos_Robot[robot][0]);
 					    	 //System.out.println(this.pos_Robot[robot][1]);
@@ -228,22 +242,19 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 					    	 repaint();
 					    	break;
 					    case KeyEvent.VK_LEFT:		    
-					        state.play(this.moveL, this.robot);
+					    	state.play(this.state.getLeftMove(this.robot), this.robot);
 					    	//System.out.println(robot);
 					    	//System.out.println(this.pos_Robot[robot][0]);
-					    	//System.out.println(this.pos_Robot[robot][1]);
-					    	this.pos_Robot[robot][0] =  moveL.getPosXF();
-					    	this.pos_Robot[robot][1] = moveL.getPosXF();
+
 					    	//System.out.println(Arrays.deepToString(state.Get_Robot()));				    	
 					    	repaint();
 					    	break;
 					    case KeyEvent.VK_RIGHT:
-					    	 state.play(this.moveR, this.robot);
+					    	state.play(this.state.getRightMove(this.robot), this.robot);
 					    	 //System.out.println(robot);
 						     //System.out.println(this.pos_Robot[robot][0]);
 						     //System.out.println(this.pos_Robot[robot][1]);
-						     this.pos_Robot[robot][0] =  moveR.getPosXF();
-						     this.pos_Robot[robot][1] = moveR.getPosXF();
+
 						     //System.out.println(Arrays.deepToString(state.Get_Robot()));	
 						     repaint();
 					    	break;
