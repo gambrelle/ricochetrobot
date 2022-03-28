@@ -136,14 +136,14 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 					    break;
 					default: 
 						g.drawImage(green_robot,dim*x_green_robot , dim*y_green_robot, null);
-						g.drawImage(red_robot,dim*x_red_robot , dim*y_red_robot, null);
-						g.drawImage(blue_robot,dim*x_blue_robot , dim*y_blue_robot, null);
-						g.drawImage(yellow_robot,dim*x_yellow_robot , dim*y_yellow_robot, null);
+						//g.drawImage(red_robot,dim*x_red_robot , dim*y_red_robot, null);
+						//g.drawImage(blue_robot,dim*x_blue_robot , dim*y_blue_robot, null);
+						//g.drawImage(yellow_robot,dim*x_yellow_robot , dim*y_yellow_robot, null);
 						
 						g.drawImage(green_jeton,dim*x_green_jeton , dim*y_green_jeton, null);
-						g.drawImage(red_jeton,dim*x_red_jeton , dim*y_red_jeton, null);
-						g.drawImage(blue_jeton,dim*x_blue_jeton , dim*y_blue_jeton, null);
-						g.drawImage(yellow_jeton,dim*x_yellow_jeton , dim*y_yellow_jeton, null);
+						//g.drawImage(red_jeton,dim*x_red_jeton , dim*y_red_jeton, null);
+						//g.drawImage(blue_jeton,dim*x_blue_jeton , dim*y_blue_jeton, null);
+						//g.drawImage(yellow_jeton,dim*x_yellow_jeton , dim*y_yellow_jeton, null);
 						
 					}
 		        	
@@ -186,16 +186,22 @@ public class Board extends JPanel implements EcouteurModele,MouseListener {
 
 		if ((int) (pos_x / dim) ==  this.pos_Robot[0][0] && (int)( pos_y / dim) == this.pos_Robot[0][1] )
 		{            
-
 			System.out.println("green_robot");
 			System.out.println(this.pos_Robot[0][0]);
 			System.out.println(this.pos_Robot[0][1]);
-
-			
-			
-			
-
 		}// TODO Auto-generated method stub
+		else if ((int) (pos_x / dim) ==  this.pos_Robot[1][0] && (int)( pos_y / dim) == this.pos_Robot[1][1] )
+		{            
+
+		}
+		if ((int) (pos_x / dim) ==  this.pos_Robot[2][0] && (int)( pos_y / dim) == this.pos_Robot[2][1] )
+		{            
+
+		}
+		if ((int) (pos_x / dim) ==  this.pos_Robot[3][0] && (int)( pos_y / dim) == this.pos_Robot[3][1] )
+		{            
+
+		}
 
 	}
 
