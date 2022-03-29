@@ -129,6 +129,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		        int valeur = tableau[i][j];
 					switch(valeur) 
 					{	
+
 			        case 10://border left
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim);		        				        	
 					    break;					   					    
@@ -153,6 +154,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 			        	g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); 
 			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); 
 					    break;
+
 			        case 23://border bottom left
 			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim);
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); 

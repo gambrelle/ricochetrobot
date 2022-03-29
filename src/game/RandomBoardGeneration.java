@@ -34,11 +34,11 @@ public class RandomBoardGeneration
         this.board[6][8] = 12;
         this.board[7][9] = 11;
         this.board[8][9] = 11;
-        this.board[9][8] = 10;//marche
+        this.board[9][8] = 10;
         this.board[9][7] = 10;
         this.board[8][6] = 13;
         this.board[7][6] = 13;
-        //this.board[1][0] = 1;
+
 
         List<Integer> centre = Arrays.asList(7,7,7,8,8,8,8,7,6,7,6,8,7,9,8,9,9,8,9,7,8,6,7,6);
 
@@ -333,6 +333,7 @@ public class RandomBoardGeneration
                                 break;
                             }
 
+
                             //axe de gauche cases du haut
                             if(obstaclesSimples.contains(this.board[int_i][int_j-1])){ //gauche haut diagonale droite
                                 feu_vert=false;
@@ -425,6 +426,7 @@ public class RandomBoardGeneration
 
         this.goalsToDo = new int[4][2];
         while (compteurjetonspos < 4)
+
         {
             int int_i = rand.nextInt(16);
             int int_j = rand.nextInt(16);
@@ -442,7 +444,9 @@ public class RandomBoardGeneration
             }
             if (statut == 0)
             {
+
                 System.out.println("allowed");
+
                 this.goalsToDo[compteurjetonspos][0]=int_i;
                 this.goalsToDo[compteurjetonspos][1]=int_j;
                 compteurjetonspos++;
@@ -453,6 +457,7 @@ public class RandomBoardGeneration
 
         //position jeton objectif
         this.active_goal = 0;
+
         for (int o = 0; o <4; o++){
             System.out.print(""+this.getPosRobot()[o][0]);
             System.out.println(" "+this.getPosRobot()[o][1]);
