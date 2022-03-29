@@ -400,10 +400,10 @@ public class RandomBoardGeneration
         {
             int int_i = rand.nextInt(16);
             int int_j = rand.nextInt(16);
+            System.out.println("robot "+int_i+ " "+ int_j);
             int statut = 0;
             for (int i=0; i<12;i=i+2)
             {
-                statut = 0;
                 if(int_i != centre.get(i) || int_j != centre.get(i+1))
                 {
                     statut = 1;
@@ -426,10 +426,10 @@ public class RandomBoardGeneration
         {
             int int_i = rand.nextInt(16);
             int int_j = rand.nextInt(16);
+            System.out.println("jeton "+int_i+ " "+ int_j);
             int statut = 0;
             for (int i=0; i<12;i=i+2)//vérification de la légalité des coordonnées aléatoirement choisies (=pas au centre)
             {
-                statut = 0;
                 if(int_i != centre.get(i) || int_j != centre.get(i+1))
                 {
                     statut = 1;
@@ -445,7 +445,7 @@ public class RandomBoardGeneration
 
         //position jeton objectif
         this.active_goal = 0;
-        // valeur à changer par l'utilisateur avec un setter.
+        //valeur à changer par l'utilisateur avec un setter.
     }
 
     public int[][] getBoard()
