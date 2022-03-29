@@ -19,7 +19,6 @@ public class Main {
 		//new Containers(board);
         State s = new State();
         new Containers(s);
-
 	}
 
 }
