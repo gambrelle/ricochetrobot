@@ -58,7 +58,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 	public int y_blue_robot = 0;
 	public int x_yellow_robot = 0 ;
 	public int y_yellow_robot = 0;
-	private JButton button_Restart = new JButton("Recommencer");
+	//private JButton button_Restart = new JButton("Recommencer");
 
 
 	
@@ -81,8 +81,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		this.x_blue_robot = this.pos_Robot[3][0];
 		this.y_blue_robot = this.pos_Robot[3][1];		
 		this.addKeyListener(this);
-		this.setPreferredSize(new Dimension(700,700));
-		
+
 		green_robot = ImageIO.read(new File("..\\static\\green_robot.png"));
 		red_robot = ImageIO.read(new File("..\\static\\red_robot.png"));
 		blue_robot = ImageIO.read(new File("..\\static\\blue_robot.png"));

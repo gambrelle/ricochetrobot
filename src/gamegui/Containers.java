@@ -56,23 +56,7 @@ public class Containers extends JFrame implements ActionListener {
 		this.board = new Board(state);  
 	    board.setPreferredSize(new Dimension(640,640));
 	    
-	    
-
-		//JPanel plateau_bouton = new JPanel();
-		//plateau_bouton.setLayout(new BorderLayout());	
-		//plateau_bouton.add(this.board,BorderLayout.CENTER);
-		button_Restart.setBounds(40, 40,320, 320);
-		//plateau_bouton.add(button_Restart,BorderLayout.EAST);
-
-		/*
-		 * board de la classe Board
-		 */		
-		/*********************************************/
-		/*Creation de la partie droite de la fen�tre principale avec : 
-		 * -Le compteur de manche count
-		 * -Le score de chaque robot
-		 * -Un Event entre le bouton et l'incr�mentation de la manche 
-		 */
+	 
 		rigth_Side.setLayout(new BorderLayout());
 		rigth_Side.setPreferredSize(new Dimension(200,400));
 
@@ -85,7 +69,7 @@ public class Containers extends JFrame implements ActionListener {
 		affichage_time.setHorizontalAlignment(SwingConstants.CENTER); 
 		
 		button_Restart.addActionListener(this);
-		button_Restart.setPreferredSize(new Dimension(40,40));
+		//button_Restart.setPreferredSize(new Dimension(40,40));
 		button_Restart.setBounds(80,80, 320, 320 );
 
 
@@ -94,7 +78,7 @@ public class Containers extends JFrame implements ActionListener {
 		show_round.setHorizontalAlignment(SwingConstants.CENTER); 
 		show_round.setText("Manche" + " "  + x);
 		affichage_Manche.add(show_round, BorderLayout.NORTH);
-		//affichage_Manche.add(button_Restart,BorderLayout.SOUTH);
+		affichage_Manche.add(button_Restart,BorderLayout.SOUTH);
 
 		JPanel affichage_Score_Robot = new JPanel();
 		//affichage_Score_Robot.setLayout(new BorderLayout());
