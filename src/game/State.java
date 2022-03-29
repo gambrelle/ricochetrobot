@@ -24,7 +24,7 @@ public class State
         this.posRobot = generationAleatoire.getPosRobot();
         this.active_goal = generationAleatoire.getActiveGoal();
         this.goalsToDo = generationAleatoire.getGoalsToDo();
-        this.robot = robot;
+        
     }
     //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois 
 

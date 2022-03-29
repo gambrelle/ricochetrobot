@@ -58,6 +58,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 	public int y_blue_robot = 0;
 	public int x_yellow_robot = 0 ;
 	public int y_yellow_robot = 0;
+	private JButton button_Restart = new JButton("Recommencer");
 
 
 	
@@ -85,15 +86,16 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		this.moveD = state.getDownMove(this.robot);
 		this.addKeyListener(this);
 		this.setPreferredSize(new Dimension(700,700));
-		green_robot = ImageIO.read(new File("static/green_robot.png"));
-		red_robot = ImageIO.read(new File("static/red_robot.png"));
-		blue_robot = ImageIO.read(new File("static/blue_robot.png"));
-		yellow_robot = ImageIO.read(new File("static/yellow_robot.png"));
-		green_jeton = ImageIO.read(new File("static/vertrond.png"));
-		red_jeton = ImageIO.read(new File("static/rougerond.png"));
-		blue_jeton = ImageIO.read(new File("static/bleurond.png"));
-		yellow_jeton = ImageIO.read(new File("static/jaunerond.png"));
-		carre = ImageIO.read(new File("static/carre.jpg"));
+		
+		green_robot = ImageIO.read(new File("..\\static\\green_robot.png"));
+		red_robot = ImageIO.read(new File("..\\static\\red_robot.png"));
+		blue_robot = ImageIO.read(new File("..\\static\\blue_robot.png"));
+		yellow_robot = ImageIO.read(new File("..\\static\\yellow_robot.png"));
+		green_jeton = ImageIO.read(new File("..\\static\\vertrond.png"));
+		red_jeton = ImageIO.read(new File("..\\static\\rougerond.png"));
+		blue_jeton = ImageIO.read(new File("..\\static\\bleurond.png"));
+		yellow_jeton = ImageIO.read(new File("..\\static\\jaunerond.png"));
+		carre = ImageIO.read(new File("..\\static\\carre.jpg"));
 		this.addMouseListener(this);
 		setFocusable(true);
 		}
@@ -225,23 +227,35 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		pos_y = e.getY();
 			if ((int) (pos_x / dim) ==  this.pos_Robot[0][0] && (int)( pos_y / dim) == this.pos_Robot[0][1] )
 			{    
-				this.robot = 0;					
+				this.robot = 0;	
+				System.out.println("green_robot");
+				System.out.println(this.pos_Robot[0][0]);
+				System.out.println(this.pos_Robot[0][1]);
+				System.out.println(robot);	
 			}		
 			else if((int) (pos_x / dim) ==  this.pos_Robot[1][0] && (int)( pos_y / dim) == this.pos_Robot[1][1] )
 			{    
-				this.robot = 1;		
+				this.robot = 1;	
+				System.out.println("red_robot");
+				System.out.println(this.pos_Robot[1][0]);
+				System.out.println(this.pos_Robot[1][1]);
+				System.out.println(robot);	
 			}
 			else if ((int) (pos_x / dim) ==  this.pos_Robot[2][0] && (int)( pos_y / dim) == this.pos_Robot[2][1] )
 			{    
 				this.robot = 2;		
+				System.out.println("yellow_robot");
+				System.out.println(this.pos_Robot[2][0]);
+				System.out.println(this.pos_Robot[2][1]);
+				System.out.println(robot);	
 			}
 			else if((int) (pos_x / dim) ==  this.pos_Robot[3][0] && (int)( pos_y / dim) == this.pos_Robot[3][1] )
 			{    
 				this.robot = 3;		
-				//System.out.println("blue_robot");
-				//System.out.println(this.pos_Robot[3][0]);
-				//System.out.println(this.pos_Robot[3][1]);
-				//System.out.println(robot);	
+				System.out.println("blue_robot");
+				System.out.println(this.pos_Robot[3][0]);
+				System.out.println(this.pos_Robot[3][1]);
+				System.out.println(robot);	
 			}
 			else 
 			{
