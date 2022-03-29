@@ -79,10 +79,6 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		this.y_yellow_robot = this.pos_Robot[2][1];
 		this.x_blue_robot = this.pos_Robot[3][0];
 		this.y_blue_robot = this.pos_Robot[3][1];		
-		this.moveL = state.getLeftMove(this.robot);
-		this.moveR = state.getRightMove(this.robot);
-		this.moveU = state.getUpMove(this.robot);
-		this.moveD = state.getDownMove(this.robot);
 		this.addKeyListener(this);
 		this.setPreferredSize(new Dimension(700,700));
 		green_robot = ImageIO.read(new File("static/green_robot.png"));
