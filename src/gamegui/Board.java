@@ -83,30 +83,28 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		this.moveR = state.getRightMove(this.robot);
 		this.moveU = state.getUpMove(this.robot);
 		this.moveD = state.getDownMove(this.robot);
-
 		this.addKeyListener(this);
 		this.setPreferredSize(new Dimension(700,700));
 		green_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\green_robot.png"));
-		red_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\red_robot.png"));
-		blue_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\blue_robot.png"));
-		yellow_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\yellow_robot.png"));
-		green_jeton = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\vertrond.png"));
-		red_jeton = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\rougerond.png"));
-		blue_jeton = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\bleurond.png"));
-		yellow_jeton = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\jaunerond.png"));
-		carre = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\carre.jpg"));
+		red_robot = ImageIO.read(new File("..\\static\\red_robot.png"));
+		blue_robot = ImageIO.read(new File("..\\static\\blue_robot.png"));
+		yellow_robot = ImageIO.read(new File("..\\static\\yellow_robot.png"));
+		green_jeton = ImageIO.read(new File("..\\static\\vertrond.png"));
+		red_jeton = ImageIO.read(new File("..\\static\\rougerond.png"));
+		blue_jeton = ImageIO.read(new File("..\\static\\bleurond.png"));
+		yellow_jeton = ImageIO.read(new File("..\\static\\jaunerond.png"));
+		carre = ImageIO.read(new File("..\\static\\carre.jpg"));
 		this.addMouseListener(this);
 		setFocusable(true);
-
 		}
 	
 	
 
 		 
 		@Override
-		public void paintComponent(Graphics g) {
+		public void paintComponent(Graphics g) 
+		{
 			super.paintComponent(g);
-
 			x_green_robot = this.pos_Robot[0][0] ;
 			y_green_robot = this.pos_Robot[0][1] ;
 			x_red_robot = this.pos_Robot[1][0];
@@ -114,8 +112,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 			x_yellow_robot = this.pos_Robot[2][0] ;
 			y_yellow_robot = this.pos_Robot[2][1];
 			x_blue_robot = this.pos_Robot[3][0];
-			y_blue_robot = this.pos_Robot[3][1];
-			
+			y_blue_robot = this.pos_Robot[3][1];			
 			int x_green_jeton = this.pos_jeton[1][0];
 			int y_green_jeton = this.pos_jeton[1][1];
 			int x_red_jeton = this.pos_jeton[2][1];
@@ -123,15 +120,10 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 			int x_yellow_jeton = this.pos_jeton[3][0];
 			int y_yellow_jeton = this.pos_jeton[3][1];
 			int x_blue_jeton = this.pos_jeton[4][0];
-			int y_blue_jeton = this.pos_jeton[4][1];
-			
-		
-			
+			int y_blue_jeton = this.pos_jeton[4][1];			
 			// Use g2 for increase the line 
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setStroke(new BasicStroke(4.0f));
-        	
-	
 			for( int i=0 ;i<16 ; i++) 
 		    {
 		        for( int j=0; j<16 ; j++) 
@@ -140,68 +132,50 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		        int valeur = tableau[i][j];
 					switch(valeur) 
 					{	
-			        case 10:
-			    		//Draw a line
-			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim);//border left 2			        				        	
+			        case 10://border left
+			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim);		        				        	
 					    break;					   					    
-			        case 11:
-
-			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim);//border top 1 
-					    break;
-			        case 12:
-			        	g.drawLine(i*dim+dim, j*dim, i*dim+dim, j*dim+dim);//border rigth 3
-					    break;
-			        case 13:
-			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim);//border bottom 4 
-					    break; 
-			        case 20:
-			        	//border left top
-			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
-			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); //1
-					    break; 
-			        case 21:		  			
-			  			g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); //3
-			  			g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); // 1
-
-			        	//border top rigth
-					    break;
-			        case 22:
-			        	g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); //3
-			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); //4
-			        	//border rigth bottom
-					    break;
-			        case 23:
-			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); // 4
-			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
-			        	//border bottom left
-					    break;
-			        case 1 : 
-			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); //2
+			        case 11://border top 
 			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim);
-			        	g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); //3
+					    break;
+			        case 12://border right 
+			        	g.drawLine(i*dim+dim, j*dim, i*dim+dim, j*dim+dim);
+					    break;
+			        case 13://border bottom 
 			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim);
-
-			        	
+					    break; 
+			        case 20://border left top
+			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); 
+			        	g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); 
+					    break; 
+			        case 21://border top right
+			  			g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); 
+			  			g.drawLine(i*dim, j*dim, i*dim+dim, j*dim); 
+					    break;
+			        case 22://border right bottom
+			        	g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); 
+			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); 
+					    break;
+			        case 23://border bottom left
+			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim);
+			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); 
+					    break;		        	
 					default: 
-
+						break;
 					}
-
 		        }		        
 		        } 
-			
-			
-			//g.drawOval( dim*x_green_robot, dim*y_green_robot, 20,20 );
+			//draw jeton 
+			g.drawImage(green_jeton,dim*x_green_jeton , dim*y_green_jeton, null);
+			g.drawImage(red_jeton,dim*x_red_jeton , dim*y_red_jeton, null);
+			g.drawImage(blue_jeton,dim*x_blue_jeton , dim*y_blue_jeton, null);
+			g.drawImage(yellow_jeton,dim*x_yellow_jeton , dim*y_yellow_jeton, null);	
+			//draw Robot
 			g.drawImage(green_robot,dim*x_green_robot , dim*y_green_robot, null);
 			g.drawImage(red_robot,dim*x_red_robot , dim*y_red_robot, null);
 			g.drawImage(blue_robot,dim*x_blue_robot , dim*y_blue_robot, null);
-			g.drawImage(yellow_robot,dim*x_yellow_robot , dim*y_yellow_robot, null);
-			
-			g.drawImage(green_jeton,dim*x_green_jeton , dim*y_green_jeton, null);
-			//g.drawImage(red_jeton,dim*x_red_jeton , dim*y_red_jeton, null);
-			//g.drawImage(blue_jeton,dim*x_blue_jeton , dim*y_blue_jeton, null);
-			//g.drawImage(yellow_jeton,dim*x_yellow_jeton , dim*y_yellow_jeton, null);
-			
-			
+			g.drawImage(yellow_robot,dim*x_yellow_robot , dim*y_yellow_robot, null);			
+		
 		}
 
 
@@ -213,149 +187,65 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 	        	System.out.println(Arrays.deepToString(state.Get_Robot()));
 	        	System.out.println("=========================================");
 	        {
-	
 				    //System.out.println(Arrays.deepToString(state.Get_Robot()));
 					    switch(key) 
 					    {
-					    case KeyEvent.VK_UP:
-					    	
+					    case KeyEvent.VK_UP:					    	
 						    state.play(this.state.getUpMove(this.robot) , this.robot);    
 					        System.out.println(this.moveU);
 				        	this.state.printBoard();
-
 					    	repaint();
-					    	//System.out.println(this.pos_Robot[robot][0]);
-					    	//System.out.println(robot);
-					    	//System.out.println(this.pos_Robot[robot][1]);
-					    	//System.out.println(Arrays.deepToString(state.Get_Robot()));	
-					    	//System.out.println(Arrays.deepToString(state.Get_Robot()));		 
-					        //state.printBoard();
 					    	break;
 					    case KeyEvent.VK_DOWN:			    				    	
 					         state.play(this.state.getDownMove(this.robot), this.robot);
-					    	// System.out.println(robot);
-					    	// System.out.println(this.pos_Robot[robot][0]);
-					    	 //System.out.println(this.pos_Robot[robot][1]);
-						     //this.pos_Robot[robot][0] =  moveD.getPosXF();
-						     //this.pos_Robot[robot][1] = moveD.getPosXF();
-					    	 System.out.println(Arrays.deepToString(state.Get_Robot()));
+					    	 //System.out.println(Arrays.deepToString(state.Get_Robot()));
 					    	 repaint();
 					    	break;
 					    case KeyEvent.VK_LEFT:		    
-					    	state.play(this.state.getLeftMove(this.robot), this.robot);
-					    	//System.out.println(robot);
-					    	//System.out.println(this.pos_Robot[robot][0]);
-
-					    	//System.out.println(Arrays.deepToString(state.Get_Robot()));				    	
+					    	state.play(this.state.getLeftMove(this.robot), this.robot);			    	
 					    	repaint();
 					    	break;
 					    case KeyEvent.VK_RIGHT:
 					    	state.play(this.state.getRightMove(this.robot), this.robot);
-					    	 //System.out.println(robot);
-						     //System.out.println(this.pos_Robot[robot][0]);
-						     //System.out.println(this.pos_Robot[robot][1]);
-
-						     //System.out.println(Arrays.deepToString(state.Get_Robot()));	
 						     repaint();
 					    	break;
 					    default:
 					    	System.out.println("useless");
 					    	break;  	
-					    }
-	        	
+					    }	        	
+	        }        	
 	        }
 
-	        	
-	        }
-
-		    	
-		    
-
-
-			    
-			    
-
-			     
-			    
-			    
-			    
-			    
-			    
-			    
-			   
-
-		    
-
- 
-			    
-		    	
-		    
-		   
-
-
-
-
-			    //System.out.println(robot);
-			    //System.out.println(Arrays.deepToString(state.Get_Robot()));
-		    	
-
-		    	
-		   
-
-
-		    
-		    
-		    
-		
-	
-
-	
-	
 
 
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		pos_x = e.getX();		
 		pos_y = e.getY();
 			if ((int) (pos_x / dim) ==  this.pos_Robot[0][0] && (int)( pos_y / dim) == this.pos_Robot[0][1] )
 			{    
-				this.robot = 0;		
-				System.out.println("green_robot");
-				System.out.println(this.pos_Robot[0][0]);
-				System.out.println(this.pos_Robot[0][1]);
-				System.out.println(robot);	
-				
+				this.robot = 0;					
 			}		
 			else if((int) (pos_x / dim) ==  this.pos_Robot[1][0] && (int)( pos_y / dim) == this.pos_Robot[1][1] )
 			{    
 				this.robot = 1;		
-				System.out.println("red_robot");
-				System.out.println(this.pos_Robot[1][0]);
-				System.out.println(this.pos_Robot[1][1]);	
-				System.out.println(robot);	
 			}
 			else if ((int) (pos_x / dim) ==  this.pos_Robot[2][0] && (int)( pos_y / dim) == this.pos_Robot[2][1] )
 			{    
 				this.robot = 2;		
-				System.out.println("yellow_robot");
-				System.out.println(this.pos_Robot[2][0]);
-				System.out.println(this.pos_Robot[2][1]);	
-				System.out.println(robot);	
 			}
 			else if((int) (pos_x / dim) ==  this.pos_Robot[3][0] && (int)( pos_y / dim) == this.pos_Robot[3][1] )
 			{    
 				this.robot = 3;		
-				System.out.println("blue_robot");
-				System.out.println(this.pos_Robot[3][0]);
-				System.out.println(this.pos_Robot[3][1]);
-				System.out.println(robot);	
+				//System.out.println("blue_robot");
+				//System.out.println(this.pos_Robot[3][0]);
+				//System.out.println(this.pos_Robot[3][1]);
+				//System.out.println(robot);	
 			}
 			else 
 			{
-				System.out.println("touche pas");
-				
+				System.out.println("touche pas");				
 				System.out.println(robot);	
 			}
 			
@@ -371,22 +261,13 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 	public void mouseEntered(MouseEvent e) {}
 	@Override
 	public void mouseExited(MouseEvent e) {}
-	
 	@Override
 	 public void keyTyped(KeyEvent evt) {}
-
-
-
-
-
-
-
 	@Override
-	public void keyReleased(KeyEvent e) {
-		
-		// TODO Auto-generated method stub
-		
-	}}
+	public void keyReleased(KeyEvent e) {}
+	
+
+}
 	 
 	 
 

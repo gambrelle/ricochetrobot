@@ -34,11 +34,11 @@ public class RandomBoardGeneration
         this.board[6][8] = 12;
         this.board[7][9] = 11;
         this.board[8][9] = 11;
-        this.board[9][8] = 10;//marche pas 
-        this.board[9][7] = 10;//marche pas 
+        this.board[9][8] = 10;//marche
+        this.board[9][7] = 10;
         this.board[8][6] = 13;
         this.board[7][6] = 13;
-        this.board[1][0] = 1;
+        //this.board[1][0] = 1;
 
         List<Integer> centre = Arrays.asList(7,7,7,8,8,8,8,7,6,7,6,8,7,9,8,9,9,8,9,7,8,6,7,6);
 
