@@ -85,15 +85,15 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		this.moveD = state.getDownMove(this.robot);
 		this.addKeyListener(this);
 		this.setPreferredSize(new Dimension(700,700));
-		green_robot = ImageIO.read(new File("C:\\Users\\lucgu\\Documents\\GitHub\\ricochetrobot\\static\\green_robot.png"));
-		red_robot = ImageIO.read(new File("..\\static\\red_robot.png"));
-		blue_robot = ImageIO.read(new File("..\\static\\blue_robot.png"));
-		yellow_robot = ImageIO.read(new File("..\\static\\yellow_robot.png"));
-		green_jeton = ImageIO.read(new File("..\\static\\vertrond.png"));
-		red_jeton = ImageIO.read(new File("..\\static\\rougerond.png"));
-		blue_jeton = ImageIO.read(new File("..\\static\\bleurond.png"));
-		yellow_jeton = ImageIO.read(new File("..\\static\\jaunerond.png"));
-		carre = ImageIO.read(new File("..\\static\\carre.jpg"));
+		green_robot = ImageIO.read(new File("static/green_robot.png"));
+		red_robot = ImageIO.read(new File("static/red_robot.png"));
+		blue_robot = ImageIO.read(new File("static/blue_robot.png"));
+		yellow_robot = ImageIO.read(new File("static/yellow_robot.png"));
+		green_jeton = ImageIO.read(new File("static/vertrond.png"));
+		red_jeton = ImageIO.read(new File("static/rougerond.png"));
+		blue_jeton = ImageIO.read(new File("static/bleurond.png"));
+		yellow_jeton = ImageIO.read(new File("static/jaunerond.png"));
+		carre = ImageIO.read(new File("static/carre.jpg"));
 		this.addMouseListener(this);
 		setFocusable(true);
 		}
