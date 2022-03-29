@@ -132,8 +132,8 @@ public class Containers extends JFrame implements ActionListener {
 
 		
 
-		//container.add(this.board, BorderLayout.CENTER);
-		container.add(plateau_bouton, BorderLayout.CENTER);
+		container.add(this.board, BorderLayout.CENTER);
+
 		container.add(rigth_Side, BorderLayout.EAST);
 	    pack();
 	    this.setLayout(null);
