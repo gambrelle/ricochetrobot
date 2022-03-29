@@ -404,13 +404,13 @@ public class RandomBoardGeneration
             int statut = 0;
             for (int i=0; i<12;i=i+2)
             {
-                if(int_i != centre.get(i) || int_j != centre.get(i+1))
+                if(int_i == centre.get(i) && int_j == centre.get(i+1))
                 {
                     statut = 1;
                 }
 
             }
-            if (statut == 1)
+            if (statut == 0)
             {
                 this.posRobot[compteurRobotspos][0] = int_i;
                 this.posRobot[compteurRobotspos][1] = int_j;
@@ -420,9 +420,11 @@ public class RandomBoardGeneration
 
         //positions jetons initiales
 
+        
         int compteurjetonspos = 0;
-        this.goalsToDo = new int[8][2];
-        while (compteurjetonspos < 8)
+
+        this.goalsToDo = new int[4][2];
+        while (compteurjetonspos < 4)
         {
             int int_i = rand.nextInt(16);
             int int_j = rand.nextInt(16);
@@ -430,21 +432,31 @@ public class RandomBoardGeneration
             int statut = 0;
             for (int i=0; i<12;i=i+2)//vérification de la légalité des coordonnées aléatoirement choisies (=pas au centre)
             {
-                if(int_i != centre.get(i) || int_j != centre.get(i+1))
-                {
+                if(int_i == centre.get(i) && int_j == centre.get(i+1))
+                {   
+                    System.out.println("statut = 1");
                     statut = 1;
+                    break;
                 }
+                System.out.println(""+statut);
             }
-            if (statut == 1)
+            if (statut == 0)
             {
+                System.out.println("allowed");
                 this.goalsToDo[compteurjetonspos][0]=int_i;
                 this.goalsToDo[compteurjetonspos][1]=int_j;
                 compteurjetonspos++;
+            }else{
+                System.out.println("forbidden");
             }
         }
 
         //position jeton objectif
         this.active_goal = 0;
+        for (int o = 0; o <4; o++){
+            System.out.print(""+this.getPosRobot()[o][0]);
+            System.out.println(" "+this.getPosRobot()[o][1]);
+        }
         //valeur à changer par l'utilisateur avec un setter.
     }
 

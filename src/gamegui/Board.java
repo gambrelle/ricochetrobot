@@ -110,14 +110,14 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 			y_yellow_robot = this.pos_Robot[2][1];
 			x_blue_robot = this.pos_Robot[3][0];
 			y_blue_robot = this.pos_Robot[3][1];			
-			int x_green_jeton = this.pos_jeton[1][0];
-			int y_green_jeton = this.pos_jeton[1][1];
-			int x_red_jeton = this.pos_jeton[2][1];
-			int y_red_jeton = this.pos_jeton[2][1];
-			int x_yellow_jeton = this.pos_jeton[3][0];
-			int y_yellow_jeton = this.pos_jeton[3][1];
-			int x_blue_jeton = this.pos_jeton[4][0];
-			int y_blue_jeton = this.pos_jeton[4][1];			
+			int x_green_jeton = this.pos_jeton[0][0];
+			int y_green_jeton = this.pos_jeton[0][1];
+			int x_red_jeton = this.pos_jeton[1][0];
+			int y_red_jeton = this.pos_jeton[1][1];
+			int x_yellow_jeton = this.pos_jeton[2][0];
+			int y_yellow_jeton = this.pos_jeton[2][1];
+			int x_blue_jeton = this.pos_jeton[3][0];
+			int y_blue_jeton = this.pos_jeton[3][1];			
 			// Use g2 for increase the line 
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setStroke(new BasicStroke(4.0f));
