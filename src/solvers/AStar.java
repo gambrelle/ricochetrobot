@@ -1,38 +1,65 @@
-/* package solvers;
+package solvers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 import game.*;
 
 public class AStar extends Solver
 {
-    public AStar(State state)
+    public AStar(State state) throws IOException, InterruptedException
     {
         super(state);
     }
 
-    public ArrayList<Node> getBestPath(int[][] board, int[] posRobot, int[]posGoals)
+    public ArrayList<Move> getBestPath(int[][] board, int[] posRobot, int[]posGoals) 
     {
-        ArrayList<Node> closedList = new ArrayList<>();
-        ArrayList<Node> openList = new ArrayList<>();
-        openList.add(new Node(posRobot[0], posRobot[0], heuristic(posRobot, posGoals), null));
+        Queue<Node> closeList = new PriorityQueue<>();
+        int cout = 1;
+        Node startNode = new Node(posRobot[0], posRobot[1], heuristic(posRobot, posGoals), cout, this.initialState);
+        PriorityQueue<Node> openList = new PriorityQueue<>();
+        openList.add(startNode);
+        ArrayList<Move> actions = new ArrayList<>();
+        actions.add(null);
+
         while (!(openList.isEmpty()))
         {
-            for (Node n : openList)
-            {
-                if (n.getX() == posGoals[0] && n.getY() == posGoals[1])
-                    return openList;
-                //////// A COMPLETER ////////////
-
-
-
-                
-                closedList.add(n);
-            }
-        }
+            Node n = openList.poll();
         
-        return openList;
+
+            if (n.getX() == posGoals[0] && n.getY() == posGoals[1])
+            {
+                return actions;
+            }
+            for (int i = 0; i <= 3; i++)
+            {
+                for (Move move : this.getState().getMove(i))
+                {
+                    State s;
+                    try {s = this.play(n.state, move, i);}
+                    catch (Exception e) {return null;}
+
+                    cout ++;
+                    int[] newPosRobot = s.Get_Robot()[this.initialState.getActiveGoal()];
+
+                    Node node = new Node(newPosRobot[0], newPosRobot[1], heuristic(newPosRobot, posGoals)+cout, cout, s);
+                    if (!(closeList.contains(node) || openList.contains(node)))
+                    {
+                        openList.add(node);
+                    }                            
+                }
+            }
+            closeList.add(n);
+        }
+        return null;
+    }
+
+    public State play(State s, Move m, int r) throws IOException, InterruptedException
+    {
+        State newS = new State();
+        newS.play(m, r);
+        return newS;
     }
 }
- */
