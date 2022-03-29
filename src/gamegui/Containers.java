@@ -132,7 +132,10 @@ public class Containers extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		// TODO Auto-generated method stub
-		
+		Object source = e.getSource();
+
+		if (source == button_Restart)
+			this.board.state.resetPosRobot();
 		
 	}
 

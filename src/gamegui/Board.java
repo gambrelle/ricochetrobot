@@ -36,7 +36,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 	public int[][] tableau;
 	public int[][] pos_Robot;
 	public int[][] pos_jeton;
-	private State state ;
+	protected State state ;
 	private BufferedImage green_robot;
 	private BufferedImage red_robot;
 	private BufferedImage blue_robot;
@@ -206,6 +206,10 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 					    	state.play(this.state.getRightMove(this.robot), this.robot);
 						     repaint();
 					    	break;
+						case KeyEvent.VK_C:
+							System.out.print("pop");
+							state.resetPosRobot();
+							repaint();
 					    default:
 					    	System.out.println("useless");
 					    	break;  	
