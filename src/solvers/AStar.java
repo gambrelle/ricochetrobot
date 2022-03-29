@@ -35,5 +35,4 @@ public class AStar extends Solver
         return openList;
     }
 }
-
  */

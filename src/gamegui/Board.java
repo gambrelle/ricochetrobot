@@ -82,15 +82,15 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		this.y_blue_robot = this.pos_Robot[3][1];		
 		this.addKeyListener(this);
 
-		green_robot = ImageIO.read(new File("..\\static\\green_robot.png"));
-		red_robot = ImageIO.read(new File("..\\static\\red_robot.png"));
-		blue_robot = ImageIO.read(new File("..\\static\\blue_robot.png"));
-		yellow_robot = ImageIO.read(new File("..\\static\\yellow_robot.png"));
-		green_jeton = ImageIO.read(new File("..\\static\\vertrond.png"));
-		red_jeton = ImageIO.read(new File("..\\static\\rougerond.png"));
-		blue_jeton = ImageIO.read(new File("..\\static\\bleurond.png"));
-		yellow_jeton = ImageIO.read(new File("..\\static\\jaunerond.png"));
-		carre = ImageIO.read(new File("..\\static\\carre.jpg"));
+		green_robot = ImageIO.read(new File("static/green_robot.png"));
+		red_robot = ImageIO.read(new File("static/red_robot.png"));
+		blue_robot = ImageIO.read(new File("static/blue_robot.png"));
+		yellow_robot = ImageIO.read(new File("static/yellow_robot.png"));
+		green_jeton = ImageIO.read(new File("static/vertrond.png"));
+		red_jeton = ImageIO.read(new File("static/rougerond.png"));
+		blue_jeton = ImageIO.read(new File("static/bleurond.png"));
+		yellow_jeton = ImageIO.read(new File("static/jaunerond.png"));
+		carre = ImageIO.read(new File("static/carre.jpg"));
 		this.addMouseListener(this);
 		setFocusable(true);
 		}
@@ -129,7 +129,6 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		        int valeur = tableau[i][j];
 					switch(valeur) 
 					{	
-
 			        case 10://border left
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim);		        				        	
 					    break;					   					    
@@ -154,7 +153,6 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 			        	g.drawLine(i*dim +dim, j*dim, i*dim+dim, j*dim+dim); 
 			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim); 
 					    break;
-
 			        case 23://border bottom left
 			        	g.drawLine(i*dim + dim , j*dim + dim, i*dim, j*dim + dim);
 			        	g.drawLine(i*dim, j*dim, i*dim ,j*dim+dim); 
