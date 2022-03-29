@@ -22,13 +22,14 @@ public class Containers extends JFrame implements ActionListener {
 	 */	
  
 	private static final long serialVersionUID = 1L;
-	private JButton button = new JButton("Manche suivante");
+	//private JButton button = new JButton("Manche suivante");
+	private JButton button_Restart = new JButton("Recommencer");
 	private JPanel rigth_Side = new JPanel();
 	private Board board;
 	private State state;
 	public static int x = 0;
 	public int count = 0;
-	public boolean running = false;
+	//public boolean running = false;
     public JTextArea area;
     public Timer timer = new Timer(1000, this);;
     public JLabel show_round = new JLabel();//affiche les manches
@@ -52,18 +53,10 @@ public class Containers extends JFrame implements ActionListener {
 		Container container = this.getContentPane();
 		container.setLayout(new BorderLayout());	
 		this.state = state;
-		this.board = new Board(state);
-	    board.setPreferredSize(new Dimension(560,560));
-
-		/*
-		 * board de la classe Board
-		 */		
-		/*********************************************/
-		/*Creation de la partie droite de la fen�tre principale avec : 
-		 * -Le compteur de manche count
-		 * -Le score de chaque robot
-		 * -Un Event entre le bouton et l'incr�mentation de la manche 
-		 */
+		this.board = new Board(state);  
+	    board.setPreferredSize(new Dimension(640,640));
+	    
+	 
 		rigth_Side.setLayout(new BorderLayout());
 		rigth_Side.setPreferredSize(new Dimension(200,400));
 
@@ -75,7 +68,9 @@ public class Containers extends JFrame implements ActionListener {
 		affichage_time.setText("0");
 		affichage_time.setHorizontalAlignment(SwingConstants.CENTER); 
 		
-		button.addActionListener(this);
+		button_Restart.addActionListener(this);
+		//button_Restart.setPreferredSize(new Dimension(40,40));
+		button_Restart.setBounds(80,80, 320, 320 );
 
 
 
@@ -83,10 +78,10 @@ public class Containers extends JFrame implements ActionListener {
 		show_round.setHorizontalAlignment(SwingConstants.CENTER); 
 		show_round.setText("Manche" + " "  + x);
 		affichage_Manche.add(show_round, BorderLayout.NORTH);
-		affichage_Manche.add(button,BorderLayout.SOUTH);
+		affichage_Manche.add(button_Restart,BorderLayout.SOUTH);
 
 		JPanel affichage_Score_Robot = new JPanel();
-		affichage_Score_Robot.setLayout(new GridLayout(4,0));
+		//affichage_Score_Robot.setLayout(new BorderLayout());
 		
 		JLabel affichage_Score_Green = new JLabel();
 		affichage_Score_Green.setText("robot minmax");
@@ -115,13 +110,14 @@ public class Containers extends JFrame implements ActionListener {
 		
 		rigth_Side.add(affichage_Manche, BorderLayout.NORTH);
 		rigth_Side.add(affichage_Score_Robot, BorderLayout.CENTER);
-        rigth_Side.add(affichage_time,BorderLayout.SOUTH);
+        //rigth_Side.add(affichage_time,BorderLayout.SOUTH);
 		
 		/************************************************************/
 
 		
 
 		container.add(this.board, BorderLayout.CENTER);
+
 		container.add(rigth_Side, BorderLayout.EAST);
 	    pack();
 	    this.setLayout(null);
@@ -132,10 +128,19 @@ public class Containers extends JFrame implements ActionListener {
 	}
 
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+
 
 
 	
-    @Override
+ /*   @Override
     public void actionPerformed(ActionEvent e) {
         affichage_time.setText(String.valueOf(count));
         if (! running) {
@@ -156,19 +161,6 @@ public class Containers extends JFrame implements ActionListener {
 
         }
 
-    }
-    
+    }*/
 
-	
-
-	/*
-	 * a faire: -Rigth_side -> compter les points du gagnant
-	 * 			- afficher les manches 
-	 * 			-
-	 * 
-	 * creer un bouton pour lancer le board 
-	 * un bouton pour d�marrer la manche 
-	 * On laisse le timer d�filer 5 sec, 
-	 * 
-	 */
 }
