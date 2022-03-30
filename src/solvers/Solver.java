@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import game.*;
 
-public abstract class Solver 
+public abstract class Solver
 {
     protected State initialState;
     protected int[] posActiveRobot, posActiveGoal;

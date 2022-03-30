@@ -39,6 +39,19 @@ public class Move
     }
     @Override
     public String toString() {
+        if (this == null)
+            return "null";
         return "Mouvement du robot n°" + this.robotcolor + "de " + this.posx_i + ", " + this.posy_i + " | " + this.posx_f + ", " + this.posy_f;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Move))
+            return false;
+        Move m = (Move) obj;
+        if (m == null)
+            return false;
+        return this.getPosXI() == m.getPosXI() && this.getPosXF() == m.getPosXF() && this.getPosYI() == m.getPosYI() && this.getPosYF() == m.getPosYF();
     }
 }

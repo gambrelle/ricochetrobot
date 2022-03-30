@@ -7,14 +7,17 @@ public class Node implements Comparable<Node>
     protected int x, y, heuristic, cout;
     protected Move move;
     protected State state;
+    protected Node noeudPrecedent;
     
-    public Node(int x, int y, int heuristic, int cout, State state)
+    public Node(int x, int y, int heuristic, int cout, State state, Node noeudPrecedent, Move move)
     {
         this.x = x;
         this.y = y;
         this.heuristic = heuristic;
         this.cout = cout;
-        this.state = state; 
+        this.state = state;
+        this.noeudPrecedent = noeudPrecedent;
+        this.move = move;
     }
 
     public int getX()
@@ -32,6 +35,14 @@ public class Node implements Comparable<Node>
     public int getCout() {
         return this.cout;
     }
+    public Node getNoeudPrecedent()
+    {
+        return this.noeudPrecedent;
+    }
+    public Move getMove()
+    {
+        return this.move;
+    }
     
     @Override
     public int compareTo(Node n) 
@@ -46,7 +57,11 @@ public class Node implements Comparable<Node>
         if (!(obj instanceof Node))
             return false;
         Node n = (Node) obj;
-        return this.getX() == n.getX() && this.getY() == this.getY();
+        if (n == null)
+            return false;
+        if (this.move == null)
+            return false;
+        return this.getX() == n.getX() && this.getY() == this.getY() && this.move.equals(n.move);
 
     }
 
