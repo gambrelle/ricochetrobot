@@ -17,9 +17,18 @@ public class Move
         this.posx_f = xf;
         this.posy_f = yf;
     }
+
+    public Move(int xi, int yi, int xf, int yf){
+        this.posx_i = xi;
+        this.posy_i = yi;
+        this.posx_f = xf;
+        this.posy_f = yf;
+    }
+
     public int getRobotColor()
     {
         return this.robotcolor;
+        //ne retourne rien si move sans robot
     }
     
     

@@ -13,7 +13,7 @@ public abstract class Solver
     public Solver(State state) throws IOException, InterruptedException
     {
         this.initialState = state.getClone();
-        this.posActiveGoal = this.initialState.getAllGoals()[this.initialState.getActiveGoal()];
+        this.posActiveGoal = this.initialState.getGoalsToDo()[this.initialState.getActiveGoal()];
         this.posActiveGoal = this.initialState.Get_Robot()[this.initialState.getActiveGoal()];
     }
 
