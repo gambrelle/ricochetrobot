@@ -12,6 +12,7 @@ public class State
     protected int active_goal;
     protected int[][] goalsToDo;
     int robot ; 
+    int[][] initialPosRobot;
 
     
 
@@ -23,7 +24,14 @@ public class State
         this.posRobot = generationAleatoire.getPosRobot();
         this.active_goal = generationAleatoire.getActiveGoal();
         this.goalsToDo = generationAleatoire.getGoalsToDo();
+
+        this.initialPosRobot = new int[4][2];
         
+        for (int i = 0; i < this.posRobot.length; i++)
+        {
+            for (int j = 0; j < this.posRobot[i].length; j ++)
+                this.initialPosRobot[i][j] = this.posRobot[i][j];
+        }
     }
     //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois 
 
@@ -32,7 +40,6 @@ public class State
     	return robot;
     }
     
-
     public int[][] Get_Board()
     {
 		return this.board;
@@ -43,7 +50,14 @@ public class State
     	return this.posRobot;
     }
 
-    
+    public void resetPosRobot()
+    {
+        for (int i = 0; i < this.posRobot.length; i++)
+        {
+            for (int j = 0; j < this.posRobot[i].length; j ++)
+                this.posRobot[i][j] = this.initialPosRobot[i][j];
+        }
+    }
     
     public int[][] Get_Goal()
     {

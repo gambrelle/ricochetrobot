@@ -35,7 +35,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 	public int[][] tableau;
 	public int[][] pos_Robot;
 	public int[][] pos_jeton;
-	private State state ;
+	protected State state ;
 	private BufferedImage green_robot;
 	private BufferedImage red_robot;
 	private BufferedImage blue_robot;
@@ -81,15 +81,15 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 		this.y_blue_robot = this.pos_Robot[3][1];		
 		this.addKeyListener(this);
 
-		green_robot = ImageIO.read(new File("..\\static\\green_robot.png"));
-		red_robot = ImageIO.read(new File("..\\static\\red_robot.png"));
-		blue_robot = ImageIO.read(new File("..\\static\\blue_robot.png"));
-		yellow_robot = ImageIO.read(new File("..\\static\\yellow_robot.png"));
-		green_jeton = ImageIO.read(new File("..\\static\\vertrond.png"));
-		red_jeton = ImageIO.read(new File("..\\static\\rougerond.png"));
-		blue_jeton = ImageIO.read(new File("..\\static\\bleurond.png"));
-		yellow_jeton = ImageIO.read(new File("..\\static\\jaunerond.png"));
-		carre = ImageIO.read(new File("..\\static\\carre.jpg"));
+		green_robot = ImageIO.read(new File("static/green_robot.png"));
+		red_robot = ImageIO.read(new File("static/red_robot.png"));
+		blue_robot = ImageIO.read(new File("static/blue_robot.png"));
+		yellow_robot = ImageIO.read(new File("static/yellow_robot.png"));
+		green_jeton = ImageIO.read(new File("static/vertrond.png"));
+		red_jeton = ImageIO.read(new File("static/rougerond.png"));
+		blue_jeton = ImageIO.read(new File("static/bleurond.png"));
+		yellow_jeton = ImageIO.read(new File("static/jaunerond.png"));
+		carre = ImageIO.read(new File("static/carre.jpg"));
 		this.addMouseListener(this);
 		setFocusable(true);
 		}
@@ -205,6 +205,10 @@ public class Board extends JPanel implements  KeyListener,MouseListener {
 					    	state.play(this.state.getRightMove(this.robot), this.robot);
 						     repaint();
 					    	break;
+						case KeyEvent.VK_C:
+							System.out.print("pop");
+							state.resetPosRobot();
+							repaint();
 					    default:
 					    	System.out.println("useless");
 					    	break;  	
