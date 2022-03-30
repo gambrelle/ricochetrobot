@@ -2,7 +2,6 @@ package gamegui;
 
 import game.*;
 import java.awt.BasicStroke;
-import java.awt.Dimension;
 //import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

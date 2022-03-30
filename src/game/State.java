@@ -1,7 +1,6 @@
 package game;
 
 import gamegui.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
