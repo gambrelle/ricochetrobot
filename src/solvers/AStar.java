@@ -37,6 +37,7 @@ public class AStar extends Solver
 
         while (!(openList.isEmpty()))
         {
+            System.out.println(openList.size());
             Node n = openList.poll();
             cout ++;
 
@@ -58,17 +59,36 @@ public class AStar extends Solver
                     int[] newPosRobot = s.Get_Robot()[this.initialState.getActiveGoal()];
 
                     Node node = new Node(newPosRobot[0], newPosRobot[1], heuristic(newPosRobot, posGoals)+cout, cout, s, n, move);
-                    int count = 0; 
+                    int count = 0;
+
+                    closeList.add(n);
+
                     if (!(closeList.isEmpty()))
                     {
                         for (Node nodeClose : closeList)
-                        if (nodeClose.equals(node))
-                            count += 1;
+                        {
+                            if (nodeClose.equals(node))
+                            {
+                                System.out.println("pop");
+                                count += 1;
+                            }
+                        }
+                       for (Node nodeOpen : openList)
+                       {
+                            if (nodeOpen.equals(node))
+                            {
+                                if (nodeOpen.cout < node.cout)
+                                {
+                                    System.out.println("pip");
+                                    count += 1;
+                                }
+                            }
+                        }
                     }
+                    System.out.println(cout + ".......");
                     if (count == 0)
                         openList.add(node);
-                    if (closeList.isEmpty())
-                        openList.add(node);
+                    
                     //if (!(closeList.contains(node)))
                     //{
                         //openList.add(node);
@@ -76,7 +96,7 @@ public class AStar extends Solver
                     //}
                 }
             }
-            closeList.add(n);
+            
         }
         System.out.println("ERROR");
         return null;

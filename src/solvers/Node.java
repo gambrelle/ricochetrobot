@@ -1,5 +1,7 @@
 package solvers;
 
+import java.util.Arrays;
+
 import game.*;
 
 public class Node implements Comparable<Node>
@@ -61,12 +63,11 @@ public class Node implements Comparable<Node>
             return false;
         if (this.move == null)
             return false;
-        return this.getX() == n.getX() && this.getY() == this.getY() && this.move.equals(n.move);
-
+        return this.getX() == n.getX() && this.getY() == this.getY() && this.move.equals(n.move) && Arrays.deepEquals(this.state.Get_Robot(), n.state.Get_Robot());// && this.noeudPrecedent.equals(n.noeudPrecedent);
     }
 
     @Override
-    public String toString() 
+    public String toString()
     {
         return this.x + ", " + this.y + " : " + this.heuristic + " " + this.cout;
     }
