@@ -27,7 +27,6 @@ public class AStar extends Solver
         while (!(openList.isEmpty()))
         {
             Node n = openList.poll();
-        
 
             if (n.getX() == posGoals[0] && n.getY() == posGoals[1])
             {
@@ -48,7 +47,8 @@ public class AStar extends Solver
                     if (!(closeList.contains(node) || openList.contains(node)))
                     {
                         openList.add(node);
-                    }                            
+                        System.out.println(move.toString());
+                    }
                 }
             }
             closeList.add(n);
@@ -58,8 +58,10 @@ public class AStar extends Solver
 
     public State play(State s, Move m, int r) throws IOException, InterruptedException
     {
-        State newS = new State();
+        State newS = s.getClone();
         newS.play(m, r);
         return newS;
     }
+
+
 }

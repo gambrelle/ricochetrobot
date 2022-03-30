@@ -1,4 +1,4 @@
-package solvers;
+/* package solvers;
 
 import java.util.ArrayList;
 
@@ -15,4 +15,4 @@ public class BFS extends Solver
         visitedState.add(this.initialState);
         return new ArrayList<Move>();
     }
-}
+} */

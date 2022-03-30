@@ -39,6 +39,6 @@ public class Move
     }
     @Override
     public String toString() {
-        return "Mouvement de " + this.posx_i + ", " + this.posy_i + " | " + this.posx_f + ", " + this.posy_f;
+        return "Mouvement du robot n°" + this.robotcolor + "de " + this.posx_i + ", " + this.posy_i + " | " + this.posx_f + ", " + this.posy_f;
     }
 }
