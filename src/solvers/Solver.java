@@ -34,4 +34,3 @@ public abstract class Solver
     
     public abstract ArrayList<Move> getBestPath(int[][] board, int[] posRobot, int[]posGoals);
 }
-

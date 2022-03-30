@@ -40,4 +40,3 @@ public class Node implements Comparable<Node>
         return this.x + ", " + this.y + " : " + this.heuristic;
     }
 }
-
