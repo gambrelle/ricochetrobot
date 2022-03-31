@@ -14,9 +14,7 @@ public class Main
         State s = new State();
         Solver solv = new AStar(s);
 
-        ArrayList<Move> al = solv.getBestPath(s.Get_Board(), s.Get_Robot()[s.getActiveGoal()], s.Get_Goal()[s.getActiveGoal()]);
-        for (Move move : al)
-            System.out.println(move.toString());
+        ArrayList<Move> al = solv.getBestPath();
     }
 }
 

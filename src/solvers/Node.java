@@ -45,6 +45,9 @@ public class Node implements Comparable<Node>
     {
         return this.move;
     }
+    public State getState() {
+        return this.state;
+    }
     
     @Override
     public int compareTo(Node n) 
@@ -64,6 +67,11 @@ public class Node implements Comparable<Node>
         if (this.move == null)
             return false;
         return this.getX() == n.getX() && this.getY() == this.getY() && this.move.equals(n.move) && Arrays.deepEquals(this.state.Get_Robot(), n.state.Get_Robot());// && this.noeudPrecedent.equals(n.noeudPrecedent);
+    }
+
+    public boolean isMoreInteresting(Node n)
+    {
+        return this.equals(n) && this.cout < n.cout;
     }
 
     @Override

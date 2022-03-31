@@ -2,8 +2,8 @@ package solvers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 import game.*;
 
@@ -26,39 +26,43 @@ public class AStar extends Solver
         return path;
     }
 
-    public ArrayList<Move> getBestPath(int[][] board, int[] posRobot, int[]posGoals) 
+    public ArrayList<Move> getBestPath() 
     {
-        Queue<Node> closeList = new PriorityQueue<>();
         int cout = 1;
-        Node startNode = new Node(posRobot[0], posRobot[1], heuristic(posRobot, posGoals), cout, this.initialState, null, null);
-        PriorityQueue<Node> openList = new PriorityQueue<>();
+        Node startNode = new Node(this.posActiveRobot[0], this.posActiveRobot[1], heuristic(this.posActiveRobot, this.posActiveGoal), cout, this.initialState, null, null);
+        PriorityQueue<Node> openList = new PriorityQueue<Node>();
         openList.add(startNode);
-        ArrayList<Move> actions = new ArrayList<>();
+        HashSet<Node> closeList = new HashSet<>();
 
         while (!(openList.isEmpty()))
         {
-            System.out.println(openList.size());
             Node n = openList.poll();
             cout ++;
 
-            if (n.getX() == posGoals[0] && n.getY() == posGoals[1])
+            if (n.getX() == this.posActiveGoal[0] && n.getY() == this.posActiveGoal[1])
             {
                 return reconstituerChemin(n);
             }
+            if (cout <11)
+            System.out.println();
             for (int i = 0; i <= 3; i++)
             {
-                for (Move move : this.getState().getMove(i))
+                for (Move move : n.getState().getMove(i))
                 {
                     State s;
+
+                    /* s = n.getState().getClone(); 
+                    s.play(move, i); */
+
                     try {
-                        s = this.initialState.getClone();
+                        s = n.state.getClone();
                         s.play(move, i);
                     }
                     catch (Exception e) {return null;}
 
-                    int[] newPosRobot = s.Get_Robot()[this.initialState.getActiveGoal()];
+                    int[] newPosRobot = {move.getPosXF(), move.getPosYF()};
 
-                    Node node = new Node(newPosRobot[0], newPosRobot[1], heuristic(newPosRobot, posGoals)+cout, cout, s, n, move);
+                    Node node = new Node(newPosRobot[0], newPosRobot[1], heuristic(newPosRobot, this.posActiveGoal)+cout, cout, s, n, move);
                     int count = 0;
 
                     closeList.add(n);
@@ -69,36 +73,31 @@ public class AStar extends Solver
                         {
                             if (nodeClose.equals(node))
                             {
-                                System.out.println("pop");
                                 count += 1;
                             }
                         }
                        for (Node nodeOpen : openList)
                        {
-                            if (nodeOpen.equals(node))
+                            if (node.equals(nodeOpen))
                             {
-                                if (nodeOpen.cout < node.cout)
+                                if (nodeOpen.heuristic < node.heuristic)
                                 {
-                                    System.out.println("pip");
                                     count += 1;
                                 }
                             }
-                        }
+                        } 
                     }
-                    System.out.println(cout + ".......");
                     if (count == 0)
+                    {
                         openList.add(node);
-                    
-                    //if (!(closeList.contains(node)))
-                    //{
-                        //openList.add(node);
-                        //System.out.println(cout);
-                    //}
+                    }
+                    if (cout <10)
+                        System.out.println(node.move.toString());
                 }
             }
             
         }
-        System.out.println("ERROR");
+        
         return null;
     }
 
