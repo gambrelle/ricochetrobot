@@ -27,11 +27,36 @@ public class AStar extends Solver
         return path;
     }
 
+    public boolean isInterestingNode(PriorityQueue<Node> openList, HashSet<Node> closedList, Node n)
+    {
+        if (!(closedList.isEmpty()))
+                    {
+                        for (Node nodeClose : closedList)
+                        {
+                            if (nodeClose.equals(n))
+                            {
+                                return false;
+                            }
+                        }
+                       for (Node nodeOpen : openList)
+                       {
+                            if (n.equals(nodeOpen))
+                            {
+                                if (nodeOpen.cout < n.cout)
+                                {
+                                    return false;
+                                }
+                            }
+                        } 
+                    }
+        return true;
+    }
+
     public ArrayList<Move> getBestPath() 
     {
         int cout = 1;
-        Node startNode = new Node(this.posActiveRobot[0], this.posActiveRobot[1], heuristic(this.posActiveRobot, this.posActiveGoal), cout, this.initialState, null, null);
-        PriorityQueue<Node> openList = new PriorityQueue<Node>();
+        Node startNode = new Node(heuristic(this.posActiveRobot, this.posActiveGoal) + cout, cout, this.initialState, null, null);
+        PriorityQueue<Node> openList = new PriorityQueue<Node>(new NodeComparator());
         openList.add(startNode);
         HashSet<Node> closeList = new HashSet<>();
 
@@ -40,23 +65,17 @@ public class AStar extends Solver
             Node n = openList.poll();
             cout ++;
 
-            if (n.getX() == this.posActiveGoal[0] && n.getY() == this.posActiveGoal[1])
+            if (n.getState().Get_Robot()[n.getState().getActiveGoal()][0] == this.posActiveGoal[0] && n.getState().Get_Robot()[n.getState().getActiveGoal()][1] == this.posActiveGoal[1])
             {
                 return reconstituerChemin(n);
             }
-            /* if (cout <11){
-                System.out.println();
-                System.out.println();} */
+
             for (int i = 0; i <= 3; i++)
             {
-                /* if (cout <11)
-                    System.out.println(); */
                 for (Move move : n.getState().getMove(i))
                 {
                     State s;
-
-                    /* s = n.getState().getClone(); 
-                    s.play(move, i); */
+                    //System.out.println(move.toString());
 
                     try {
                         s = n.getState().getClone();
@@ -66,11 +85,15 @@ public class AStar extends Solver
 
                     int[] newPosRobot = s.Get_Robot()[s.getActiveGoal()];
 
-                    Node node = new Node(newPosRobot[0], newPosRobot[1], heuristic(newPosRobot, this.posActiveGoal), cout, s, n, move);
-                    int count = 0;
+                    Node node = new Node(heuristic(newPosRobot, this.posActiveGoal) + cout, cout, s, n, move);
+                    //int count = 0;
 
+                    if (isInterestingNode(openList, closeList, node))
+                    {
+                        openList.add(node);
+                    }
 
-                    if (!(closeList.isEmpty()))
+                    /* if (!(closeList.isEmpty()))
                     {
                         for (Node nodeClose : closeList)
                         {
@@ -83,7 +106,7 @@ public class AStar extends Solver
                        {
                             if (node.equals(nodeOpen))
                             {
-                                if (nodeOpen.cout > node.cout)
+                                if (nodeOpen.cout < node.cout)
                                 {
                                     count += 1;
                                 }
@@ -93,11 +116,14 @@ public class AStar extends Solver
                     if (count == 0)
                     {
                         openList.add(node);
-                    }
+                    } */
+
+                    
                     /* if (cout <10)
                         System.out.println(Array (node.state.Get_Robot())); */
                 }
             }
+            //System.out.println();
             
         }
         

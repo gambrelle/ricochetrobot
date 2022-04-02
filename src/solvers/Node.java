@@ -4,17 +4,15 @@ import java.util.Arrays;
 
 import game.*;
 
-public class Node implements Comparable<Node>
+public class Node //implements Comparable<Node>
 {
-    protected int x, y, heuristic, cout;
+    protected int heuristic, cout;
     protected Move move;
     protected State state;
     protected Node noeudPrecedent;
     
-    public Node(int x, int y, int heuristic, int cout, State state, Node noeudPrecedent, Move move)
+    public Node(int heuristic, int cout, State state, Node noeudPrecedent, Move move)
     {
-        this.x = x;
-        this.y = y;
         this.heuristic = heuristic;
         this.cout = cout;
         this.state = state;
@@ -22,14 +20,6 @@ public class Node implements Comparable<Node>
         this.move = move;
     }
 
-    public int getX()
-    {
-        return this.x;
-    }
-    public int getY()
-    {
-        return this.y;
-    }
     public int getHeuristic()
     {
         return this.heuristic;
@@ -49,11 +39,11 @@ public class Node implements Comparable<Node>
         return this.state;
     }
     
-    @Override
+   /*  @Override
     public int compareTo(Node n) 
     {
         return this.heuristic > n.heuristic ? 1 : this.heuristic < n.heuristic ? -1 : 0;
-    }
+    } */
 
     @Override
     public boolean equals(Object obj) {
@@ -66,17 +56,14 @@ public class Node implements Comparable<Node>
             return false;
         if (this.move == null)
             return false;
-        return this.getX() == n.getX() && this.getY() == this.getY() && this.move.equals(n.move) && Arrays.deepEquals(this.state.Get_Robot(), n.state.Get_Robot());// && this.noeudPrecedent.equals(n.noeudPrecedent);
-    }
-
-    public boolean isMoreInteresting(Node n)
-    {
-        return this.equals(n) && this.cout < n.cout;
+        //return this.move.equals(n.move) && Arrays.deepEquals(this.state.Get_Robot(), n.state.Get_Robot());// && this.noeudPrecedent.equals(n.noeudPrecedent);
+        return Arrays.deepEquals(this.getState().Get_Robot(), n.getState().Get_Robot());
+        
     }
 
     @Override
     public String toString()
     {
-        return this.x + ", " + this.y + " : " + this.heuristic + " " + this.cout;
+        return this.getState().Get_Robot()[this.getState().getActiveGoal()][0] + ", " + this.getState().Get_Robot()[this.getState().getActiveGoal()][0] + " : " + this.heuristic + " " + this.cout;
     }
 }

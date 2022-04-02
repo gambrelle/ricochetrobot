@@ -2,7 +2,7 @@ package solvers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
+//import java.util.PriorityQueue;
 
 import game.*;
 import gamegui.*;
@@ -20,11 +20,13 @@ public class Main
 
         ArrayList<Move> al = solv.getBestPath();
 
-        for (int i = al.size(); i > 0; i--)
+        for (int i = al.size() - 1; i >= 0; i--)
             if (al.get(i) != null)
                 System.out.println(al.get(i).toString());
             else
                 continue;
+        
+        new Containers(s);
     }
 }
 
