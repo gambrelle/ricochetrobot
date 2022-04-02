@@ -52,8 +52,6 @@ public class Node //implements Comparable<Node>
         if (!(obj instanceof Node))
             return false;
         Node n = (Node) obj;
-        if (n == null)
-            return false;
         if (this.move == null)
             return false;
         //return this.move.equals(n.move) && Arrays.deepEquals(this.state.Get_Robot(), n.state.Get_Robot());// && this.noeudPrecedent.equals(n.noeudPrecedent);

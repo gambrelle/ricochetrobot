@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
-import java.util.*;
 
 import game.*;
 
@@ -42,7 +41,7 @@ public class AStar extends Solver
                        {
                             if (n.equals(nodeOpen))
                             {
-                                if (nodeOpen.cout < n.cout)
+                                if (nodeOpen.cout > n.cout)
                                 {
                                     return false;
                                 }

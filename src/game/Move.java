@@ -8,6 +8,7 @@ public class Move
     private int posy_i;
     private int posx_f;
     private int posy_f;
+    private String[] color = {"vert", "rouge", "jaune", "bleu"};
 
     public Move(int rc, int xi, int yi, int xf, int yf)
     {
@@ -39,7 +40,7 @@ public class Move
     }
     @Override
     public String toString() {
-        return "Mouvement du robot " + this.robotcolor + " de (" + this.posx_i + ", " + this.posy_i + ") -> (" + this.posx_f + ", " + this.posy_f + ")";
+        return "Mouvement du robot " + this.color[this.robotcolor] + " de (" + this.posx_i + ", " + this.posy_i + ") -> (" + this.posx_f + ", " + this.posy_f + ")";
     }
     @Override
     public boolean equals(Object obj) {
