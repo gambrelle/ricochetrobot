@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.*;
 
 import game.*;
 
@@ -43,10 +44,13 @@ public class AStar extends Solver
             {
                 return reconstituerChemin(n);
             }
-            if (cout <11)
-            System.out.println();
+            /* if (cout <11){
+                System.out.println();
+                System.out.println();} */
             for (int i = 0; i <= 3; i++)
             {
+                /* if (cout <11)
+                    System.out.println(); */
                 for (Move move : n.getState().getMove(i))
                 {
                     State s;
@@ -55,17 +59,16 @@ public class AStar extends Solver
                     s.play(move, i); */
 
                     try {
-                        s = n.state.getClone();
+                        s = n.getState().getClone();
                         s.play(move, i);
                     }
                     catch (Exception e) {return null;}
 
-                    int[] newPosRobot = {move.getPosXF(), move.getPosYF()};
+                    int[] newPosRobot = s.Get_Robot()[s.getActiveGoal()];
 
-                    Node node = new Node(newPosRobot[0], newPosRobot[1], heuristic(newPosRobot, this.posActiveGoal)+cout, cout, s, n, move);
+                    Node node = new Node(newPosRobot[0], newPosRobot[1], heuristic(newPosRobot, this.posActiveGoal), cout, s, n, move);
                     int count = 0;
 
-                    closeList.add(n);
 
                     if (!(closeList.isEmpty()))
                     {
@@ -80,7 +83,7 @@ public class AStar extends Solver
                        {
                             if (node.equals(nodeOpen))
                             {
-                                if (nodeOpen.heuristic < node.heuristic)
+                                if (nodeOpen.cout > node.cout)
                                 {
                                     count += 1;
                                 }
@@ -91,8 +94,8 @@ public class AStar extends Solver
                     {
                         openList.add(node);
                     }
-                    if (cout <10)
-                        System.out.println(node.move.toString());
+                    /* if (cout <10)
+                        System.out.println(Array (node.state.Get_Robot())); */
                 }
             }
             
