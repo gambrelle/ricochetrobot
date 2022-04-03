@@ -48,8 +48,16 @@ public class Main
             new Containers(s);
         }
          */
-        int j = 0;
         State s = new State();
+
+        PrecomputedMap pm = new PrecomputedMap(s);
+
+        pm.printMap();
+
+        new Containers(s);
+
+        /* int j = 0;
+        
         ArrayList<Move> al;
         AStar solv;
         Node n;
@@ -87,7 +95,7 @@ public class Main
             }
             j++;
         }
-        new Containers(s);
-    }
+        new Containers(s);*/
+    } 
 }
 
