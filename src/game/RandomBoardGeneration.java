@@ -12,7 +12,7 @@ public class RandomBoardGeneration
     protected int[][] posRobot;//[xrobot1, yrobot1, xrobot2, yrobot2,..] positions des robots (4 robots donc 8 entiers (coordonnées x, y))
     protected int active_goal; //numéro du jeton "objectif" entre 0 et 3 (4 valeurs possibles car 4 jetons)
     protected int[][] goalsToDo;//[xjeton1,yjeton1,xjeton2,yjeton2] position des jetons (4 jetons donc 8 entiers (coordonnées x, y))
-    public RandomBoardGeneration() throws IOException, InterruptedException
+    public RandomBoardGeneration() //throws IOException, InterruptedException
 
     {
         //création du plateau vide.
@@ -186,7 +186,7 @@ public class RandomBoardGeneration
                             }
                             else
                             {   
-                                System.out.println("obstacle double");
+                                //System.out.println("obstacle double");
                                 feu_vert = false;
                             }
                         }
@@ -197,43 +197,43 @@ public class RandomBoardGeneration
                             //System.out.println("("+int_i + " : " + int_j+")");
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ //gauche
                                 feu_vert=false;
-                                System.out.println("obstacle simple gauche");
+                                //System.out.println("obstacle simple gauche");
                                 break;
                             }
                             if(obstaclesSimples.contains(this.board[int_i][int_j-1])){ //haut
                                 feu_vert=false;
-                                System.out.println("obstacle simple haut");
+                                //System.out.println("obstacle simple haut");
                                 break;
                             }
 
                             //axe bord haut cases de droite
                             if(obstaclesSimples.contains(this.board[int_i+1][int_j-1])){ //haut diagonale haut droite
                                 feu_vert=false;
-                                System.out.println("haut diagonale haut droite");
+                                //System.out.println("haut diagonale haut droite");
                                 break;
                             }
                             if(obstaclesSimples.contains(this.board[int_i+1][int_j])){ //haut diagonale bas droite
                                 feu_vert=false;
-                                System.out.println("haut diagonale bas droite");
+                                //System.out.println("haut diagonale bas droite");
                                 break;
                             }
 
                             //axe bord gauche cases du bas
                             if(obstaclesSimples.contains(this.board[int_i][int_j+1])){ //gauche diagonale bas droite
                                 feu_vert=false;
-                                System.out.println("gauche diagonale bas droite");
+                                //System.out.println("gauche diagonale bas droite");
                                 break;
                             }
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j+1])){ //gauche diagonale bas gauche
                                 feu_vert=false;
-                                System.out.println("gauche diagonale bas gauche");
+                                //System.out.println("gauche diagonale bas gauche");
                                 break;
                             }
                             break;
 
 
                         case 21: // cas du coin haut droite
-                            System.out.println("cas 21");
+                            //System.out.println("cas 21");
                             if(obstaclesSimples.contains(this.board[int_i+1][int_j])){ //droite
                                 feu_vert=false;
                                 break;
@@ -246,31 +246,31 @@ public class RandomBoardGeneration
                             //axe bords haut cases de gauche
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j-1])){ //haut gauche diagonale haut droite
                                 feu_vert=false;
-                                System.out.println("huhuhu");
+                                //System.out.println("huhuhu");
                                 break;
                             }
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ //haut gauche diagonale haut gauche
                                 feu_vert=false;
-                                System.out.println("huhuhu");
+                                //System.out.println("huhuhu");
                                 break;
                             }
 
                             //axe bords droit cases du bas
                             if(obstaclesSimples.contains(this.board[int_i+1][int_j+1])){ //droit bas diagonale droite bas
                                 feu_vert=false;
-                                System.out.println("huhuhu");
+                                //System.out.println("huhuhu");
                                 break;
                             }
                             if(obstaclesSimples.contains(this.board[int_i][int_j+1])){ //droit bas diagonale gauche bas
                                 feu_vert=false;
-                                System.out.println("huhuhu");
+                                //System.out.println("huhuhu");
                                 break;
                             }
                             break;
 
 
                         case 22: // cas du coin bas droite
-                            System.out.println("cas 22");
+                            //System.out.println("cas 22");
                             if(obstaclesSimples.contains(this.board[int_i+1][int_j])){ //droite
                                 feu_vert=false;
                                 break;
@@ -284,12 +284,12 @@ public class RandomBoardGeneration
                             //axe bords bas cases de gauche
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ // bas gauche diagonale haute
                                 feu_vert=false;
-                                System.out.println("hihihi");
+                                //System.out.println("hihihi");
                                 break;
                             }
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j+1])){ // bas gauche diagonale basse
                                 feu_vert=false;
-                                System.out.println("hihihi");
+                                //System.out.println("hihihi");
                                 break;
                             }
 
@@ -297,19 +297,19 @@ public class RandomBoardGeneration
                             //axe bords droite case du haut
                             if(obstaclesSimples.contains(this.board[int_i+1][int_j-1])){ // droite haut diagonale droite
                                 feu_vert=false;
-                                System.out.println("hihihi");
+                                //System.out.println("hihihi");
                                 break;
                             }
                             if(obstaclesSimples.contains(this.board[int_i][int_j-1])){ // droite haut diagonale gauche
                                 feu_vert=false;
-                                System.out.println("hihihi");
+                                //System.out.println("hihihi");
                                 break;
                             }
                             break;
 
 
                         case 23: // cas du coin bas gauche
-                            System.out.println("cas 23");
+                            //System.out.println("cas 23");
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ //gauche
                                 feu_vert=false;
                                 //System.out.println("hahaha");
@@ -324,12 +324,12 @@ public class RandomBoardGeneration
                             //axe du bord bas cases de droites
                             if(obstaclesSimples.contains(this.board[int_i+1][int_j])){ //bas droite diagonale haute
                                 feu_vert=false;
-                                System.out.println("hahaha");
+                                //System.out.println("hahaha");
                                 break;
                             }
                             if(obstaclesSimples.contains(this.board[int_i+1][int_j+1])){ //bas droite diagonale basse
                                 feu_vert=false;
-                                System.out.println("hahaha");
+                                //System.out.println("hahaha");
                                 break;
                             }
 
@@ -337,12 +337,12 @@ public class RandomBoardGeneration
                             //axe de gauche cases du haut
                             if(obstaclesSimples.contains(this.board[int_i][int_j-1])){ //gauche haut diagonale droite
                                 feu_vert=false;
-                                System.out.println("hahaha");
+                                //System.out.println("hahaha");
                                 break;
                             }
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j-1])){ //gauche haut diagonale gauche
                                 feu_vert=false;
-                                System.out.println("hahaha");
+                                //System.out.println("hahaha");
                                 break;
                             }
                             break;
@@ -382,10 +382,10 @@ public class RandomBoardGeneration
                     compteurObstaclesDoubles++;
                     line[int_i]++;
                     row[int_j]++;
-                    System.out.print("allow  ");
-                    System.out.println(compteurObstaclesDoubles);
+                    //System.out.print("allow  ");
+                    //System.out.println(compteurObstaclesDoubles);
                 }else{
-                    System.out.println("abort");
+                    //System.out.println("abort");
                 }
 
             }
@@ -401,7 +401,7 @@ public class RandomBoardGeneration
         {
             int int_i = rand.nextInt(16);
             int int_j = rand.nextInt(16);
-            System.out.println("robot "+int_i+ " "+ int_j);
+            //System.out.println("robot "+int_i+ " "+ int_j);
             int statut = 0;
             for (int i=0; i<12;i=i+2)
             {
@@ -430,7 +430,7 @@ public class RandomBoardGeneration
         {
             int int_i = rand.nextInt(16);
             int int_j = rand.nextInt(16);
-            System.out.println("jeton "+int_i+ " "+ int_j);
+            //System.out.println("jeton "+int_i+ " "+ int_j);
             int statut = 0;
             for (int i=0; i<12;i=i+2)//vérification de la légalité des coordonnées aléatoirement choisies (=pas au centre)
             {
@@ -440,18 +440,18 @@ public class RandomBoardGeneration
                     statut = 1;
                     break;
                 }
-                System.out.println(""+statut);
+                //System.out.println(""+statut);
             }
             if (statut == 0)
             {
 
-                System.out.println("allowed");
+                //System.out.println("allowed");
 
                 this.goalsToDo[compteurjetonspos][0]=int_i;
                 this.goalsToDo[compteurjetonspos][1]=int_j;
                 compteurjetonspos++;
             }else{
-                System.out.println("forbidden");
+                //System.out.println("forbidden");
             }
         }
 

@@ -16,7 +16,7 @@ public class State
 
     
 
-    public State() throws IOException, InterruptedException
+    public State() //throws IOException, InterruptedException
     {   
         System.out.println("State.java");
     	RandomBoardGeneration generationAleatoire = new RandomBoardGeneration();

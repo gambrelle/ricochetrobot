@@ -2,6 +2,7 @@ package solvers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import game.*;
 import gamegui.*;
@@ -13,7 +14,7 @@ public class Precompute{
     private int compteurCasesPleines;
 
 
-    public Precompute(State etat, int jeton_objectif){
+    public Precompute(State etat, int jeton_objectif) throws IOException, InterruptedException{
         
         this.mapPrecomputed = new int[16][16];
         this.compteurCasesPleines = 0;
@@ -26,27 +27,37 @@ public class Precompute{
                 this.mapPrecomputed[r][l]=0;
             }
         }
+        System.out.println("test 1");
         int posToken[] =this.etat.getGoalsToDo()[this.etat.getActiveGoal()];
         this.mapPrecomputed[posToken[0]][posToken[1]]=-1;
+        System.out.println("test 2");
         while (compteurCasesPleines <= limite){
             if (niveau == 0){
+                System.out.println("niveau 0");
                 ArrayList<Move> cache = this.etat.getMoveToken(jeton_objectif);
+                System.out.println("test avant move");
                 for (Move c : cache){
+                    System.out.println("test après move");
+                    System.out.println(c);
                     if(c.getPosXF()!=c.getPosXI()){
                         //deplacement latéral
+                        System.out.println("déplacement latéral");
                         if(c.getPosXF()>c.getPosXI()){
                             //déplacement vers la droite
+                            System.out.println("déplacement droite");
                             for(int j= 1;j<(c.getPosXF()-c.getPosXI());j++){
                                 this.mapPrecomputed[c.getPosXI()+j][c.getPosYI()]=1;
                             }
                         }else{
                             //déplacement vers la gauche
+                            System.out.println("déplacement gauche");
                             for(int j= -1;j>(c.getPosXF()-c.getPosXI());j--){
                                 this.mapPrecomputed[c.getPosXI()+j][c.getPosYI()]=1;
                             }
                         }
                     }else{
                         //deplacement vertical
+                        System.out.println("déplacement vertical");
                         if(c.getPosYF()>c.getPosYI()){
                             //déplacement vers le bas
                             for(int j= 1;j<(c.getPosYF()-c.getPosYI());j++){
@@ -60,7 +71,9 @@ public class Precompute{
                         }
                     }
                 }
+                niveau++;
             }else{
+                System.out.println("niveau "+niveau);
                for (int l = 0;l<16;l++){
                    for(int r = 0; r <16;r++){
                         if (this.mapPrecomputed[l][r]==(niveau-1)){
