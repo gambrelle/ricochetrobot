@@ -51,7 +51,7 @@ public class AStar extends Solver
         return true;
     }
 
-    public ArrayList<Move> getBestPath() 
+    public Node getBestPath() 
     {
         int cout = 1;
         Node startNode = new Node(heuristic(this.posActiveRobot, this.posActiveGoal) + cout, cout, this.initialState, null, null);
@@ -66,7 +66,7 @@ public class AStar extends Solver
 
             if (n.getState().Get_Robot()[n.getState().getActiveGoal()][0] == this.posActiveGoal[0] && n.getState().Get_Robot()[n.getState().getActiveGoal()][1] == this.posActiveGoal[1])
             {
-                return reconstituerChemin(n);
+                return n;
             }
 
             for (int i = 0; i <= 3; i++)

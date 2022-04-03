@@ -1,7 +1,6 @@
 package solvers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import game.*;
 
@@ -32,5 +31,5 @@ public abstract class Solver
         return Math.abs(posGoals[0] - posRobot[0]) + Math.abs(posGoals[1] - posRobot[1]);
     }
 
-    public abstract ArrayList<Move> getBestPath();
+    public abstract Node getBestPath();
 }

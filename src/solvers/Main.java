@@ -51,7 +51,8 @@ public class Main
         int j = 0;
         State s = new State();
         ArrayList<Move> al;
-        Solver solv;
+        AStar solv;
+        Node n;
 
         while (j < 4)
         {
@@ -63,9 +64,12 @@ public class Main
             
             solv = new AStar(s);
 
-            try 
+            try
             {
-            al = solv.getBestPath();
+            n = solv.getBestPath();
+            al = solv.reconstituerChemin(n);
+
+            s = n.getState();
 
             for (int i = al.size() - 1; i >= 0; i--)
                 if (al.get(i) != null)
