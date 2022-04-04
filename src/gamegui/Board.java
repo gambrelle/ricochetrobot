@@ -370,7 +370,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			    // La touche R permet de mettre le jeton rouge directement	
 			    case KeyEvent.VK_R:
 			    	state.chooseActivegoal(1);
-			    	state.resetPosRobot();
+
 			    	repaint();								
 			    	break;	
 				//La touche G permet de reinitialiser le jeu et de remettre au jeton vert(green)	 
@@ -383,13 +383,13 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 					 // La touche B permet de mettre le jeton bleu directement		
 			    case KeyEvent.VK_B:
 			    	state.chooseActivegoal(3);
-			    	state.resetPosRobot();
+
 			    	repaint();								
 			    	break;
 				    // La touche Y permet de mettre le jeton jaune directement		
 			    case KeyEvent.VK_Y:
 			    	state.chooseActivegoal(2);
-			    	state.resetPosRobot();
+
 			    	repaint();								
 			    	break;	
 			    default:
