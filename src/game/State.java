@@ -40,6 +40,8 @@ public class State
     	return robot;
     }
     
+
+    
     public int[][] Get_Board()
     {
 		return this.board;
@@ -192,9 +194,18 @@ public class State
         return allMoves;
     }
 
-    public boolean isFinalState()
+    public int isFinalState()
     {
-        return this.posRobot[this.active_goal][0] == this.goalsToDo[this.active_goal][0] && this.posRobot[this.active_goal][1] == this.goalsToDo[this.active_goal][1];
+        if (this.posRobot[this.active_goal][0] == this.goalsToDo[this.active_goal][0] && this.posRobot[this.active_goal][1] == this.goalsToDo[this.active_goal][1])
+        {
+            return  1; 
+        }
+        else 
+        {
+        	return 0;
+        }
+    	
     }
+
     
 }
