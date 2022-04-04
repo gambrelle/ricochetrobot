@@ -20,6 +20,7 @@ public class Node //implements Comparable<Node>
         this.move = move;
     }
 
+    // Accesseurs 
     public int getHeuristic()
     {
         return this.heuristic;
@@ -39,6 +40,8 @@ public class Node //implements Comparable<Node>
         return this.state;
     }
 
+
+    // Redéfinition de la fonction équals pour vérifier si un élément est dans une liste. 
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -50,6 +53,7 @@ public class Node //implements Comparable<Node>
             return false;
         return Arrays.deepEquals(this.getState().Get_Robot(), n.getState().Get_Robot());
     }
+
 
     @Override
     public String toString()
