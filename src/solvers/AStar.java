@@ -74,7 +74,6 @@ public class AStar extends Solver
                 for (Move move : n.getState().getMove(i))
                 {
                     State s;
-                    //System.out.println(move.toString());
 
                     try {
                         s = n.getState().getClone();
@@ -85,47 +84,14 @@ public class AStar extends Solver
                     int[] newPosRobot = s.Get_Robot()[s.getActiveGoal()];
 
                     Node node = new Node(heuristic(newPosRobot, this.posActiveGoal) + cout, cout, s, n, move);
-                    //int count = 0;
 
                     if (isInterestingNode(openList, closeList, node))
                     {
                         openList.add(node);
                     }
-
-                    /* if (!(closeList.isEmpty()))
-                    {
-                        for (Node nodeClose : closeList)
-                        {
-                            if (nodeClose.equals(node))
-                            {
-                                count += 1;
-                            }
-                        }
-                       for (Node nodeOpen : openList)
-                       {
-                            if (node.equals(nodeOpen))
-                            {
-                                if (nodeOpen.cout < node.cout)
-                                {
-                                    count += 1;
-                                }
-                            }
-                        } 
-                    }
-                    if (count == 0)
-                    {
-                        openList.add(node);
-                    } */
-
-                    
-                    /* if (cout <10)
-                        System.out.println(Array (node.state.Get_Robot())); */
                 }
-            }
-            //System.out.println();
-            
+            }            
         }
-        
         return null;
     }
 
