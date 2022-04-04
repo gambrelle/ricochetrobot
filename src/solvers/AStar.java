@@ -1,38 +1,98 @@
-/* package solvers;
+package solvers;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 
 import game.*;
 
 public class AStar extends Solver
 {
-    public AStar(State state)
+    public AStar(State state) throws IOException, InterruptedException
     {
         super(state);
     }
 
-    public ArrayList<Node> getBestPath(int[][] board, int[] posRobot, int[]posGoals)
+    public ArrayList<Move> reconstituerChemin(Node n)
     {
-        ArrayList<Node> closedList = new ArrayList<>();
-        ArrayList<Node> openList = new ArrayList<>();
-        openList.add(new Node(posRobot[0], posRobot[0], heuristic(posRobot, posGoals), null));
+        ArrayList<Move> path = new ArrayList<>();
+        path.add(n.getMove());
+        while (n.getNoeudPrecedent() != null)
+        {
+            n = n.getNoeudPrecedent();
+            path.add(n.getMove());
+        }
+        return path;
+    }
+
+    public boolean isInterestingNode(PriorityQueue<Node> openList, HashSet<Node> closedList, Node n)
+    {
+        if (!(closedList.isEmpty()))
+                    {
+                        for (Node nodeClose : closedList)
+                        {
+                            if (nodeClose.equals(n))
+                            {
+                                return false;
+                            }
+                        }
+                       for (Node nodeOpen : openList)
+                       {
+                            if (n.equals(nodeOpen))
+                            {
+                                if (nodeOpen.cout > n.cout)
+                                {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+        return true;
+    }
+
+    public Node getBestPath()
+    {
+        int cout = 1;
+        Node startNode = new Node(manhattanDistance(this.posActiveRobot, this.posActiveGoal) + cout, cout, this.initialState, null, null);
+        PriorityQueue<Node> openList = new PriorityQueue<Node>(new NodeComparator());
+        openList.add(startNode);
+        HashSet<Node> closeList = new HashSet<>();
+
         while (!(openList.isEmpty()))
         {
-            for (Node n : openList)
+            Node n = openList.poll();
+            cout ++;
+
+            if (n.getState().Get_Robot()[n.getState().getActiveGoal()][0] == this.posActiveGoal[0] && n.getState().Get_Robot()[n.getState().getActiveGoal()][1] == this.posActiveGoal[1])
             {
-                if (n.getX() == posGoals[0] && n.getY() == posGoals[1])
-                    return openList;
-                //////// A COMPLETER ////////////
+                return n;
+            }
 
+            for (int i = 0; i <= 3; i++)
+            {
+                for (Move move : n.getState().getMove(i))
+                {
+                    State s;
 
+                    try {
+                        s = n.getState().getClone();
+                        s.play(move, i);
+                    }
+                    catch (Exception e) {return null;}
 
-                
-                closedList.add(n);
+                    int[] newPosRobot = s.Get_Robot()[s.getActiveGoal()];
+
+                    Node node = new Node(manhattanDistance(newPosRobot, this.posActiveGoal) + cout, cout, s, n, move);
+
+                    if (isInterestingNode(openList, closeList, node))
+                    {
+                        openList.add(node);
+                    }
+                }
             }
         }
-        
-        return openList;
+        return null;
     }
+
 }
- */

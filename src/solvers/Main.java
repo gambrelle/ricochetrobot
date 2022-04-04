@@ -1,29 +1,62 @@
 package solvers;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 import game.*;
 import gamegui.*;
 
 public class Main 
 {
-    public static void main(String[] args) 
+    public static void main(String[] args) throws IOException, InterruptedException
     {
-        ArrayList<Node> al = new ArrayList<Node>();
-        
-        Move m = new Move(1, 0, 0, 2, 0);
-        Node n1 = new Node(1, 1, 6, m);
-        Node n2 = new Node(2, 2, 4, m);
-        Node n3 = new Node(3, 2, 3, m);
+        State s = new State();
+        State copyS = s.getClone();
 
-        al.add(n1);
-        al.add(n3);
-        al.add(n2);
-        
-        System.out.println(Arrays.toString(al.toArray()));
-        Collections.sort(al);
-        System.out.println(Arrays.toString(al.toArray()));
-    }
+        int j = 0;
+        ArrayList<Move> al;
+        AStar solv;
+        Node n;
+
+        while (j < 4)
+        {
+            s.chooseActivegoal(j);
+
+            System.out.println(s.printActiveGoal() + "\n");
+
+            solv = new AStar(s);
+
+            try
+            {
+            n = solv.getBestPath();
+            al = solv.reconstituerChemin(n);
+
+            s = n.getState();
+
+            for (int i = al.size() - 1; i<= 0; i--)
+                if (al.get(i) != null)
+            System.out.println(al.get(i).toString());
+                else
+            continue;
+
+            for (int i = al.size() - 1; i >= 0; i--)
+                if (al.get(i) != null)
+                    System.out.println(al.get(i).toString());
+                else
+                    continue;
+            }
+            catch (Exception e) 
+            {
+                System.out.println("Memory Error");
+            }
+            catch (OutOfMemoryError e) 
+            {
+                System.out.println("Solutions introuvables !");
+            }
+            j++;
+            System.out.println();
+        }
+        new Containers(copyS);
+    } 
 }
+
