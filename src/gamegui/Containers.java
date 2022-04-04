@@ -21,11 +21,6 @@ public class Containers extends JFrame {
 	private static final long serialVersionUID = 1L;	
 	private JPanel top_Side = new JPanel();
 	private Board board;
-	public int count = 0;
-	public JLabel affichage_Score_Green = new JLabel();
-    public JTextArea area;
-    public JLabel show_round = new JLabel();//affiche les manches
-    public JLabel affichage_time = new JLabel();//affiche le timer
 	private Border border = BorderFactory.createMatteBorder(0, 0,4 , 0, Color.BLACK);;
 	
 
@@ -57,13 +52,12 @@ public class Containers extends JFrame {
 
 		//Creer un texte pout informer comment reinitialiser le jeu
 		JLabel affichage_Reset = new JLabel();
-		affichage_Reset.setText("Press R to reset the game");
+		affichage_Reset.setText("Press V to reset the game");
 		affichage_Reset.setFont(new Font("Verdana", Font.PLAIN, 20));		
 		affichage_Reset.setForeground (Color.BLACK);
 		affichage_Reset.setHorizontalAlignment(SwingConstants.CENTER);
 		 	
 		top_Side.add(affichage_Ricochet);
-		top_Side.add(affichage_Score_Green);
 
 		//depose les trois containers dans le container principal et place les containers dans l'espace.
 		container.add(this.board, BorderLayout.SOUTH);

@@ -22,8 +22,8 @@ import javax.swing.*;
 
 /*
  * Cette classe permet de gerer le plateau principal et ces modifications par la methode Paintcomponent de JLabel.
- * C'est dans cette classe que les méthodes écrites sont utilisé pour gérer la partie graphique.
- * Ces méthodes sont utilisé grace à un implémentation des évenements Keylistener et MouseListener.
+ * C'est dans cette classe que les mï¿½thodes ï¿½crites sont utilisï¿½ pour gï¿½rer la partie graphique.
+ * Ces mï¿½thodes sont utilisï¿½ grace ï¿½ un implï¿½mentation des ï¿½venements Keylistener et MouseListener.
  *  
  *  
  */
@@ -51,7 +51,6 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 	private BufferedImage carre_noir;
 	private int pos_x , pos_y;
 	private int dim = 40;
-	public boolean bool = false ;
 	private int p  ;
 	public int robot  = 0;
 	public int x_green_robot = 0 ;
@@ -81,7 +80,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		this.addKeyListener(this);
 		
 		
-		// recuperation du chemin relatif des images utilisé pour le jeu.
+		// recuperation du chemin relatif des images utilisï¿½ pour le jeu.
 		
 		green_robot = ImageIO.read(new File("..\\static\\green_robot.png"));
 		red_robot = ImageIO.read(new File("..\\static\\red_robot.png"));
@@ -101,14 +100,15 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 	
 	
 		/*
-		 * Cette methode est utilisé pour dessiner le plateau et le modifier en fonction
-		 * des événements et des méthodes.
+		 * Cette methode est utilisï¿½ pour dessiner le plateau et le modifier en fonction
+		 * des ï¿½vï¿½nements et des mï¿½thodes.
 
 		 */
 		@Override
 		public void paintComponent(Graphics g) 
 		{
 			super.paintComponent(g);
+
 			
 			// utilisation de variable pour recuperer le x et y de la position des robots. 
 			
@@ -132,7 +132,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			int x_blue_jeton = this.pos_jeton[3][0];
 			int y_blue_jeton = this.pos_jeton[3][1];	
 			
-			//utilise g2 pour augmenter l'épaisseur des obstacles.
+			//utilise g2 pour augmenter l'ï¿½paisseur des obstacles.
 			Graphics2D  g2 = (Graphics2D) g;
 			g2.setStroke(new BasicStroke(4.0f));
 			
@@ -209,12 +209,15 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 				if(state.isFinalState() == 0)
 				{
 					g.drawImage(green_jeton,dim*x_green_jeton , dim*y_green_jeton, null);
+				
 					repaint();	
 				}
 				else
 				{
-					state.chooseActivegoal(1);				
+					state.chooseActivegoal(1);	
+
 				}		
+
 			}
 			if(state.getActiveGoal() == 1)
 			{		
@@ -255,8 +258,10 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 					g.drawImage(blue_jeton,dim*x_blue_jeton , dim*y_blue_jeton, null);
 					g.drawImage(green_jeton,dim*x_green_jeton , dim*y_green_jeton, null);
 					g.drawImage(red_jeton,dim*x_red_jeton , dim*y_red_jeton, null);
-					g.drawImage(yellow_jeton,dim*x_yellow_jeton , dim*y_yellow_jeton, null);	
-					bool = true;				
+					g.drawImage(yellow_jeton,dim*x_yellow_jeton , dim*y_yellow_jeton, null);
+					
+
+					
 				}		
 			}
 			//dessine les quatres robots lorsque le jeton bleu 
@@ -274,12 +279,12 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 					RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			Font font = new Font("Serif", Font.PLAIN, 40);
 			g2.setFont(font);
-			g2.setColor (Color.WHITE);
+			g2.setColor (Color.BLACK);
 			g2.drawString(String.valueOf(p) , 300, 325);
 
 			/*
 			 * dessine le texte en bas du tableau 
-			 * avec le robot selectionné
+			 * avec le robot selectionnï¿½
 			 */
 			String rbot = "vert" ; 
 			if(this.robot == 0)
@@ -304,13 +309,14 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			Font font1 = new Font("Serif", Font.PLAIN, 24);
 			g3.setFont(font1);
 			g3.setColor (Color.BLACK);
-			g3.drawString("Robot selectionné : "  + rbot  ,200, 660);
+			g3.drawString("Robot selectionnï¿½ : "  + rbot  ,200, 660);
+			
 			
 
 		}
 
-		//cette methode est utilisé pour controler les mouvements des robots en fonctions des touches et incrementer le compteur de mouvement. 
-		// les touches utilisé sont la fleche du haut, bas, gauche et droite ainsi que la touche R pour reinitialiser le jeu
+		//cette methode est utilisï¿½ pour controler les mouvements des robots en fonctions des touches et incrementer le compteur de mouvement. 
+		// les touches utilisï¿½ sont la fleche du haut, bas, gauche et droite ainsi que la touche R pour reinitialiser le jeu
 		@Override
 		public void keyPressed(KeyEvent e) {
 		    int key = e.getKeyCode();
@@ -361,13 +367,31 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			    	}
 			    	repaint();
 			    	break;
-			    // La touche R permet de reinitialiser le jeu	
+			    // La touche R permet de mettre le jeton rouge directement	
 			    case KeyEvent.VK_R:
+			    	state.chooseActivegoal(1);
+			    	state.resetPosRobot();
+			    	repaint();								
+			    	break;	
+				//La touche G permet de reinitialiser le jeu et de remettre au jeton vert(green)	 
+			    case KeyEvent.VK_G:
 			    	state.chooseActivegoal(0);
 			    	state.resetPosRobot();
-			    	p = 0;
+			    	p=0;
 			    	repaint();								
-			    	break;			    	
+			    	break;
+					 // La touche B permet de mettre le jeton bleu directement		
+			    case KeyEvent.VK_B:
+			    	state.chooseActivegoal(3);
+			    	state.resetPosRobot();
+			    	repaint();								
+			    	break;
+				    // La touche Y permet de mettre le jeton jaune directement		
+			    case KeyEvent.VK_Y:
+			    	state.chooseActivegoal(2);
+			    	state.resetPosRobot();
+			    	repaint();								
+			    	break;	
 			    default:
 			    	break;  	
 				}	        	
@@ -380,7 +404,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		
 		
 	/*
-	 * Cette méthode est utilisé pour avoir la position en pixel de chaque robot sur le plateau
+	 * Cette mï¿½thode est utilisï¿½ pour avoir la position en pixel de chaque robot sur le plateau
 	 *  grace au clique de la souris.
 	 *  On l'utilise pour selectionner quel robot nous voulons bouger.
 	 */
@@ -411,7 +435,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		}		
 	}
 
-	//Methode implementé par keylistener et MouseListener mais non utilisé.
+	//Methode implementï¿½ par keylistener et MouseListener mais non utilisï¿½.
 	@Override
 	public void mousePressed(MouseEvent e) {}
 	@Override
