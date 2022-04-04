@@ -1,51 +1,61 @@
 package game;
 
-import gamegui.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class State
 {
-    int[][] board;
-    int[][] posRobot;
+    int[][] board, posRobot, goalsToDo, initialPosRobot;
     protected int active_goal;
-    protected int[][] goalsToDo;
-    int robot ; 
-
-    
 
     public State() throws IOException, InterruptedException
-    {   
-        System.out.println("State.java");
+    {
     	RandomBoardGeneration generationAleatoire = new RandomBoardGeneration();
 		this.board =  generationAleatoire.getBoard();
         this.posRobot = generationAleatoire.getPosRobot();
         this.active_goal = generationAleatoire.getActiveGoal();
         this.goalsToDo = generationAleatoire.getGoalsToDo();
-        
-    }
-    //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois 
 
-    public int GetNumber()
-    {
-    	return robot;
+        this.initialPosRobot = new int[4][2];
+
+        for (int i = 0; i < this.posRobot.length; i++)
+            for (int j = 0; j < this.posRobot[i].length; j ++)
+                this.initialPosRobot[i][j] = this.posRobot[i][j];
     }
-    
+    public State(int[][] board, int[][] posRobot, int active_goal, int[][] goalsToDo) throws IOException, InterruptedException
+    {
+        this.board =  board;
+        this.posRobot = posRobot;
+        this.active_goal = active_goal;
+        this.goalsToDo = goalsToDo;
+
+        this.initialPosRobot = new int[4][2];
+
+        for (int i = 0; i < this.posRobot.length; i++)
+            for (int j = 0; j < this.posRobot[i].length; j ++)
+                this.initialPosRobot[i][j] = this.posRobot[i][j];
+    }
+    //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois
+
+    public void resetPosRobot()
+    {
+        for (int i = 0; i < this.posRobot.length; i++)
+        {
+            for (int j = 0; j < this.posRobot[i].length; j ++)
+                this.posRobot[i][j] = this.initialPosRobot[i][j];
+        }
+    }
 
     public int[][] Get_Board()
     {
 		return this.board;
-    	
     }
     public int[][] Get_Robot()
     {
     	return this.posRobot;
     }
 
-    
-    
     public int[][] Get_Goal()
     {
     	return this.goalsToDo ;
@@ -54,7 +64,7 @@ public class State
     public int[][] getAllGoals()
     {
         return this.goalsToDo;
-    } 
+    }
     public int getActiveGoal()
     {
         return this.active_goal;
@@ -64,6 +74,16 @@ public class State
         this.active_goal = i;
     }
 
+    public String printActiveGoal()
+    {
+        if (this.getActiveGoal() == 0)
+            return ColorTerminal.GREEN + "Position de l'objectif actif : (" + this.Get_Goal()[this.getActiveGoal()][0] + ", " + this.Get_Goal()[this.getActiveGoal()][1] + ")" + ColorTerminal.RESET;
+        if (this.getActiveGoal() == 1)
+            return ColorTerminal.RED + "Position de l'objectif actif : (" + this.Get_Goal()[this.getActiveGoal()][0] + ", " + this.Get_Goal()[this.getActiveGoal()][1] + ")" + ColorTerminal.RESET;
+        if (this.getActiveGoal() == 2)
+            return ColorTerminal.YELLOW + "Position de l'objectif actif : (" + this.Get_Goal()[this.getActiveGoal()][0] + ", " + this.Get_Goal()[this.getActiveGoal()][1] + ")" + ColorTerminal.RESET;
+        return ColorTerminal.BLUE + "Position de l'objectif actif : (" + this.Get_Goal()[this.getActiveGoal()][0] + ", " + this.Get_Goal()[this.getActiveGoal()][1] + ")" + ColorTerminal.RESET;
+    }
 
     public void printBoard()
     {
@@ -79,24 +99,27 @@ public class State
                 System.out.print("\n");
         }
     }
-    
     public State getClone() throws IOException, InterruptedException
     {
-        State s = new State();
-        for (int i = 0; i < s.board.length; i++)
+        int[][] newBoard = new int[16][16];
+        int[][] newPosRobot = new int[4][2];
+
+        for (int i = 0; i < this.board.length; i++)
         {
-            for (int j = 0; j < s.board[i].length; j++)
+            for (int j = 0; j < this.board[i].length; j++)
             {
-                s.board[i][j] = this.board[i][j];
+                newBoard[i][j] = this.board[i][j];
             }
         }
-        for (int i = 0; i < s.posRobot.length; i++)
+        for (int i = 0; i < this.posRobot.length; i++)
         {
-            for (int j = 0; j < s.posRobot[i].length; j++)
+            for (int j = 0; j < this.posRobot[i].length; j++)
             {
-                s.posRobot[i][j] = this.posRobot[i][j];
+                newPosRobot[i][j] = this.posRobot[i][j];
             }
         }
+
+        State s = new State(newBoard, newPosRobot, this.active_goal, this.goalsToDo);
         return s;
     }
 
@@ -179,9 +202,12 @@ public class State
         return allMoves;
     }
 
-    public boolean isFinalState()
+    public int isFinalState()
     {
-        return this.posRobot[this.active_goal][0] == this.goalsToDo[this.active_goal][0] && this.posRobot[this.active_goal][1] == this.goalsToDo[this.active_goal][1];
+        if (this.posRobot[this.active_goal][0] == this.goalsToDo[this.active_goal][0] && this.posRobot[this.active_goal][1] == this.goalsToDo[this.active_goal][1])
+            return  1;
+        else
+        	return 0;
     }
     
 }
