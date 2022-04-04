@@ -20,7 +20,13 @@ import javax.swing.*;
 
 
 
-// Montrer 
+/*
+ * Cette classe permet de gerer le plateau principal et ces modifications par la methode Paintcomponent de JLabel.
+ * C'est dans cette classe que les méthodes écrites sont utilisé pour gérer la partie graphique.
+ * Ces méthodes sont utilisé grace à un implémentation des évenements Keylistener et MouseListener.
+ *  
+ *  
+ */
 
 public class Board extends JPanel implements  KeyListener,MouseListener {//ActionListener{
 
@@ -79,16 +85,19 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		this.y_blue_robot = this.pos_Robot[3][1];
 		this.addKeyListener(this);
 		
-		green_robot = ImageIO.read(new File("..\\static\\green_robot.png"));
-		red_robot = ImageIO.read(new File("..\\static\\red_robot.png"));
-		blue_robot = ImageIO.read(new File("..\\static\\blue_robot.png"));
-		yellow_robot = ImageIO.read(new File("..\\static\\yellow_robot.png"));
-		green_jeton = ImageIO.read(new File("..\\static\\vertrond.png"));
-		red_jeton = ImageIO.read(new File("..\\static\\rougerond.png"));
-		blue_jeton = ImageIO.read(new File("..\\static\\bleurond.png"));
-		yellow_jeton = ImageIO.read(new File("..\\static\\jaunerond.png"));
-		carre = ImageIO.read(new File("..\\static\\carre.jpg"));
-		carre_noir = ImageIO.read(new File("..\\static\\carre_noir.png"));
+		
+		// recuperation du chemin relatif des images utilisé pour le jeu.
+		
+		green_robot = ImageIO.read(new File("static/green_robot.png"));
+		red_robot = ImageIO.read(new File("static/red_robot.png"));
+		blue_robot = ImageIO.read(new File("static/blue_robot.png"));
+		yellow_robot = ImageIO.read(new File("static/yellow_robot.png"));
+		green_jeton = ImageIO.read(new File("static/vertrond.png"));
+		red_jeton = ImageIO.read(new File("static/rougerond.png"));
+		blue_jeton = ImageIO.read(new File("static/bleurond.png"));
+		yellow_jeton = ImageIO.read(new File("static/jaunerond.png"));
+		carre = ImageIO.read(new File("static/carre.jpg"));
+		carre_noir = ImageIO.read(new File("static/carre_noir.png"));
 		this.addMouseListener(this);
 		setFocusable(true);
 		this.setBackground(Color.WHITE);
@@ -97,12 +106,16 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 	
 	
 		/*
-		 * this method is used to draw all of the board and the transformation.
+		 * Cette methode est utilisé pour dessiner le plateau et le modifier en fonction
+		 * des événements et des méthodes.
+
 		 */
 		@Override
 		public void paintComponent(Graphics g) 
 		{
 			super.paintComponent(g);
+			
+			// utilisation de variable pour recuperer le x et y de la position des robots. 
 			
 			x_green_robot = this.pos_Robot[0][0] ;
 			y_green_robot = this.pos_Robot[0][1] ;
@@ -113,6 +126,8 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			x_blue_robot = this.pos_Robot[3][0];
 			y_blue_robot = this.pos_Robot[3][1];
 			
+			// utilisation de variable pour en recuperer le x et y de la position des jetons.
+			
 			int x_green_jeton = this.pos_jeton[0][0];
 			int y_green_jeton = this.pos_jeton[0][1];
 			int x_red_jeton = this.pos_jeton[1][0];
@@ -122,11 +137,14 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			int x_blue_jeton = this.pos_jeton[3][0];
 			int y_blue_jeton = this.pos_jeton[3][1];	
 			
-			// Use g2 for increase the line 
-			Graphics2D g2 = (Graphics2D) g;
+			//utilise g2 pour augmenter l'épaisseur des obstacles.
+			Graphics2D  g2 = (Graphics2D) g;
 			g2.setStroke(new BasicStroke(4.0f));
 			
-			
+			/*
+			 * Parcours toute les cases du tableau a travers deux boucles for.
+			 * 
+			 */
 			for( int i=0 ;i<16 ; i++) 
 		    {
 				for( int j=0; j<16 ; j++) 
@@ -192,7 +210,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			
 			if(state.getActiveGoal() == 0)
 			{	
-				//draw the green token
+				//dessine le jeton vert
 				if(state.isFinalState() == 0)
 				{
 					g.drawImage(green_jeton,dim*x_green_jeton , dim*y_green_jeton, null);
@@ -218,7 +236,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			}
 			if(state.getActiveGoal() == 2)
 			{	
-				//draw the yellow token
+				//dessine le jeton jaune
 				if(state.isFinalState() == 0)
 				{
 					g.drawImage(yellow_jeton,dim*x_yellow_jeton , dim*y_yellow_jeton, null);	
@@ -231,7 +249,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			}
 			if(state.getActiveGoal() == 3)
 			{		
-				//draw the blue token
+				//dessine le jeton bleu 
 				if(state.isFinalState() == 0)
 				{
 					g.drawImage(blue_jeton,dim*x_blue_jeton , dim*y_blue_jeton, null);
@@ -246,7 +264,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 					bool = true;				
 				}		
 			}
-			//draw the 4 robot
+			//dessine les quatres robots lorsque le jeton bleu 
 			g.drawImage(green_robot,dim*x_green_robot , dim*y_green_robot, null);
 			g.drawImage(red_robot,dim*x_red_robot , dim*y_red_robot, null);
 			g.drawImage(blue_robot,dim*x_blue_robot , dim*y_blue_robot, null);
@@ -254,7 +272,8 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			
 			
 			
-			//draw the count at the middle of the board
+
+			//dessine le compteur au milieu du tableau 
 			
 			g2.setRenderingHint(
 					RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -262,6 +281,11 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			g2.setFont(font);
 			g2.setColor (Color.WHITE);
 			g2.drawString(String.valueOf(p) , 300, 325);
+
+			/*
+			 * dessine le texte en bas du tableau 
+			 * avec le robot selectionné
+			 */
 			String rbot = "vert" ; 
 			if(this.robot == 0)
 			{
@@ -290,14 +314,15 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 
 		}
 
-
-		// this method is used to control the robot movement, and increase the count  
+		//cette methode est utilisé pour controler les mouvements des robots en fonctions des touches et incrementer le compteur de mouvement. 
+		// les touches utilisé sont la fleche du haut, bas, gauche et droite ainsi que la touche R pour reinitialiser le jeu
 		@Override
 		public void keyPressed(KeyEvent e) {
 		    int key = e.getKeyCode();
 		    {
 		    	switch(key) 
 				{
+		    	//Action produit par la fleche haut
 				case KeyEvent.VK_UP:	
 					int YI_U= this.state.getUpMove(this.robot).getPosYI();
 					int YF_U = this.state.getUpMove(this.robot).getPosYF();		    	
@@ -308,7 +333,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 					}
 					repaint();
 			    	break;
-			    	
+			    	//Action produit par la fleche bas			    	
 				case KeyEvent.VK_DOWN:		
 			    	int YI_D= this.state.getDownMove(this.robot).getPosYI();
 			    	int YF_D = this.state.getDownMove(this.robot).getPosYF();
@@ -319,7 +344,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 					}		   
 			    	repaint();
 			    	break;
-			    	
+			    	//Action produit par la fleche gauche	
 			    case KeyEvent.VK_LEFT:		    
 			    	int XI_L = this.state.getLeftMove(this.robot).getPosXI();
 			    	int XF_L = this.state.getLeftMove(this.robot).getPosXF();
@@ -330,7 +355,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 					}							   
 				    repaint();
 				    break;
-			    
+			    	//Action produit par la fleche droite
 			    case KeyEvent.VK_RIGHT:
 			    	int XI_R = this.state.getRightMove(this.robot).getPosXI();
 			    	int XF_R = this.state.getRightMove(this.robot).getPosXF();
@@ -341,7 +366,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			    	}
 			    	repaint();
 			    	break;
-			    // the R touch is used to restart te game.	
+			    // La touche R permet de reinitialiser le jeu	
 			    case KeyEvent.VK_R:
 			    	state.chooseActivegoal(0);
 			    	state.resetPosRobot();
@@ -360,10 +385,9 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		
 		
 	/*
-	 * 	this method is used to get the pixel position of each robot, 
-	 *  with a click of the mouse 
-	 *  we use it to choose which robot we want to move
-	 * 
+	 * Cette méthode est utilisé pour avoir la position en pixel de chaque robot sur le plateau
+	 *  grace au clique de la souris.
+	 *  On l'utilise pour selectionner quel robot nous voulons bouger.
 	 */
 	//
 	@Override
@@ -392,7 +416,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		}		
 	}
 
-	
+	//Methode implementé par keylistener et MouseListener mais non utilisé.
 	@Override
 	public void mousePressed(MouseEvent e) {}
 	@Override

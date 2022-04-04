@@ -6,7 +6,10 @@ import java.io.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-
+/*
+ * Classe Principal de la partie graphique.
+ * C'est dans cette classe que l'on structure l'emplacement des containers.
+ */
 
 
 public class Containers extends JFrame {
@@ -33,18 +36,18 @@ public class Containers extends JFrame {
 		 * container : fenetre de la Frame
 		 */		
 		super("board");
+		
+		//creer un container pour pouvoir gerer l'emplacement des containers mineurs dans le JFrame 
 		Container container = this.getContentPane();
-		container.setLayout(new BorderLayout());	
+		container.setLayout(new BorderLayout());
+		
+		//creer une instance de la classe Board.
 		this.board = new Board(state);  	
 	    board.setPreferredSize(new Dimension(640,700));	 
 	    
-	    
-	    //BoxLayout boxlayout = new BoxLayout(top_Side, BoxLayout.Y_AXIS);
-		//top_Side.setLayout(boxlayout);
-		//top_Side.setPreferredSize(new Dimension(250,100));
 
 
-		//Create the title 
+		//Créer un titre
 		JLabel affichage_Ricochet = new JLabel();
 		affichage_Ricochet.setHorizontalAlignment(SwingConstants.CENTER); 
 		affichage_Ricochet.setText("Ricochet Robot :");
@@ -52,7 +55,7 @@ public class Containers extends JFrame {
 		affichage_Ricochet.setForeground (Color.BLACK);
 		affichage_Ricochet.setBorder(border);
 
-		//Create a text to reset the game
+		//Creer un texte pout informer comment reinitialiser le jeu
 		JLabel affichage_Reset = new JLabel();
 		affichage_Reset.setText("Press R to reset the game");
 		affichage_Reset.setFont(new Font("Verdana", Font.PLAIN, 20));		
@@ -62,10 +65,11 @@ public class Containers extends JFrame {
 		top_Side.add(affichage_Ricochet);
 		top_Side.add(affichage_Score_Green);
 
-
+		//depose les trois containers dans le container principal et place les containers dans l'espace.
 		container.add(this.board, BorderLayout.SOUTH);
 		container.add(top_Side, BorderLayout.WEST);
 		container.add(affichage_Reset, BorderLayout.EAST);
+		
 	    pack();
 	    this.setLayout(null);
 	    this.setLocationRelativeTo(null);//centre la fenetre
