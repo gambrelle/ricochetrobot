@@ -1,5 +1,5 @@
 package game;
-import gamegui.*;
+//import gamegui.*;
 
 public class Move
 {   

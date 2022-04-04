@@ -1,5 +1,5 @@
 package game;
-import gamegui.*;
+//import gamegui.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,13 +9,13 @@ import java.io.IOException;
 public class RandomBoardGeneration 
 {
     protected int[][] board;
-    protected int[][] posRobot;//[xrobot1, yrobot1, xrobot2, yrobot2,..] positions des robots (4 robots donc 8 entiers (coordonnées x, y))
-    protected int active_goal; //numéro du jeton "objectif" entre 0 et 3 (4 valeurs possibles car 4 jetons)
-    protected int[][] goalsToDo;//[xjeton1,yjeton1,xjeton2,yjeton2] position des jetons (4 jetons donc 8 entiers (coordonnées x, y))
+    protected int[][] posRobot;//[xrobot1, yrobot1, xrobot2, yrobot2,..] positions des robots (4 robots donc 8 entiers (coordonnees x, y))
+    protected int active_goal; //numero du jeton "objectif" entre 0 et 3 (4 valeurs possibles car 4 jetons)
+    protected int[][] goalsToDo;//[xjeton1,yjeton1,xjeton2,yjeton2] position des jetons (4 jetons donc 8 entiers (coordonnees x, y))
     public RandomBoardGeneration() throws IOException, InterruptedException
 
     {
-        //création du plateau vide.
+        //creation du plateau vide.
         this.board = new int[16][16];
         for (int i = 0; i < 16; i++)
         {
@@ -42,7 +42,7 @@ public class RandomBoardGeneration
 
         List<Integer> centre = Arrays.asList(7,7,7,8,8,8,8,7,6,7,6,8,7,9,8,9,9,8,9,7,8,6,7,6);
 
-        List<Integer> obstaclesSimples = Arrays.asList(10, 11, 12, 13);//liste non utilisé dans le programme
+        List<Integer> obstaclesSimples = Arrays.asList(10, 11, 12, 13);//liste non utilise dans le programme
         //10 = obstacle simple gauche
         //11 = obstacle simple haut
         //12 = obstacle simple droit
@@ -94,7 +94,7 @@ public class RandomBoardGeneration
             {
                 int int_i = rand.nextInt(11)+2;//entre 2 et 13 inclus
                 int int_j = 15; 
-                //on place aléatoirement un obstacle vertical sur la paroi/bordure basse
+                //on place aleatoirement un obstacle vertical sur la paroi/bordure basse
                 if (this.board[int_i][int_j] == 0)
                 {
                     if (compteurSimpleBas==1 && this.board[int_i-2][int_j]==0 && this.board[int_i-1][int_j]==0 && this.board[int_i+2][int_j]==0 && this.board[int_i+1][int_j]==0){
@@ -152,7 +152,7 @@ public class RandomBoardGeneration
             }
             
         } 
-        //on trouve forcément 8 emplacements pour les obstacles simples.
+        //on trouve forcement 8 emplacements pour les obstacles simples.
 
         int[] line = new int[16];
         int[] row = new int[16];
@@ -390,7 +390,7 @@ public class RandomBoardGeneration
             int int_i = rand.nextInt(16);
             int int_j = rand.nextInt(16);
             int statut = 0;
-            for (int i=0; i<12;i=i+2)//vérification de la légalité des coordonnées aléatoirement choisies (=pas au centre)
+            for (int i=0; i<12;i=i+2)//verification de la legalite des coordonnees aleatoirement choisies (=pas au centre)
             {
                 if(int_i == centre.get(i) && int_j == centre.get(i+1))
                 {   

@@ -30,20 +30,17 @@ public class Main
             {
             n = solv.getBestPath();
             al = solv.reconstituerChemin(n);
+            
+            if (n != null)
+            {
+                s = n.getState();
 
-            s = n.getState();
-
-            for (int i = al.size() - 1; i<= 0; i--)
-                if (al.get(i) != null)
-            System.out.println(al.get(i).toString());
-                else
-            continue;
-
-            for (int i = al.size() - 1; i >= 0; i--)
-                if (al.get(i) != null)
-                    System.out.println(al.get(i).toString());
-                else
-                    continue;
+                for (int i = al.size() - 1; i >= 0; i--)
+                    if (al.get(i) != null)
+                        System.out.println(al.get(i).toString());
+                    else
+                        continue;
+            }
             }
             catch (Exception e) 
             {

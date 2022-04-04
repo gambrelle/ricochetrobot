@@ -27,7 +27,7 @@ public abstract class Solver
 
     public int manhattanDistance(int[] posRobot, int[] posGoals)
     {
-        // Comme donnée heuristique on prend la distance de manhattan entre le robot et l'objectif
+        // Comme donnee heuristique on prend la distance de manhattan entre le robot et l'objectif
         return Math.abs(posGoals[0] - posRobot[0]) + Math.abs(posGoals[1] - posRobot[1]);
     }
 
