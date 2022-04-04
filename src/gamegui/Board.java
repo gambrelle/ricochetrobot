@@ -35,11 +35,6 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 	 */
 	
 	private static final long serialVersionUID = 1L;
-	JLabel score = new JLabel();
-	public Move moveL;
-	public Move moveR;
-	public Move moveU;
-	public Move moveD;
 	public int[][] tableau;
 	public int[][] pos_Robot;
 	public int[][] pos_jeton;
@@ -88,16 +83,16 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		
 		// recuperation du chemin relatif des images utilisé pour le jeu.
 		
-		green_robot = ImageIO.read(new File("static/green_robot.png"));
-		red_robot = ImageIO.read(new File("static/red_robot.png"));
-		blue_robot = ImageIO.read(new File("static/blue_robot.png"));
-		yellow_robot = ImageIO.read(new File("static/yellow_robot.png"));
-		green_jeton = ImageIO.read(new File("static/vertrond.png"));
-		red_jeton = ImageIO.read(new File("static/rougerond.png"));
-		blue_jeton = ImageIO.read(new File("static/bleurond.png"));
-		yellow_jeton = ImageIO.read(new File("static/jaunerond.png"));
-		carre = ImageIO.read(new File("static/carre.jpg"));
-		carre_noir = ImageIO.read(new File("static/carre_noir.png"));
+		green_robot = ImageIO.read(new File("..\\static\\green_robot.png"));
+		red_robot = ImageIO.read(new File("..\\static\\red_robot.png"));
+		blue_robot = ImageIO.read(new File("..\\static\\blue_robot.png"));
+		yellow_robot = ImageIO.read(new File("..\\static\\yellow_robot.png"));
+		green_jeton = ImageIO.read(new File("..\\static\\vertrond.png"));
+		red_jeton = ImageIO.read(new File("..\\static\\rougerond.png"));
+		blue_jeton = ImageIO.read(new File("..\\static\\bleurond.png"));
+		yellow_jeton = ImageIO.read(new File("..\\static\\jaunerond.png"));
+		carre = ImageIO.read(new File("..\\static\\carre.jpg"));
+		carre_noir = ImageIO.read(new File("..\\static\\carre_noir.png"));
 		this.addMouseListener(this);
 		setFocusable(true);
 		this.setBackground(Color.WHITE);
