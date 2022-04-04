@@ -47,7 +47,7 @@ public class Containers extends JFrame {
 	    
 
 
-		//Créer un titre
+		//Creer un titre
 		JLabel affichage_Ricochet = new JLabel();
 		affichage_Ricochet.setHorizontalAlignment(SwingConstants.CENTER); 
 		affichage_Ricochet.setText("Ricochet Robot :");

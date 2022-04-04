@@ -1,6 +1,6 @@
 package game;
 
-import gamegui.*;
+//import gamegui.*;
 
 import java.io.IOException;
 

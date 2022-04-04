@@ -304,7 +304,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			Font font1 = new Font("Serif", Font.PLAIN, 24);
 			g3.setFont(font1);
 			g3.setColor (Color.BLACK);
-			g3.drawString("Robot selectionn� : "  + rbot  ,200, 660);
+			g3.drawString("Robot selectionne : "  + rbot  ,200, 660);
 			
 
 		}
