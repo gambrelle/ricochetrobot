@@ -1,5 +1,4 @@
 package game;
-//import gamegui.*;
 
 public class Move
 {   
@@ -17,7 +16,7 @@ public class Move
         this.posx_f = xf;
         this.posy_f = yf;
     }
-
+    // Accesseurs
     public int getRobotColor()
     {
         return this.robotcolor;
@@ -39,6 +38,7 @@ public class Move
         return this.posy_f;
     }
 
+    // affiche le mouvement dans la bonne couleur
     @Override
     public String toString()
     {
@@ -51,6 +51,7 @@ public class Move
         return ColorTerminal.BLUE + "(" + this.posx_i + ", " + this.posy_i + ") -> (" + this.posx_f + ", " + this.posy_f + ")" + ColorTerminal.RESET;
     }
     
+    //retourne si deux mouvement sont égaux
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

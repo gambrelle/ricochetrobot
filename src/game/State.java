@@ -38,6 +38,7 @@ public class State
     }
     //Produit une nouvelle grille a chaque tour, il faudrai faire un ramdom que une seule fois
 
+    // Remet les robots dans leurs positions initials
     public void resetPosRobot()
     {
         for (int i = 0; i < this.posRobot.length; i++)
@@ -46,34 +47,38 @@ public class State
                 this.posRobot[i][j] = this.initialPosRobot[i][j];
         }
     }
-
+    // retourne le plateau de jeu
     public int[][] Get_Board()
     {
 		return this.board;
     }
+    // retourne la positions des robots
     public int[][] Get_Robot()
     {
     	return this.posRobot;
     }
-
+    // retourne la positions des objectifs
     public int[][] Get_Goal()
     {
     	return this.goalsToDo ;
     }
-
+    // retourne la positions des objectifs
     public int[][] getAllGoals()
     {
         return this.goalsToDo;
     }
+    // retourne l'indice de l'objectif actif
     public int getActiveGoal()
     {
         return this.active_goal;
     }
+    // change l'objectif actif
     public void chooseActivegoal(int i)
     {
         this.active_goal = i;
     }
 
+    // affiche l'objectifs actifs avec la bonne couleur
     public String printActiveGoal()
     {
         if (this.getActiveGoal() == 0)
@@ -85,6 +90,7 @@ public class State
         return ColorTerminal.BLUE + "Position de l'objectif actif : (" + this.Get_Goal()[this.getActiveGoal()][0] + ", " + this.Get_Goal()[this.getActiveGoal()][1] + ")" + ColorTerminal.RESET;
     }
 
+    // affiche le plateau de jeu
     public void printBoard()
     {
         for (int i = 0; i < this.board.length; i++)
@@ -99,6 +105,8 @@ public class State
                 System.out.print("\n");
         }
     }
+
+    // renvoie un clone de l'état
     public State getClone() throws IOException, InterruptedException
     {
         int[][] newBoard = new int[16][16];
@@ -123,70 +131,86 @@ public class State
         return s;
     }
 
+    // Joue le mouvement pris en entree par le robot pris en entree
     public void play(Move move, int robot)
     {
         this.posRobot[robot][0] = move.getPosXF();
         this.posRobot[robot][1] = move.getPosYF();
     }
 
-
+    // renvoie le mouvement possible a droite pour le robot donne en entree
     public Move getRightMove(int robot)
     {
+        // va jusqu'au bordure
         for (int i = this.posRobot[robot][0]; i<16; i++)
         {
+            // verifie si un robot bloque
             for (int k = 0; k <= 3; k++)
             {
                 if (k != robot && this.posRobot[k][0] == i+1 && this.posRobot[k][1] == this.posRobot[robot][1])
                     return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
             }
+            // verifie si un mur bloque
             if(this.board[i][this.posRobot[robot][1]] == 12 || this.board[i][this.posRobot[robot][1]] == 21 || this.board[i][this.posRobot[robot][1]] == 22)
                 return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 15, this.posRobot[robot][1]);
     }
+    // renvoie le mouvement possible a droite pour le robot donne en entree
     public Move getLeftMove(int robot)
     {
+        // va jusqu'au bordure
         for (int i = this.posRobot[robot][0]; i>0; i--)
         {
+            // verifie si un robot bloque
             for (int k = 0; k <= 3; k++)
             {
                 if (k != robot && this.posRobot[k][0] == i-1 && this.posRobot[k][1] == this.posRobot[robot][1])
                     return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
             }
+            // verifie si un mur bloque
             if(this.board[i][this.posRobot[robot][1]] == 10 || this.board[i][this.posRobot[robot][1]] == 20 || this.board[i][this.posRobot[robot][1]] == 23)
                 return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], i, this.posRobot[robot][1]);
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], 0, this.posRobot[robot][1]);
     }
+    // renvoie le mouvement possible a droite pour le robot donne en entree
     public Move getDownMove(int robot)
     {
+        // va jusqu'au bordure
         for (int i = this.posRobot[robot][1]; i<16; i++)
         {
+            // verifie si un robot bloque
             for (int k = 0; k <= 3; k++)
             {
                 if (k != robot && this.posRobot[k][0] == this.posRobot[robot][0] && this.posRobot[k][1] == i+1)
                     return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
             }
+            // verifie si un mur bloque
             if(this.board[this.posRobot[robot][0]][i] == 13 || this.board[this.posRobot[robot][0]][i] == 22 || this.board[this.posRobot[robot][0]][i] == 23)
                 return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 15);
     }
+    // renvoie le mouvement possible a droite pour le robot donne en entree
     public Move getUpMove(int robot)
     {
+        // va jusqu'au bordure
         for (int i = this.posRobot[robot][1]; i>0; i--)
         {
+            // verifie si un robot bloque
             for (int k = 0; k <= 3; k++)
             {
                 if (k != robot && this.posRobot[k][0] == this.posRobot[robot][0] && this.posRobot[k][1] == i-1)
                     return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
             }
+            // verifie si un mur bloque
             if(this.board[this.posRobot[robot][0]][i] == 11 || this.board[this.posRobot[robot][0]][i] == 20 || this.board[this.posRobot[robot][0]][i] == 21)
                 return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], i);
         }
         return new Move(robot, this.posRobot[robot][0], this.posRobot[robot][1], this.posRobot[robot][0], 0);
     }
-
+    // renvoie tous les mouvement possible pour le robot en argument
     public ArrayList<Move> getMove(int robot)
     {
         ArrayList<Move> allMoves = new ArrayList<>();
@@ -202,6 +226,7 @@ public class State
         return allMoves;
     }
 
+    // renvoie un boolean de si le robot est sur l'objectif
     public int isFinalState()
     {
         if (this.posRobot[this.active_goal][0] == this.goalsToDo[this.active_goal][0] && this.posRobot[this.active_goal][1] == this.goalsToDo[this.active_goal][1])

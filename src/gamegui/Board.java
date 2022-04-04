@@ -22,8 +22,8 @@ import javax.swing.*;
 
 /*
  * Cette classe permet de gerer le plateau principal et ces modifications par la methode Paintcomponent de JLabel.
- * C'est dans cette classe que les m�thodes �crites sont utilis� pour g�rer la partie graphique.
- * Ces m�thodes sont utilis� grace � un impl�mentation des �venements Keylistener et MouseListener.
+ * C'est dans cette classe que les methodes ecrites sont utilise pour gerer la partie graphique.
+ * Ces methodes sont utilise graceaun implementation des evenements Keylistener et MouseListener.
  *  
  *  
  */
@@ -81,7 +81,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		this.addKeyListener(this);
 		
 		
-		// recuperation du chemin relatif des images utilis� pour le jeu.
+		// recuperation du chemin relatif des images utilise pour le jeu.
 		
 		green_robot = ImageIO.read(new File("static/green_robot.png"));
 		red_robot = ImageIO.read(new File("static/red_robot.png"));
@@ -101,8 +101,8 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 	
 	
 		/*
-		 * Cette methode est utilis� pour dessiner le plateau et le modifier en fonction
-		 * des �v�nements et des m�thodes.
+		 * Cette methode est utilise pour dessiner le plateau et le modifier en fonction
+		 * des evenements et des methodes.
 
 		 */
 		@Override
@@ -132,7 +132,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			int x_blue_jeton = this.pos_jeton[3][0];
 			int y_blue_jeton = this.pos_jeton[3][1];	
 			
-			//utilise g2 pour augmenter l'�paisseur des obstacles.
+			//utilise g2 pour augmenter l'epaisseur des obstacles.
 			Graphics2D  g2 = (Graphics2D) g;
 			g2.setStroke(new BasicStroke(4.0f));
 			
@@ -279,7 +279,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 
 			/*
 			 * dessine le texte en bas du tableau 
-			 * avec le robot selectionn�
+			 * avec le robot selectionne
 			 */
 			String rbot = "vert" ; 
 			if(this.robot == 0)
@@ -305,12 +305,12 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			g3.setFont(font1);
 			g3.setColor (Color.BLACK);
 			g3.drawString("Robot selectionne : "  + rbot  ,200, 660);
-			
+			g3.drawString("Press C to change goal" , 200, 690);
 
 		}
 
-		//cette methode est utilis� pour controler les mouvements des robots en fonctions des touches et incrementer le compteur de mouvement. 
-		// les touches utilis� sont la fleche du haut, bas, gauche et droite ainsi que la touche R pour reinitialiser le jeu
+		//cette methode est utilise pour controler les mouvements des robots en fonctions des touches et incrementer le compteur de mouvement. 
+		// les touches utilise sont la fleche du haut, bas, gauche et droite ainsi que la touche R pour reinitialiser le jeu
 		@Override
 		public void keyPressed(KeyEvent e) {
 		    int key = e.getKeyCode();
@@ -368,7 +368,12 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 			    	p = 0;
 			    	repaint();								
 			    	break;			    	
-			    default:
+			    //La touche C permet de passer à l'objectif suivant	 
+			    case KeyEvent.VK_C:
+					state.chooseActivegoal(this.nextGoal());
+			    	repaint();															
+			    	break;	
+				default:
 			    	break;  	
 				}	        	
 		        	}
@@ -376,11 +381,19 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		    
 		    	}
       		
-	        	
-		
-		
+	// Fonction qui donne l'identifiant du prochain goal
+	public int nextGoal()
+	{
+		int actual = this.state.getActiveGoal();
+		if (actual == 3)
+			actual = 0;
+		else
+			actual ++;
+		return actual;
+	}		
+
 	/*
-	 * Cette m�thode est utilis� pour avoir la position en pixel de chaque robot sur le plateau
+	 * Cette methode est utilise pour avoir la position en pixel de chaque robot sur le plateau
 	 *  grace au clique de la souris.
 	 *  On l'utilise pour selectionner quel robot nous voulons bouger.
 	 */
@@ -411,7 +424,7 @@ public class Board extends JPanel implements  KeyListener,MouseListener {//Actio
 		}		
 	}
 
-	//Methode implement� par keylistener et MouseListener mais non utilis�.
+	//Methode implemente par keylistener et MouseListener mais non utilise.
 	@Override
 	public void mousePressed(MouseEvent e) {}
 	@Override

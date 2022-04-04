@@ -30,13 +30,25 @@ public class AStar extends Solver
     public boolean isInterestingNode(PriorityQueue<Node> openList, HashSet<Node> closedList, Node n)
     {
         if (!(closedList.isEmpty()))
+        {
             for (Node nodeClose : closedList)
+            {
                 if (nodeClose.equals(n))
+                {
                     return false;
-            for (Node nodeOpen : openList)
+                }
+            }
+           for (Node nodeOpen : openList)
+           {
                 if (n.equals(nodeOpen))
+                {
                     if (nodeOpen.cout > n.cout)
+                    {
                         return false;
+                    }
+                }
+            }
+        }
         return true;
     }
     //Boucle pricipale de l'A*
@@ -54,6 +66,7 @@ public class AStar extends Solver
         while (!(openList.isEmpty()))
         {
             Node n = openList.poll();
+            //closeList.add(n); 
             cout ++;
 
             //Condition de fin (niveau complété)
@@ -74,8 +87,6 @@ public class AStar extends Solver
                         s.play(move, i);
                     }
                     catch (Exception e) {return null;}
-
-                    closeList.add(n);
 
                     // Création d'un nouveau noeud
                     int[] newPosRobot = s.Get_Robot()[s.getActiveGoal()];

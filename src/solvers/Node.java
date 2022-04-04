@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import game.*;
 
-public class Node //implements Comparable<Node>
+public class Node
 {
     protected int heuristic, cout;
     protected Move move;
