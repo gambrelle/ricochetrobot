@@ -17,7 +17,6 @@ public class State
 
     public State() throws IOException, InterruptedException
     {
-        System.out.println("State.java");
     	RandomBoardGeneration generationAleatoire = new RandomBoardGeneration();
 		this.board =  generationAleatoire.getBoard();
         this.posRobot = generationAleatoire.getPosRobot();
@@ -67,6 +66,16 @@ public class State
         this.active_goal = i;
     }
 
+    public String printActiveGoal()
+    {
+        if (this.getActiveGoal() == 0)
+            return ColorTerminal.GREEN + "Position de l'objectif actif : (" + this.Get_Goal()[this.getActiveGoal()][0] + ", " + this.Get_Goal()[this.getActiveGoal()][1] + ")" + ColorTerminal.RESET;
+        if (this.getActiveGoal() == 1)
+            return ColorTerminal.RED + "Position de l'objectif actif : (" + this.Get_Goal()[this.getActiveGoal()][0] + ", " + this.Get_Goal()[this.getActiveGoal()][1] + ")" + ColorTerminal.RESET;
+        if (this.getActiveGoal() == 2)
+            return ColorTerminal.YELLOW + "Position de l'objectif actif : (" + this.Get_Goal()[this.getActiveGoal()][0] + ", " + this.Get_Goal()[this.getActiveGoal()][1] + ")" + ColorTerminal.RESET;
+        return ColorTerminal.BLUE + "Position de l'objectif actif : (" + this.Get_Goal()[this.getActiveGoal()][0] + ", " + this.Get_Goal()[this.getActiveGoal()][1] + ")" + ColorTerminal.RESET;
+    }
 
     public void printBoard()
     {

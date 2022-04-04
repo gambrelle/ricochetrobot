@@ -2,6 +2,7 @@ package solvers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
@@ -23,6 +24,7 @@ public class AStar extends Solver
             n = n.getNoeudPrecedent();
             path.add(n.getMove());
         }
+        Collections.reverse(path);
         return path;
     }
 
@@ -46,15 +48,15 @@ public class AStar extends Solver
                                     return false;
                                 }
                             }
-                        } 
+                        }
                     }
         return true;
     }
 
-    public Node getBestPath() 
+    public Node getBestPath()
     {
         int cout = 1;
-        Node startNode = new Node(heuristic(this.posActiveRobot, this.posActiveGoal) + cout, cout, this.initialState, null, null);
+        Node startNode = new Node(manhattanDistance(this.posActiveRobot, this.posActiveGoal) + cout, cout, this.initialState, null, null);
         PriorityQueue<Node> openList = new PriorityQueue<Node>(new NodeComparator());
         openList.add(startNode);
         HashSet<Node> closeList = new HashSet<>();
@@ -83,14 +85,14 @@ public class AStar extends Solver
 
                     int[] newPosRobot = s.Get_Robot()[s.getActiveGoal()];
 
-                    Node node = new Node(heuristic(newPosRobot, this.posActiveGoal) + cout, cout, s, n, move);
+                    Node node = new Node(manhattanDistance(newPosRobot, this.posActiveGoal) + cout, cout, s, n, move);
 
                     if (isInterestingNode(openList, closeList, node))
                     {
                         openList.add(node);
                     }
                 }
-            }            
+            }
         }
         return null;
     }

@@ -34,10 +34,9 @@ public class PrecomputedMap
                         this.searchDown(i, j, level + 1);
                     }
             level ++;
-            System.out.println(level);
         }
     }
-    
+
     public void printMap()
     {
         for (int i = 0; i < this.map.length; i++)

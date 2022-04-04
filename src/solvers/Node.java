@@ -10,7 +10,7 @@ public class Node //implements Comparable<Node>
     protected Move move;
     protected State state;
     protected Node noeudPrecedent;
-    
+
     public Node(int heuristic, int cout, State state, Node noeudPrecedent, Move move)
     {
         this.heuristic = heuristic;
@@ -38,12 +38,6 @@ public class Node //implements Comparable<Node>
     public State getState() {
         return this.state;
     }
-    
-   /*  @Override
-    public int compareTo(Node n) 
-    {
-        return this.heuristic > n.heuristic ? 1 : this.heuristic < n.heuristic ? -1 : 0;
-    } */
 
     @Override
     public boolean equals(Object obj) {
@@ -54,9 +48,7 @@ public class Node //implements Comparable<Node>
         Node n = (Node) obj;
         if (this.move == null)
             return false;
-        //return this.move.equals(n.move) && Arrays.deepEquals(this.state.Get_Robot(), n.state.Get_Robot());// && this.noeudPrecedent.equals(n.noeudPrecedent);
         return Arrays.deepEquals(this.getState().Get_Robot(), n.getState().Get_Robot());
-        
     }
 
     @Override
