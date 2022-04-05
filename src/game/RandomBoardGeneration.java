@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.io.IOException;
 
+
+//Génération du tableau de façon aléatoire
 public class RandomBoardGeneration 
 {
     protected int[][] board;
@@ -168,15 +170,19 @@ public class RandomBoardGeneration
         while (compteurObstaclesDoubles < 16){
             int int_i = rand.nextInt(14)+1;//entre 1 et 14
             int int_j = rand.nextInt(14)+1;//entre 1 et 14
-            boolean feu_vert = true;
+            boolean feu_vert = true;//ce booléen a pour but d'empêcher la création d'un obstacle lorsqu'il est rouge (=faux)
             int obstacle_potentiel = 0;
             if (this.board[int_i][int_j] == 0)
             {   
                 
+                //selection d'un obstacle double aléatoire
                 obstacle_potentiel = obstaclesDoubles.get(rand.nextInt(obstaclesDoubles.size()));                
+                //limite d'obstacles par ligne
                 if (line[int_i]>2){feu_vert=false;}
-                if (row[int_j]>2){feu_vert=false;}                
+                if (row[int_j]>2){feu_vert=false;} 
+
                 if (feu_vert){
+                    //verification de la non-présence d'un obstacle double sur les cases à une distance de 1
                     for (int k = -1; k < 2; k++)
                     {
                         for (int l = -1; l < 2; l++)
@@ -192,6 +198,9 @@ public class RandomBoardGeneration
                             }
                         }
                     }
+                    //pour chaque obstacle on autorise diferents obstacles aux alentours,
+                    //l'idée est qu'entre deux obstacles différents un robot doit toujours pouvoir passer
+                    //il ne doit pas y avoir de grands obstacles crées par la concaténation de deux obstacles
                     switch(obstacle_potentiel){
                         case 20: // cas du coin haut gauche
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ //gauche
