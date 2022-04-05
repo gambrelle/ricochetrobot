@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.io.IOException;
 
+
+//Génération du tableau de façon aléatoire
 public class RandomBoardGeneration 
 {
     protected int[][] board;
@@ -25,7 +27,7 @@ public class RandomBoardGeneration
             }
         }
 
-        //positions interdites du centre
+        //positions interdites du centre interdites d'accès par la présence d'obstacles 
         this.board[7][7] = 20;
         this.board[7][8] = 23;
         this.board[8][8] = 22;
@@ -34,29 +36,27 @@ public class RandomBoardGeneration
         this.board[6][8] = 12;
         this.board[7][9] = 11;
         this.board[8][9] = 11;
-        this.board[9][8] = 10;//marche
+        this.board[9][8] = 10;
         this.board[9][7] = 10;
         this.board[8][6] = 13;
         this.board[7][6] = 13;
-        //this.board[1][0] = 1;
 
         List<Integer> centre = Arrays.asList(7,7,7,8,8,8,8,7,6,7,6,8,7,9,8,9,9,8,9,7,8,6,7,6);
+        //positions des obstacles du centre avec le format (x1, y1, x2, y2, ...)
 
-        List<Integer> obstaclesSimples = Arrays.asList(10, 11, 12, 13);//liste non utilise dans le programme
+        //liste des obstacles simples
+        List<Integer> obstaclesSimples = Arrays.asList(10, 11, 12, 13);
         //10 = obstacle simple gauche
         //11 = obstacle simple haut
         //12 = obstacle simple droit
         //13 = obstacle simple bas
 
+        //liste des obstacles doubles
         List<Integer> obstaclesDoubles = Arrays.asList(20, 21, 22, 23);
         //20 = obstacle double haut gauche
         //21 = obstacle double haut droit
         //22 = obstacle double bas droit
         //23 = obstacle double bas gauche
-
-        //Obstacles "tunnel"
-        //30 = tunnel vertical/gauche droite
-        //31 = tunnel horizontal/haut bas
 
 
         
@@ -68,20 +68,24 @@ public class RandomBoardGeneration
         int compteurSimpleBas = 0;
         int compteurSimpleDroit = 0;
         int compteurSimpleGauche = 0;
+        //Les obstacles simples sont deux par bord de tableaux soient 8 obstacles simples en tout
+
         while (compteurObstaclesSimples < 8){
             //bordure exterieur haute
             while (compteurSimpleHaut <2)
             {
                 int int_i = rand.nextInt(11)+2;//entre 2 et 13 inclus
                 int int_j = 0;
-                if (this.board[int_i][int_j] == 0)
+                if (this.board[int_i][int_j] == 0)//la case doit être vide
                 {   
+                    //on vérifie que les cases alentours sont vides après la première itération
                     if (compteurSimpleHaut==1 && this.board[int_i-2][int_j]==0 && this.board[int_i-1][int_j]==0 && this.board[int_i+2][int_j]==0 && this.board[int_i+1][int_j]==0){
                         this.board[int_i][int_j] = 10;
                         this.board[int_i-1][int_j]=12;
                         compteurSimpleHaut++;
                         compteurObstaclesSimples++;   
                     }else{
+                        //première itération
                         this.board[int_i][int_j] = 10;
                         this.board[int_i-1][int_j]=12;
                         compteurSimpleHaut++;
@@ -95,14 +99,16 @@ public class RandomBoardGeneration
                 int int_i = rand.nextInt(11)+2;//entre 2 et 13 inclus
                 int int_j = 15; 
                 //on place aleatoirement un obstacle vertical sur la paroi/bordure basse
-                if (this.board[int_i][int_j] == 0)
-                {
+                if (this.board[int_i][int_j] == 0)//la case doit être vide
+                {   
+                    //on vérifie que les cases alentours sont vides après la première itération
                     if (compteurSimpleBas==1 && this.board[int_i-2][int_j]==0 && this.board[int_i-1][int_j]==0 && this.board[int_i+2][int_j]==0 && this.board[int_i+1][int_j]==0){
                         this.board[int_i][int_j] = 10;
                         this.board[int_i-1][int_j]=12;
                         compteurObstaclesSimples++;
                         compteurSimpleBas++;
                     }else{
+                        //première itération
                         this.board[int_i][int_j] = 10;
                         this.board[int_i-1][int_j]=12;
                         compteurObstaclesSimples++;
@@ -115,14 +121,16 @@ public class RandomBoardGeneration
             {
                 int int_i = 0;
                 int int_j = rand.nextInt(11)+2;//entre 2 et 13 inclus
-                if (this.board[int_i][int_j] == 0)
+                if (this.board[int_i][int_j] == 0)//la case doit être vide
                 {   
+                    //on vérifie que les cases alentours sont vides après la première itération
                     if (compteurSimpleGauche==1 && this.board[int_i][int_j-2]==0 && this.board[int_i][int_j-1]==0 && this.board[int_i][int_j+2]==0 && this.board[int_i][int_j+1]==0){
                         this.board[int_i][int_j] = 11;
                         this.board[int_i][int_j-1]=13;
                         compteurObstaclesSimples++;  
                         compteurSimpleGauche++;
                     }else{
+                        //première itération
                         this.board[int_i][int_j] = 11;
                         this.board[int_i][int_j-1]=13;
                         compteurObstaclesSimples++;  
@@ -135,14 +143,16 @@ public class RandomBoardGeneration
             {
                 int int_i = 15;
                 int int_j = rand.nextInt(11)+2;//entre 2 et 13 inclus
-                if (this.board[int_i][int_j] == 0)
+                if (this.board[int_i][int_j] == 0)//la case doit être vide
                 {   
+                    //on vérifie que les cases alentours sont vides après la première itération
                     if (compteurSimpleDroit==1 && this.board[int_i][int_j-2]==0 && this.board[int_i][int_j-1]==0 && this.board[int_i][int_j+2]==0 && this.board[int_i][int_j+1]==0){
                         this.board[int_i][int_j] = 11;
                         this.board[int_i][int_j-1]=13;
                         compteurObstaclesSimples++;  
                         compteurSimpleDroit++;
                     }else{
+                        //première itération
                         this.board[int_i][int_j] = 11;
                         this.board[int_i][int_j-1]=13;
                         compteurObstaclesSimples++;  
@@ -160,15 +170,19 @@ public class RandomBoardGeneration
         while (compteurObstaclesDoubles < 16){
             int int_i = rand.nextInt(14)+1;//entre 1 et 14
             int int_j = rand.nextInt(14)+1;//entre 1 et 14
-            boolean feu_vert = true;
+            boolean feu_vert = true;//ce booléen a pour but d'empêcher la création d'un obstacle lorsqu'il est rouge (=faux)
             int obstacle_potentiel = 0;
             if (this.board[int_i][int_j] == 0)
             {   
                 
+                //selection d'un obstacle double aléatoire
                 obstacle_potentiel = obstaclesDoubles.get(rand.nextInt(obstaclesDoubles.size()));                
+                //limite d'obstacles par ligne
                 if (line[int_i]>2){feu_vert=false;}
-                if (row[int_j]>2){feu_vert=false;}                
+                if (row[int_j]>2){feu_vert=false;} 
+
                 if (feu_vert){
+                    //verification de la non-présence d'un obstacle double sur les cases à une distance de 1
                     for (int k = -1; k < 2; k++)
                     {
                         for (int l = -1; l < 2; l++)
@@ -184,6 +198,9 @@ public class RandomBoardGeneration
                             }
                         }
                     }
+                    //pour chaque obstacle on autorise diferents obstacles aux alentours,
+                    //l'idée est qu'entre deux obstacles différents un robot doit toujours pouvoir passer
+                    //il ne doit pas y avoir de grands obstacles crées par la concaténation de deux obstacles
                     switch(obstacle_potentiel){
                         case 20: // cas du coin haut gauche
                             if(obstaclesSimples.contains(this.board[int_i-1][int_j])){ //gauche
