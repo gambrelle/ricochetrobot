@@ -37,6 +37,7 @@ public class PrecomputedMap
         }
     }
 
+    //Affiche la map sans le milieu
     public void printMap()
     {
         for (int i = 0; i < this.map.length; i++)
@@ -53,11 +54,13 @@ public class PrecomputedMap
 
     }
 
+    //Accesseurs
     public int[][] getMap()
     {
         return this.map;
     }
 
+    //Vérifie si la Map contient encore des -1 (des cases sans accès)
     public boolean isComputed()
     {
         for (int i = 0; i < 16; i++)
@@ -67,6 +70,7 @@ public class PrecomputedMap
         return true;
     }
 
+    //Remplis la Map vers la droite jusqu'a un obstacle.
     public void searchRight(int positionX, int positionY, int level)
     {
         for (int i = positionX; i<16; i++)
@@ -80,7 +84,7 @@ public class PrecomputedMap
             }
         }
     }
-
+    //Remplis la Map vers la droite jusqu'a un obstacle.
     public void searchLeft(int positionX, int positionY, int level)
     {
         for (int i = positionX; i>=0; i--)
@@ -94,7 +98,7 @@ public class PrecomputedMap
             } 
         }
     }
- 
+    //Remplis la Map vers la droite jusqu'a un obstacle.
     public void searchDown(int positionX, int positionY, int level)
     {
         for (int i = positionY; i<16; i++)
@@ -108,7 +112,7 @@ public class PrecomputedMap
             }
         }
     }
-
+    //Remplis la Map vers la droite jusqu'a un obstacle.
     public void searchUp(int positionX, int positionY, int level)
     {
         for (int i = positionY; i>=0; i--)

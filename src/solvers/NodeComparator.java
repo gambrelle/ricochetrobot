@@ -2,6 +2,7 @@ package solvers;
 
 import java.util.Comparator;
 
+//Création d'un comparateur pour pouvoir ordonner dans la File de priorité.
 public class NodeComparator implements Comparator<Node>
 {
     public int compare(Node n1, Node n2)
