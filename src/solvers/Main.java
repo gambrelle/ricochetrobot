@@ -1,3 +1,4 @@
+
 package solvers;
 
 import java.util.ArrayList;
@@ -27,3 +28,4 @@ public class Main
         System.out.println(Arrays.toString(al.toArray()));
     }
 }
+

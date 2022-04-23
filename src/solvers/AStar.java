@@ -1,3 +1,4 @@
+
 /* package solvers;
 
 import java.util.ArrayList;
@@ -35,4 +36,4 @@ public class AStar extends Solver
         return openList;
     }
 }
- */
+*/
