@@ -1,43 +1,63 @@
-
 package solvers;
+
+import java.util.Arrays;
 
 import game.*;
 
-public class Node implements Comparable<Node>
+public class Node
 {
-    protected int x, y, heuristic;
+    protected int heuristic, cout;
     protected Move move;
-    
-    public Node(int x, int y, int heuristic, Move move)
+    protected State state;
+    protected Node noeudPrecedent;
+
+    public Node(int heuristic, int cout, State state, Node noeudPrecedent, Move move)
     {
-        this.x = x;
-        this.y = y;
         this.heuristic = heuristic;
+        this.cout = cout;
+        this.state = state;
+        this.noeudPrecedent = noeudPrecedent;
         this.move = move;
     }
 
-    public int getX()
-    {
-        return this.x;
-    }
-    public int getY()
-    {
-        return this.y;
-    }
+    // Accesseurs 
     public int getHeuristic()
     {
         return this.heuristic;
     }
-    
-    @Override
-    public int compareTo(Node n) 
+    public int getCout() {
+        return this.cout;
+    }
+    public Node getNoeudPrecedent()
     {
-        return this.heuristic > n.heuristic ? 1 : this.heuristic < n.heuristic ? -1 : 0;
+        return this.noeudPrecedent;
+    }
+    public Move getMove()
+    {
+        return this.move;
+    }
+    public State getState() {
+        return this.state;
     }
 
+
+    // Redéfinition de la fonction équals pour vérifier si un élément est dans une liste. 
     @Override
-    public String toString() 
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Node))
+            return false;
+        Node n = (Node) obj;
+        if (this.move == null)
+            return false;
+        return Arrays.deepEquals(this.getState().Get_Robot(), n.getState().Get_Robot());
+    }
+
+
+    @Override
+    public String toString()
     {
-        return this.x + ", " + this.y + " : " + this.heuristic;
+        return this.getState().Get_Robot()[this.getState().getActiveGoal()][0] + ", " + this.getState().Get_Robot()[this.getState().getActiveGoal()][0] + " : " + this.heuristic + " " + this.cout;
     }
 }
